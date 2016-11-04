@@ -1,0 +1,265 @@
+a.button{
+	color:#fff;
+	font-size:16px;
+}
+h1{
+	margin-left:30px;
+}
+.container {
+background: white;
+padding: 10px 20px;
+margin-left: 64px;
+width: 812px;
+margin-top:-10px;
+margin-bottom:40px;
+}
+.location{
+
+	display:block;
+
+	height:40px;
+	width:auto;
+	padding:0 20px;
+	float:right;
+	border-radius:10px;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+}
+.location:hover{
+	background:rgba(255,255,255,.2);
+}
+#name{
+	position: absolute;
+	margin-left: 64px;
+	font-size: 50px;
+	color: #222;
+	font-weight: bold;
+	width: 852px;
+	background:#eee;
+	background: rgba(255, 255, 255, 0.3);
+}
+#name:hover{
+	background:#fff;
+	background: rgba( 0.8);
+}
+.interests{
+	padding:10px 0;
+	color:#fff;
+	width:100%;
+	border-radius:10px;
+	background:#eee;
+}
+	.interests li {
+	background: #19E;
+	color: white;
+	list-style-type: none;
+	float: left;
+	border-radius: 6px;
+	box-shadow: 0 0 10px #888;
+	padding: 8px 17px;
+	font-size:13px;
+	font-weight:bold;
+	margin-left: 11px;
+	margin-bottom:10px;
+	}
+	.interest .delete {
+	padding: 6px;
+	border-radius: 50px;
+	margin-left: -22px;
+	font-size: 15px;
+	position: absolute;
+	margin-right: 3px;
+	color: #921;
+	width: 15px;
+	margin-top: -13px;
+	display:none;
+	}
+	.interest:hover{
+		cursor:pointer;
+		background:#e32;
+		transition:0.2s background linear;
+		-webkit-transition:0.2s background linear;
+		-moz-transition:0.2s background linear;
+		-o-transition:0.2s background linear;
+	}
+	input{
+		width: 95%;
+		font-size: 20px;
+		padding: 10px 21px;
+		border: none;
+		border-radius: 6px;
+	}
+	
+	#autocomplete{
+		width:800px;
+		background:#fff;
+		display:none;
+	}
+		.list{
+			margin:0;
+			padding:0;
+			border-radius:10px;
+			background:#eee;
+			overflow:hidden;
+		}
+		.result{
+			margin:0;
+			list-style-type:none;
+			list-style-position:inside;
+			font-size:15px;
+			font-weight:bold;
+			border-bottom:1px solid #fff;
+			padding:7px 10px;
+			color:#888;
+			
+		}
+			.result:hover{
+				cursor:pointer;
+				border-radius:7px;
+				background:#0083C4;
+				color:#fff;
+				transition:0.2s background linear;
+				-webkit-transition:0.2s background linear;
+				-moz-transition:0.2s background linear;
+				-o-transition:0.2s background linear;
+			}
+			.ecoicon.plus{
+				float:right;
+				color:#fff;
+				font-size:15px;
+				line-height:10px;
+			}
+			span.number{
+				font-size:12px;
+				padding-right:20px;
+
+			}
+			.ecoicon.star{
+				color: #FB0;
+				font-size: 16px;
+				line-height: 13px;
+			}
+			.ecoicon.up{
+				font-size: 10px;
+				color: white;
+				position: absolute;
+
+				line-height: 18px;
+			}
+			p{
+				color:#999;
+			}
+			.step{
+				line-height: 36px;
+				font-weight: bold;
+				font-size: 18px;
+				margin-right:15px;
+				padding-right:10px;
+				border-radius:10px;
+			}
+				.step .number{
+					padding:5px 15px;
+					font-size:20px;
+					margin-right:10px;
+					border-radius:40px;
+				}
+					.step:hover{
+						cursor:pointer;
+					}
+				.number.selected{
+					background:#AADA31;
+					color:#222;
+				}
+				.petal{
+					line-height:50px;
+					background:#dfdfdf;
+					border-radius:10px;
+					margin-bottom:20px;
+					padding-left:20px;
+					color:#333;
+					font-weight:bold;
+				}
+					.petal:hover{
+						cursor:pointer;
+						background:#eee;
+					}
+				.iconwrap{
+					width:50px;
+					float:left;
+				}
+				.petalname {
+				line-height: 53px;
+				}
+				
+				.petal .plus {
+				color: #dfdfdf;
+				font-size: 23px;
+				line-height: 40px;
+				margin-right: 15px;
+				width:25px;
+				}
+				.petal:hover .plus{
+					color: #19E;
+					-webkit-transition:0.2s color linear;
+					-moz-transition:0.2s color linear;
+					-o-transition:0.2s color linear;
+					transition:0.2s color linear;
+				}
+				#interests{
+					width:100%;
+				}
+				#experience{
+					width:90%;
+					margin-bottom:10px;
+					border:none;
+					border-radius:10px;
+					-moz-border-radius:10px;
+					-o-border-radius:10px;
+					font-size:18px;
+					line-height:25px;
+					padding:15px 20px ;
+					height:160px;
+				}
+				#skillinput input{
+					width:90%;
+				}
+				.petal.selected{
+					background:#AADA31;
+				}
+/** PETALS **/
+.petal.selected .ecoicon, .petal:hover .ecoicon{
+	color: #fff;
+}
+.petal.selected{
+	color:#fff !important;
+}
+.petal:hover{
+		color:#fff;
+		-webkit-transition:0.2s background linear;
+		-moz-transition:0.2s background linear;
+		-o-transition:0.2s background linear;
+		transition:0.2s background linear;
+}
+.petal.p1.selected			{background:#E70A3E;}
+.petal.p1:hover				{background:#f81b4E;}
+.petal.p2.selected			{background:#EF8123;}
+.petal.p2:hover				{background:#fF9234;}
+.petal.p3.selected			{background:#EEBD09;}
+.petal.p3:hover				{background:#ffce1a;}
+.petal.p4.selected			{background:#89C115;}
+.petal.p4:hover				{background:#9ad226;}
+.petal.p5.selected			{background:#1ABBC7;}
+.petal.p5:hover				{background:#1eede6;}
+.petal.p6.selected			{background:#0A6DCE;}
+.petal.p6:hover				{background:#1b7edf;}
+.petal.p7.selected			{background:#A846CF;}
+.petal.p7:hover				{background:#b957df;}
+
+/** SLIDER **/
+.explevel{
+	font-size:20px;
+}
+.explabel{
+	font-size:11px;
+	color:#074B76;
+}

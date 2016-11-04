@@ -1,0 +1,1 @@
+<?php echo $ec_id = $_GET['ec_id']; ?>

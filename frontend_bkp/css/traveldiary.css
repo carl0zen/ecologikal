@@ -1,0 +1,138 @@
+#littlemap{
+	width:100px;
+	height:100px;
+	position:absolute;
+}
+#map{
+	width:100%;
+	height:300px;
+}
+.tripitem {
+background: #333;
+border-bottom: 1px solid #444;
+padding: 15px;
+height: 100px;
+
+}
+.tripitem:hover{
+	background:#3a3a3a;
+}
+span.delete{
+	float:right;
+	margin-right:-5px;
+}
+.back{
+	font-size:12px;
+	position:absolute;
+	top:20px;
+	right:20px;
+}
+.tripinfo{
+	margin-left: 110px;
+}
+.address{
+	line-height: 20px;
+	font-size: 17px;
+	color: #CCC;
+	font-family: Helvetica Neue;
+	text-align:right;
+	
+}
+.title{
+	font-family: Helvetica Neue;
+	font-size: 18px;
+}
+.datefrom {
+float: right;
+margin-top: -40px;
+padding: 6px 15px;
+font-size: 11px;
+background: rgba(0, 0, 0, 0.6);
+margin-right: -10px;
+border-radius: 10px 0 0;
+color: white;
+font-weight: bold;
+}
+#tripdetails{
+	background: rgba(0, 0, 0, .6);
+	position: relative;
+	top: -50px;
+	padding: 10px;
+	width: 640px;
+}
+#tripdetails h2 {
+width: 396px;
+float: left;
+line-height: 20px;
+font-family: Helvetica Neue;
+margin: 0;
+font-size: 22px;
+}
+.dates {
+color: #CCC;
+font-size: 11px;
+line-height: 14px;
+float: right;
+font-style: italic;
+margin-right: 11px;
+}
+.description{
+	font-size: 12px;
+	padding: 5px 0;
+	color:#999;
+	margin:10px 0;
+}
+#friends{
+	float:right;
+}
+#friendsbar {
+position: fixed;
+top: 12px;
+margin-left: 690px;
+}
+.tripstops {
+position: absolute;
+right: 24px;
+margin-top: 80px;
+color: white;
+font-family: Helvetica Neue;
+font-size: 14px;
+font-weight: bold;
+}
+#stops{
+	width:100%;
+}
+div.tripstop {
+background: #333;
+overflow: hidden;
+padding: 10px;
+}
+.tripstop h3{
+	padding:10px;
+	margin:0;
+}
+.tripstop:hover h3{
+background:#444;
+}
+div.stopcontent{
+	display:none;
+}
+div.skill{
+	line-height:35px;
+}
+div.comment{
+	min-height:50px;
+}
+memberavatar.stopauthor{
+	float:right;
+}
+#stops button{
+	float:right;
+}
+div.pics{
+	clear: both;
+	background: #222;
+	padding: 5px;
+	height: 61px;
+	margin-top: 7px;
+}

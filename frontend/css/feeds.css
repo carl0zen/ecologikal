@@ -1,0 +1,467 @@
+input{
+	border:1px solid #999;
+	border-radius:7px;
+	-webkit-border-radius:7px;
+
+	-moz-border-radius:7px;
+
+	-o-border-radius:7px;
+	padding:7px 13px;
+
+}
+p{
+	color:#666;
+}
+
+
+#filters{
+	margin-bottom:20px;
+}
+
+#search{
+	width:170px;
+}
+.distance{
+	margin:7px 7px;
+	background:#eee;
+	border-radius:10px;
+	font-weight:bold;
+	padding:7px 13px;
+	color:#27A6DE;
+
+}
+.on{
+	background:#27A6DE;
+	color:#fff;
+}
+	.distance.on:hover{
+		background:#27A6DE;
+		color:#fff;
+	}
+	.distance:hover{
+		background:#dadada;
+		cursor:pointer;
+	}
+	.submenu {
+	background: #EEE;
+	padding: 7px 13px;
+	border-radius: 0 13px 0 13px;
+	}
+		.submenu:hover{
+			cursor:pointer;
+		}
+.submenu a{
+	line-height:40px;
+	color:#777;
+	margin-left:13px;
+}
+ .result{
+	width:98%;
+	padding:7px;
+	border-radius:7px;
+	background:#eee;
+	margin-bottom:20px;
+}
+ .result:hover{
+		background:#f7f7f7;
+
+	}
+strong{
+	color:#222;
+	font-weight:bold;
+	font-size:16px;
+}
+
+body{
+	color:#666 !important;
+}
+p.description{
+	font-size:11px;
+	margin-top:3px	;
+	font-family:Lucida Grande;
+	width:88%;
+}
+.dates{
+	margin:3px 0;
+	font-size:10px;
+	color:#aaa;
+}
+	.dates strong{
+		font-size:12px;
+		color:#999;
+	}
+	.remmuneration .ecoicon{
+		font-size:15px;
+		margin-top:-3px;
+		font-weight:normal;
+		margin-right:7px;
+		text-align:left;
+		margin-left:0px;
+		color:#fff;
+	}
+	.remmuneration {
+		background: #A5E000;
+	padding: 3px 7px;
+	border-radius: 6px;
+	position: absolute;
+	margin-top: 53px;
+	font-size: 19px;
+	font-weight: bold;
+	color: white;
+	margin-left: 617px;
+	border-radius: 7px 0;
+	text-shadow: 1px 1px 1px #222;
+	width: 81px;
+	}
+	.remmuneration.positive{
+		background: #A5E000;
+	}
+	.remmuneration.negative{
+		background:#EB2486;
+	}
+ 	.result .info{
+		margin-left:50px;
+	}
+	.proximity {
+	position: absolute;
+	margin-top: 61px;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: center;
+	width: 61px;
+	background: #0083C4;
+	padding: 2px 0;
+	color: white;
+	border-radius: 0 0 3px 3px;
+	}
+	.load{
+		background: #8E2;
+		color: white;
+		font-weight: bold;
+		text-align: center;
+		padding: 7px 0;
+		border-radius: 6px;
+	}
+	.load:hover{
+		background:#af3;
+		cursor:pointer;
+	}
+	.showmap, .showlist{
+		line-height: 9px;
+		font-size: 20px;
+		font-weight: bold;
+		color: #39F;
+	}
+		.showmap:hover, .showlist:hover{
+			cursor:pointer;
+		}
+	.showmap .ecoicon, .showlist .ecoicon{
+		color: #39F;
+		margin-right:10px;
+	}
+	#map{
+		height:500px;
+		margin-bottom:20px;
+	}
+	.category {
+
+	width: 31px;
+	height: 32px;
+	position: absolute;
+	text-align: center;
+	margin-top: -7px;
+	margin-left: -7px;
+	border-radius: 7px 0 7px 7px;
+	}
+	.category .ecoicon{
+		font-size:17px;
+		margin-left:3px;
+		color:#fff;
+		text-align:center;
+	}
+	#search, #address{
+		width:111%;
+	}
+	#selectable li {
+	margin: 13px 7px;
+	padding: 0.4em;
+	font-size: 1em;
+	height: 18px;
+	width: 71px;
+	float: left;
+	}
+	#map {
+	position: absolute !important;
+	width: 758px;
+	height: 588px;
+	top: 180px;
+	}
+	
+	.viewmode{
+		font-weight: bold;
+		line-height: 17px;
+		background: #EEE;
+		padding: 9px 10px;
+		border-radius: 10px 0 0 10px;
+		color: #AAA;
+	}
+		.viewmode:hover{
+			background:#dfdfdf;
+			color:#999;
+			cursor:pointer;
+		}
+	.viewmode .ecoicon{
+		font-size:15px;
+		color:#bbb;
+		margin-right:10px;
+	}
+	.ui-button-text{
+		padding: 3px;
+		font-size: 9px;
+	}
+	.checkboxes{
+		text-align:right;
+	}
+	.ui-state-default {
+	border: 0px solid #DDD;
+	background: #333;
+	font-weight: bold;
+	color: #00C0E6;
+	border-radius: 8px 0;
+	}
+	.ui-state-active{
+		background:#fff;
+		color:#222;
+	}
+	#map{}
+	
+	
+	.ecocenter-address{
+		font-size: 12px;
+		font-family: Lucida Grande;
+		color: #999;
+	}
+	.ecocenter-distance {
+	font-size: 13px;
+
+	font-weight: bold;
+	
+	}
+	.ecocenter-vibe {
+	position: absolute;
+	margin-left: 483px;
+	margin-top: -6px;
+	background: #666;
+	border-radius: 7px;
+	padding: 2px 1px;
+	width: 176px;
+	border-radius: 0px 7px 0 7px;
+	}
+		.ecocenter-vibe .text{
+			color: white;
+			font-weight: bold;
+			font-size: 12px;
+			text-align: center;
+		}
+		.ecocenter-vibe .icon{
+			width:30px;
+			height:30px;
+		}
+		.ecocenter-description{
+			width: 63%;
+			font-family: Lucida Grande, Lucida Sans, sans-serif;
+			font-size: 12px;
+			color: #BBB;
+		}
+		.type {
+		float: left;
+		width: 105px;
+		margin-left: 14px;
+		line-height: 44px;
+		background: #EEE;
+		margin-top: 10px;
+		border-radius: 9px;
+		padding: 0 7px;
+		text-align: center;
+		}
+			.type:hover{
+				cursor:pointer;
+				background:#f4f4f4;
+			}
+		.type .ecoicon{
+			margin-right:13px;
+			margin-top:-4px;
+			font-size:23px;
+		}
+		#profilecontent .type .ecoicon{ margin-right:0; }
+		.type .text{
+			font-size:13px;
+			font-weight:bold;
+		}
+		#subfilters{
+			margin:7px 13px;
+		}
+		.subfilter{
+			font-size:13px;
+			padding:7px 13px;
+			border-radius:7px;
+			background:#eee;
+			margin-right:9px;
+		}
+		.subfilter:hover{
+			background:#f7f7f7;
+		}
+		.subfilter.on{
+			background:#27A6DE;
+			color:#fff;
+		}
+#pictures{
+	width:100%;
+}
+	.picture-item {
+	background: #F7F7F7;
+	width: 32.3%;
+	float: left;
+	margin-right: 7px;
+	margin-bottom: 7px;
+	border-radius:0 0 7px 7px;
+	}
+	#pictures .picture{
+		width: 100%;
+		height: 232px;
+		background: #EEE;
+		overflow:hidden;
+	}
+		#pictures .picture img{
+			text-align:center;
+			margin-top:2px;
+		}
+	.actions {
+	border-radius: 7px;
+	margin: 8px;
+	width:214px;
+	margin-bottom:0;
+	}
+		.social-response{
+			width:214px;
+			margin:0 13px;
+			margin-bottom:6px;
+		}
+	.actions {
+
+	background: #ddd;
+	}
+	.action, .social {
+	float: left;
+	margin-right: 7px;
+	font-size: 11px;
+	text-align: center;
+	width: 64px;
+	border-radius:3px;
+	}
+		.action .ecoicon, .social .ecoicon {
+		width: 60px;
+		line-height: 50px;
+		margin-top: -6px;
+		text-align: center;
+		font-size: 25px;
+		}
+		.social .value{
+			color:#fff;
+		}
+
+		.picture-item .category {
+		margin-left: 196px;
+		margin-top: 5px;
+		}
+		.type.on{
+			background:#777;
+			color:#fff;
+		}
+			.type.on .ecoicon{
+				color:#fff;
+				
+			}
+.response{
+	display:none;
+	width: 96%;
+	clear: both;
+	background: #F7F7F7;
+	padding: 3px 10px;
+	border-radius: 7px;
+	margin-bottom: 8px;
+}
+
+
+/** MEET FEED **/
+.flower {
+width: 102.5%;
+margin: -9px;
+border-radius: 0 0 10px 10px;
+overflow: hidden;
+}
+.result .flag{
+	width: 32px;
+	background: #777;
+	position: absolute;
+	margin-left: 673px;
+	border-radius: 6px;
+}
+.buttons.social-actions{
+	width:auto;
+	margin-right:30px;
+}
+.buttons .button {
+float: right;
+padding: 7px 10px;
+margin:0px 7px 7px 0;
+}
+.buttons .button .ecoicon {
+text-align: right;
+width: 33px;
+font-size: 16px;
+padding: 3px 0;
+}
+.result name{
+	margin-left: 8px;
+	line-height: 36px;
+	color: #AAA;
+	font-weight: bold;
+}
+.reputation{
+margin-right: 14px;
+float:right;
+margin-top:-9px;
+}
+.reputation div{
+	color:#aaa;
+	text-align:center;
+	font-weight:bold;
+	margin-left:7px;
+	font-size:17px;
+}
+
+.doner .kins {
+background: #A5E000;
+color: white;
+position: absolute;
+font-weight: bold;
+padding: 3px;
+font-size: 9px;
+}
+.maximize .ecoicon, .minimize .ecoicon{
+	position: absolute;
+	margin-top: -27px;
+	font-size: 16px;
+	width: 53px;
+	text-align: center;
+	color:#bbb;
+}
+.maximize .ecoicon:hover, .minimize .ecoicon:hover{
+	cursor:pointer;
+	color:#aaa;
+}
+.actions .active{ color:#2794FF; }
+.picture-item{ cursor:pointer; }
+.picture-item .star{ position:absolute; top:0; left:5px; }
+.picture-item .featured{ color:#FC3; }

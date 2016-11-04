@@ -1,0 +1,20 @@
+ 
+#Options +FollowSymLinks  
+#RewriteEngine On  
+  
+#RewriteCond %{SCRIPT_FILENAME} !-d  
+#RewriteCond %{SCRIPT_FILENAME} !-f  
+Options +FollowSymlinks
+RewriteEngine On
+
+RewriteRule ^css(/)?$ /stylesheets/ [R]
+
+
+#RewriteCond %{THE_REQUEST} ^[A-Z]{3,9} /?seccion=([^&]+) HTTP/ 
+#RewriteRule ^$ http://www.cherada.com/%1.html? [R=301,L]
+
+#RewriteCond %{THE_REQUEST} ^[A-Z]{3,9} ?user_id=([0-9]+) HTTP/ 
+RewriteRule ^(.*)member_profile\.php\?user\_\id$ /members$1/ [R] 
+#RewriteRule ^$ http://localhost:8888/%1? [R=301,L]
+
+#RewriteRule ^(*)members\/member_profile /member_profile.php [R]

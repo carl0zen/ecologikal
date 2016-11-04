@@ -1,0 +1,457 @@
+.block{
+	width:30%;
+}
+.main .block{
+	width:57%;
+	float:left;
+}
+
+button.backtoprofile{
+
+	position:absolute;
+	right:10px;
+	top:10px;
+}
+#overview{
+	height:200px;
+	width:400px;
+	background:#ccc;
+}
+.number{
+	color:#fff;
+}
+#mycredits{
+	width:230px;
+	position:absolute;
+	top:90px;
+	margin-left:420px;
+	background:#c9c9c9;
+	padding:10px;
+	border-radius:10px 0 0 0;
+}
+h3 a.fancylink{
+	float:right;
+	font-size:13px;
+	padding:0 10px;
+}
+a.fancylink{
+	padding:5px 10px;
+	background:#ccc;
+}
+#profileheader memberavatar{
+	position: absolute;
+	right: 14px;
+	
+}
+#profileheader button, button.booknow{
+	float:right;
+}
+#profileheader #buttons{
+	float:left;
+}
+button .iconic{
+	font-size:23px;
+
+}
+#profilecontent div#people {
+	float:right;
+	width: 40%;
+
+}
+/** RIGHTBAR **/
+#rightbar {
+position: fixed;
+margin-left: 671px;
+top: 0;
+
+width: 275px;
+padding: 15px;
+}
+#rightbar .icon {
+width: 30px;
+height: 30px;
+margin: 0;
+margin-right: 10px;
+margin-top: -5px;
+}
+#bargraph .graphValuebargraph{
+	top: 3px;
+	color: #fff;
+	position: absolute;
+	z-index: 100;
+	margin-left: 5px;
+	font-family: Helvetica Neue;
+	font-weight: bold;
+}
+#bargraph .graphBarbargraph{
+	border-radius: 5px 5px 0 0;
+	box-shadow:0 0 10px #111;
+	-moz-border-radius: 5px 5px 0 0;
+	-moz-box-shadow:0 0 10px #111;
+	-webkit-border-radius: 5px 5px 0 0;
+	-webkit-box-shadow:0 0 10px #111;
+}
+#bargraph{
+	margin: 45px 0;
+}
+#bargraph .icon{
+	margin-top:10px;
+	margin-left:5px;
+}
+#rightbar .comments {
+	background-image: linear-gradient(bottom, rgb(128,128,128) 26%, rgb(184,184,184) 63%);
+	background-image: -o-linear-gradient(bottom, rgb(128,128,128) 26%, rgb(184,184,184) 63%);
+	background-image: -moz-linear-gradient(bottom, rgb(128,128,128) 26%, rgb(184,184,184) 63%);
+	background-image: -webkit-linear-gradient(bottom, rgb(128,128,128) 26%, rgb(184,184,184) 63%);
+	background-image: -ms-linear-gradient(bottom, rgb(128,128,128) 26%, rgb(184,184,184) 63%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.26, rgb(128,128,128)),
+		color-stop(0.63, rgb(184,184,184))
+	);
+float: right;
+padding: 6px 12px;
+margin-top: -34px;
+border-radius: 5px;
+box-shadow: 0 0 10px #000;
+color: #eee;
+font-weight:bold;
+text-shadow: 1px 1px 2px #555;
+}
+#rightbar .comments:hover, #rightbar .comments:hover .iconic{
+	color:#fff;
+	cursor:pointer;
+}
+#rightbar .comments .iconic{
+
+	margin-top: 2px;
+	color: #eee;
+	display: block;
+	float: left;
+	margin-right: 3px;
+
+	
+}
+#rightbar #date{
+	width:150px;
+	float:left;
+	margin-right:10px;
+}
+#rightbar #nodays{
+	width:40px;
+	float:left;
+}
+/** PEOPLE **/
+#people .icon{
+	height: 25px;
+	margin-right: 5px;
+	width: 25px;
+}
+#people div.avatars{
+	min-height:30px;
+
+}
+#container{
+	margin:0 auto;
+	background:#000 url(images/bg.png);
+	width:100%;
+}
+#moreabout{
+	width:100%;
+}
+#moreabout td{
+	width:33%;
+	vertical-align:top;
+}
+#moreabout .icon{
+	width: 30px;
+	height: 30px;
+	float: left;
+}
+div#places #profilecontent{
+	min-height:360px;
+}
+#profilecontent.main{
+	min-height:500px;
+}
+#map{
+	width:100%;
+	height:300px;
+}
+#map h2{
+	color:#666;
+	margin:7px 0;
+}
+div.addplace {
+width: 200px;
+background: #222;
+padding: 15px;
+position: absolute;
+top: 94px;
+left: 420px;
+
+}
+.addplace h2{
+	margin-top:-15px;
+}
+.addplace p{
+	text-shadow:none;
+	color:#ddd;
+}
+div.addplace input, .addplace textarea, .addplace select{
+	width:190px;
+}
+div.form input, div.form textarea{
+	width:400px;
+}
+div.form #description{
+	height:100px;
+}
+a.viewall{
+	color:#00C0E6;
+	float:right;
+}
+
+/** ROOMS **/
+div.picthumbs {
+clear: both;
+height: 60px;
+display: block;
+background: #292929;
+padding: 4px;
+}
+.room a{
+	float:right;
+}
+#price{
+	float: right;
+	font-size: 19px;
+	color: white;
+	font-weight: bold;
+	font-family: Helvetica Neue;
+}
+#currency{
+	float:right;
+}
+
+
+/* ECOCENTER PROFILE */
+#ecocenter #profileimage{
+	margin-top:98px;
+	margin-left:19px;
+}
+#ecocenter h2{ color:#FFF; text-shadow:none; margin:5px 0; }
+#ecocenter #profilecontent{
+	margin-top:295px;
+}
+#bookingform input{
+	border:1px solid #999;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+}
+#reputation .icon{
+	width:30px;
+	height:30px;
+}
+.iconic.image{ margin:0; }
+
+
+
+
+/** APPLICATION FORM **/
+#application-form textarea{
+	width:97%;
+	height:70px;
+}
+.vacancies-left .number {
+font-size: 60px;
+font-weight: bold;
+}
+#bargraph.application{
+	height:140px !important;
+	margin:10px 0;
+}
+.vacancies-left .text{
+	margin-top: 13px;
+	margin-left: 10px;
+	font-weight: bold;
+	color: #CCC;
+}
+#reputation{
+	margin-top:40px;
+	width:200px;
+}
+.review .title{
+	font-size:13px;
+}
+.review p{
+	font-size:11px;
+	font-family:Lucida Grande;
+	color:#ddd;
+	
+}
+.review{
+	background:#333;
+	padding:7px;
+	border-radius:10px;
+	margin-bottom:13px;
+	
+}
+	.review:hover{
+		background:#444;
+	}
+.review .grade {
+font-size: 13px;
+background: #92C542;
+padding: 3px 6px;
+float: right;
+font-weight: bold;
+border-radius: 7px 0 7px 0;
+margin-top: -15px;
+margin-right: -7px;
+}
+.application .category{
+	position:relative;
+}
+ .result{
+	width:98%;
+	padding:7px;
+	border-radius:7px;
+	background:#eee;
+	margin-bottom:20px;
+}
+ .result:hover{
+		background:#f7f7f7;
+
+	}
+	.result .info{
+		margin-left:70px;
+	}
+	.result .info p{
+		font-size:11px;
+		font-family:Lucida Grande, Lucida Sans, Sans-serif;
+		color:#999;
+	}
+	.graphValuebargraph{
+
+		z-index: 1 !important;
+	}
+	.availability{
+		margin-top:10px;
+	}
+	.availability .date{
+		font-size:13px;
+		border-radius:7px 7px 0 0;
+		color:#999;
+		font-weight:bold;
+		background:#ddd;
+		padding:3px 0;
+	}
+	.availability .ecoicon{
+		font-size:12px;
+		padding:3px 0;
+		border-radius:0 0 7px 7px;
+	}
+	.availability .ecoicon.tick{
+		background:#A1CA39;
+		color:#fff;
+	}
+
+	.availability .ecoicon.no{
+		background:#EF4A29;
+		color:#fff;
+	}
+
+		#search input{
+			border-radius:7px;
+			border:1px solid #999;
+			width:180px;
+		}
+		#search .search{
+			margin-top:10px;
+		}
+		.booking .confirmation{
+			margin-left:75px;
+		}
+		.cost.big .ecoicon {
+		font-size: 40px;
+		color: white;
+		margin-top: -14px;
+		margin-right: 10px;
+		}
+		.cost.big{
+			font-size:40px;
+		}
+		.cost-label{
+			font-size:40px;
+			font-weight:bold;
+			letter-spacing:-1px;
+		}
+		.confirm-transaction .button {
+		font-size: 40px;
+		text-align: center;
+		padding: 35px;
+		}
+		.invite-friends input{
+			width:100% !important;
+			color: #888 !important;
+			font-size: 15px !important;
+			background: #EEE !important;
+			border-radius: 7px !important;
+			padding: 9px 13px !important;
+			margin:13px 0;
+			clear:both;
+}
+#realcost{
+	font-weight: bold;
+	margin-right: 10px;
+	margin-top: 16px;
+}
+#account-balance{
+	margin-bottom:18px;
+}
+#account-balance .ecoicon{
+	font-size:40px;
+
+	color:#fff;
+}
+#account-balance .text {
+font-size: 46px;
+font-weight: bold;
+line-height: 83px;
+margin-left: 7px;
+}
+.buykins{
+	font-size:18px !important;
+	padding:13px 20px;
+}
+.incentive{
+	font-size: 23px;
+	color: #CCC;
+	text-align: right;
+}
+.incentive strong{
+	color:#999;
+}
+#social-share img{
+	width:120px;
+}
+.reserve-info{
+	text-align: right;
+	font-family: Lucida Grande;
+	font-size: 13px;
+}
+.this-is-info{
+	margin: 0 0 10px 0;
+	font-size: 13px;
+	font-family: Lucida Grande, Lucida Sans, Lucida, sans-serif;
+	
+}
+.ec-name{
+	margin: 9px 7px;
+	font-weight: bold;
+}

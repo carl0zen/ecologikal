@@ -1,0 +1,10 @@
+#map{
+	width:100%;
+	height:300px;
+	float:none;
+}
+#profileimage{ margin:0; }
+#buttons:hover{ opacity:1; }
+.experiences, .comments{	padding:0; margin:0; list-style:none; }
+.experiences li, .comments li{ margin-bottom:10px; width:100%; }
+.comments{ color:#000; }

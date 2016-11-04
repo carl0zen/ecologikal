@@ -1,0 +1,238 @@
+.block{
+	width:30%;
+}
+.main .block{
+	width:57%;
+	float:left;
+}
+
+button.backtoprofile{
+
+	position:absolute;
+	right:10px;
+	top:10px;
+}
+#overview{
+	height:200px;
+	width:400px;
+	background:#ccc;
+}
+.number{
+	color:#fff;
+}
+#mycredits{
+	width:230px;
+	position:absolute;
+	top:90px;
+	margin-left:420px;
+	background:#c9c9c9;
+	padding:10px;
+	border-radius:10px 0 0 0;
+}
+h3 a.fancylink{
+	float:right;
+	font-size:13px;
+	padding:0 10px;
+}
+a.fancylink{
+	padding:5px 10px;
+	background:#ccc;
+}
+#profileheader memberavatar{
+	position: absolute;
+	right: 14px;
+	
+}
+#profileheader button, button.booknow{
+	float:right;
+}
+#profileheader #buttons{
+	float:left;
+}
+button .iconic{
+	font-size:23px;
+
+}
+#profilecontent div#people {
+	float:right;
+	width: 40%;
+
+}
+/** RIGHTBAR **/
+#rightbar {
+position: fixed;
+margin-left: 671px;
+top: 0;
+
+width: 275px;
+padding: 15px;
+}
+#rightbar .icon {
+width: 30px;
+height: 30px;
+margin: 0;
+margin-right: 10px;
+margin-top: -5px;
+}
+#bargraph .graphValuebargraph{
+	top: 3px;
+	color: #fff;
+	position: absolute;
+	z-index: 100;
+	margin-left: 5px;
+	font-family: Helvetica Neue;
+	font-weight: bold;
+}
+#bargraph .graphBarbargraph{
+	border-radius: 5px 5px 0 0;
+	box-shadow:0 0 10px #111;
+	-moz-border-radius: 5px 5px 0 0;
+	-moz-box-shadow:0 0 10px #111;
+	-webkit-border-radius: 5px 5px 0 0;
+	-webkit-box-shadow:0 0 10px #111;
+}
+#bargraph{
+	margin: 45px -10px;
+}
+#bargraph .icon{
+	margin-top:10px;
+	margin-left:5px;
+}
+#rightbar .comments {
+	background-image: linear-gradient(bottom, rgb(128,128,128) 26%, rgb(184,184,184) 63%);
+	background-image: -o-linear-gradient(bottom, rgb(128,128,128) 26%, rgb(184,184,184) 63%);
+	background-image: -moz-linear-gradient(bottom, rgb(128,128,128) 26%, rgb(184,184,184) 63%);
+	background-image: -webkit-linear-gradient(bottom, rgb(128,128,128) 26%, rgb(184,184,184) 63%);
+	background-image: -ms-linear-gradient(bottom, rgb(128,128,128) 26%, rgb(184,184,184) 63%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.26, rgb(128,128,128)),
+		color-stop(0.63, rgb(184,184,184))
+	);
+float: right;
+padding: 6px 12px;
+margin-top: -34px;
+border-radius: 5px;
+box-shadow: 0 0 10px #000;
+color: #eee;
+font-weight:bold;
+text-shadow: 1px 1px 2px #555;
+}
+#rightbar .comments:hover, #rightbar .comments:hover .iconic{
+	color:#fff;
+	cursor:pointer;
+}
+#rightbar .comments .iconic{
+
+	margin-top: 2px;
+	color: #eee;
+	display: block;
+	float: left;
+	margin-right: 3px;
+
+	
+}
+#rightbar #date{
+	width:150px;
+	float:left;
+	margin-right:10px;
+}
+#rightbar #nodays{
+	width:40px;
+	float:left;
+}
+/** PEOPLE **/
+#people .icon{
+	height: 25px;
+	margin-right: 5px;
+	width: 25px;
+}
+#people div.avatars{
+	min-height:30px;
+
+}
+#container{
+	margin:0 auto;
+	background:#000 url(images/bg.png);
+	width:100%;
+}
+#moreabout{
+	width:100%;
+}
+#moreabout td{
+	width:33%;
+	vertical-align:top;
+}
+#moreabout .icon{
+	width: 30px;
+	height: 30px;
+	float: left;
+}
+div#places #profilecontent{
+	min-height:360px;
+}
+#profilecontent.main{
+	min-height:500px;
+}
+#map{
+	width:100%;
+	height:300px;
+}
+#map h2{
+	color:#666;
+	margin:7px 0;
+}
+div.addplace {
+width: 200px;
+background: #222;
+padding: 15px;
+position: absolute;
+top: 94px;
+left: 420px;
+
+}
+.addplace h2{
+	margin-top:-15px;
+}
+.addplace p{
+	text-shadow:none;
+	color:#ddd;
+}
+div.addplace input, .addplace textarea, .addplace select{
+	width:190px;
+}
+div.form input, div.form textarea{
+	width:400px;
+}
+div.form #description{
+	height:100px;
+}
+a.viewall{
+	color:#00C0E6;
+	float:right;
+}
+
+/** ROOMS **/
+div.picthumbs {
+clear: both;
+height: 60px;
+display: block;
+background: #292929;
+padding: 4px;
+}
+.room a{
+	float:right;
+}
+#price{
+	float: right;
+	font-size: 19px;
+	color: white;
+	font-weight: bold;
+	font-family: Helvetica Neue;
+}
+#currency{
+	float:right;
+}
