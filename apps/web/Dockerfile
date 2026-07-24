@@ -20,6 +20,8 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3100
+ARG NEXT_BASE_PATH=/v2
+ENV NEXT_BASE_PATH=$NEXT_BASE_PATH
 RUN corepack enable
 COPY --from=build /app /app
 WORKDIR /app/apps/web

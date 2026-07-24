@@ -14,9 +14,12 @@ reference vertical. Both UIs coexist.
 
 ```bash
 pnpm install
-pnpm dual:up          # vintage + v2 + NC + gateway
+pnpm dual:up:lite     # vintage + v2 + gateway (fastest)
+pnpm dual:up          # above + Eco Nextcloud (:8081)
 pnpm dev              # hot revival on :3100 (optional)
 ```
+
+Health: `http://localhost:8080/v2/api/health` (or `:3100/api/health` with `pnpm dev`).
 
 Details: [docs/DUAL_STACK.md](docs/DUAL_STACK.md)
 

@@ -1,0 +1,11 @@
+node_modules
+.pnpm-store
+.next
+.git
+.cursor
+apps/web/.data
+*.log
+.DS_Store
+frontend_bkp
+**/*conflicted*
+greenble_ecologikalv1.sql
