@@ -1,0 +1,137 @@
+# Dual-stack Ecologikal: vintage PHP + revival Next.js (+ optional Eco Nextcloud)
+#
+#   Gateway:   http://localhost:8090/      → vintage
+#              http://localhost:8090/v2    → revival UI
+#              (:8090 avoids Certexi NC often bound on :8080)
+#   Nextcloud: http://localhost:8081/     (profile: nc)
+#   Dev (no gateway): pnpm dev → :3100, vintage container still on :8082
+#
+#   pnpm dual:up       → vintage + v2 + NC + gateway
+#   pnpm dual:up:lite  → vintage + v2 + gateway (no NC; faster)
+
+services:
+  vintage-db:
+    # 5.7 has no arm64 image; amd64 via emulation on Apple Silicon
+    image: mysql:5.7
+    platform: linux/amd64
+    environment:
+      MYSQL_DATABASE: ecologikal
+      MYSQL_USER: eco
+      MYSQL_PASSWORD: eco
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - vintage-db:/var/lib/mysql
+      - ../greenble_ecologikalv1.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    command: --character-set-server=utf8 --collation-server=utf8_general_ci
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', '127.0.0.1', '-ueco', '-peco']
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  vintage:
+    build:
+      context: ./vintage
+    ports:
+      - '8082:80'
+    environment:
+      ECO_DB_HOST: vintage-db
+      ECO_DB_NAME: ecologikal
+      ECO_DB_USER: eco
+      ECO_DB_PASSWORD: eco
+      ECO_VINTAGE_PUBLIC_URL: http://localhost:8090/
+      ECO_REVIVAL_PUBLIC_URL: http://localhost:8090/v2
+    volumes:
+      - ..:/var/www/html
+    depends_on:
+      vintage-db:
+        condition: service_healthy
+
+  nextcloud-db:
+    profiles: ['nc']
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: nextcloud
+      POSTGRES_USER: nextcloud
+      POSTGRES_PASSWORD: nextcloud
+    volumes:
+      - nc-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U nextcloud']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  nextcloud:
+    profiles: ['nc']
+    image: nextcloud:29-apache
+    ports:
+      - '8081:80'
+    environment:
+      POSTGRES_HOST: nextcloud-db
+      POSTGRES_DB: nextcloud
+      POSTGRES_USER: nextcloud
+      POSTGRES_PASSWORD: nextcloud
+      NEXTCLOUD_ADMIN_USER: ecoadmin
+      NEXTCLOUD_ADMIN_PASSWORD: ecoadmin-change-me
+      NEXTCLOUD_TRUSTED_DOMAINS: localhost
+    volumes:
+      - nc-data:/var/www/html
+    depends_on:
+      nextcloud-db:
+        condition: service_healthy
+
+  web:
+    build:
+      context: ..
+      dockerfile: apps/web/Dockerfile
+      args:
+        NEXT_BASE_PATH: /v2
+        NEXT_PUBLIC_APP_URL: http://localhost:8090/v2
+        NEXT_PUBLIC_VINTAGE_URL: http://localhost:8090
+    environment:
+      JWT_SECRET: development-only-secret-change-me
+      SSO_SECRET: development-only-secret-change-me
+      CERTEXI_PLATFORM_URL: http://host.docker.internal:3000
+      NEXT_PUBLIC_APP_URL: http://localhost:8090/v2
+      NEXT_PUBLIC_VINTAGE_URL: http://localhost:8090
+      NEXT_BASE_PATH: /v2
+      ECO_ALLOW_DEV_LOGIN: 'true'
+      ECO_ALLOW_PROOF_STUB: 'true'
+      ECO_NEXTCLOUD_URL: http://nextcloud
+      ECO_NEXTCLOUD_ADMIN_USER: ecoadmin
+      ECO_NEXTCLOUD_ADMIN_PASSWORD: ecoadmin-change-me
+    ports:
+      - '3101:3100'
+    volumes:
+      - eco-store:/app/apps/web/.data
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "fetch('http://127.0.0.1:3100/v2/api/health').then((r)=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 60s
+
+  gateway:
+    image: nginx:1.27-alpine
+    ports:
+      - '8090:80'
+    volumes:
+      - ./gateway/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      vintage:
+        condition: service_started
+      web:
+        condition: service_healthy
+
+volumes:
+  vintage-db:
+  eco-store:
+  nc-db:
+  nc-data:
