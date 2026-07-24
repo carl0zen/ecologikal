@@ -1,6 +1,6 @@
 # Status Map
 
-Last zengineered: 2026-07-23
+Last updated: 2026-07-23
 
 ## Categories
 
@@ -21,8 +21,10 @@ Last zengineered: 2026-07-23
 | Next.js vertical | `apps/web` |
 | Domain | `packages/domain` |
 | Certexi bridge | `packages/certexi-bridge` |
-| Dual-stack compose | `infra/docker-compose.yml` (vintage+v2+NC+gateway) |
+| Dual-stack compose | `infra/docker-compose.yml` (`dual:up` / `dual:up:lite`) |
+| Health probe | `apps/web/app/api/health` |
 | Vintage coexist banner | `header.php`, `index.php` |
+| Discover places/needs | `/discover` + store collections |
 | Playbook (Eco-only) | `docs/VERTICAL_PLAYBOOK.md` |
 | Dual-stack runbook | `docs/DUAL_STACK.md` |
 | Tenancy + demo | `docs/NEXTCLOUD_TENANCY.md`, `docs/DEMO_SCRIPT.md` |
@@ -33,17 +35,17 @@ Last zengineered: 2026-07-23
 | Area | Note |
 |------|------|
 | Proof bridge | Stub receipts without platform session |
-| JSON store | Tables-shaped stand-in for Eco NC Tables |
-| Discover pillar | Placeholder route (IA kept; no domain yet) |
-| Dev login | `ECO_ALLOW_DEV_LOGIN` bypasses Certexi IdP |
+| JSON store | **Domain SSOT** today; shapes mirror future NC Tables |
+| NC account provisioning | OCS when NC up; local profiles if `ECO_ALLOW_DEV_LOGIN` |
+| Dev login | bypasses Certexi IdP |
 
 ## Dormant
 
 | Area | Note |
 |------|------|
-| NC Tables sync | Store API ready; not wired to OCS Tables |
+| NC Tables sync | Not wired — do not document as live |
 | Real SSO e2e | Needs running Certexi + allowlisted host |
-| Place → need loop | Vintage idea; not in revival store |
+| Service-token proof | Certexi upstream U2 |
 
 ## Archive (do not extend)
 
@@ -54,3 +56,4 @@ memory for primitives. Conflict copies + `frontend_bkp/` = **parasitic**; ignore
 
 - Duplicated generic SSO/topology docs (Certexi `architecture/*` is SSOT)
 - `docs/DUAL_BUSINESS_PROOF.md`, `docs/CERTEXI_UPSTREAM.md` (folded into playbook)
+- False “NC Tables live” framing in tenancy doc

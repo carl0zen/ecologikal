@@ -33,10 +33,19 @@ Cross-links:
 - PHP 7.4 + `infra/vintage/mysql_polyfill.php` (mysql_* → mysqli)
 - DB credentials swapped in-container via `dbconnection.docker.php`
 - Schema import: `greenble_ecologikalv1.sql` on first MySQL boot (slow)
+- `vintage-db` uses `platform: linux/amd64` (MySQL 5.7 has no arm64 image)
+
+## Profiles
+
+| Command | Stack |
+|---------|-------|
+| `pnpm dual:up:lite` | Vintage + revival + gateway (no Nextcloud) |
+| `pnpm dual:up` | Above + Eco Nextcloud (`--profile nc`) |
 
 ## Revival notes
 
-- Domain store: `apps/web/.data/eco-store.json`
+- Domain store: JSON file `.data/eco-store.json` (SSOT today; not NC Tables yet)
+- Health: `GET http://localhost:8080/v2/api/health` or `:3100/api/health`
 - Seed: Admin or home **Cargar datos demo** (`POST /api/seed`)
 - Certexi SSO optional; `ECO_ALLOW_DEV_LOGIN=true` for local demo
 

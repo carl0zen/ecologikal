@@ -33,7 +33,8 @@ Same OS plane (SSO + proof). Separate repos, brands, data. **Do not merge.**
 | Domain (petals, flower, KINS) | `packages/domain` |
 | SSO / NC / proof bridge | `packages/certexi-bridge` (local jose + OCS; not a `file:` Certexi dep yet) |
 | Eco NC compose | `infra/docker-compose.yml` (:8081) |
-| Domain store | `apps/web/lib/store.ts` → `.data/eco-store.json` (Tables-shaped; NC Tables later) |
+| Domain store | `apps/web/lib/store.ts` → `.data/eco-store.json` (**SSOT**; Tables-shaped for later NC sync) |
+| Health probe | `GET /api/health` — store counts + NC reachability |
 | Hosts / guests | [NEXTCLOUD_TENANCY.md](./NEXTCLOUD_TENANCY.md) |
 | Demo | [DEMO_SCRIPT.md](./DEMO_SCRIPT.md) |
 | Primitives | [.claude/knowledge/PRIMITIVES.md](../.claude/knowledge/PRIMITIVES.md) |

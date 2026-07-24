@@ -10,8 +10,9 @@
     "build": "pnpm -r run build",
     "typecheck": "pnpm -r run typecheck",
     "test": "pnpm -r run test",
-    "dual:up": "docker compose -f infra/docker-compose.yml up -d --build",
-    "dual:down": "docker compose -f infra/docker-compose.yml down",
+    "dual:up": "docker compose -f infra/docker-compose.yml --profile nc up -d --build",
+    "dual:up:lite": "docker compose -f infra/docker-compose.yml up -d --build",
+    "dual:down": "docker compose -f infra/docker-compose.yml --profile nc down",
     "dual:logs": "docker compose -f infra/docker-compose.yml logs -f --tail=100"
   },
   "devDependencies": {

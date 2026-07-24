@@ -1,13 +1,18 @@
-# Dual-stack Ecologikal: vintage PHP + revival Next.js + Eco Nextcloud
+# Dual-stack Ecologikal: vintage PHP + revival Next.js (+ optional Eco Nextcloud)
 #
 #   Gateway:   http://localhost:8080/      → vintage
 #              http://localhost:8080/v2    → revival UI
-#   Nextcloud: http://localhost:8081/
+#   Nextcloud: http://localhost:8081/     (profile: nc)
 #   Dev (no gateway): pnpm dev → :3100, vintage container still on :8082
+#
+#   pnpm dual:up       → vintage + v2 + NC + gateway
+#   pnpm dual:up:lite  → vintage + v2 + gateway (no NC; faster)
 
 services:
   vintage-db:
+    # 5.7 has no arm64 image; amd64 via emulation on Apple Silicon
     image: mysql:5.7
+    platform: linux/amd64
     environment:
       MYSQL_DATABASE: ecologikal
       MYSQL_USER: eco
@@ -42,6 +47,7 @@ services:
         condition: service_healthy
 
   nextcloud-db:
+    profiles: ['nc']
     image: postgres:16-alpine
     environment:
       POSTGRES_DB: nextcloud
@@ -56,6 +62,7 @@ services:
       retries: 10
 
   nextcloud:
+    profiles: ['nc']
     image: nextcloud:29-apache
     ports:
       - '8081:80'
@@ -91,8 +98,8 @@ services:
       ECO_NEXTCLOUD_URL: http://nextcloud
       ECO_NEXTCLOUD_ADMIN_USER: ecoadmin
       ECO_NEXTCLOUD_ADMIN_PASSWORD: ecoadmin-change-me
-    depends_on:
-      - nextcloud
+    volumes:
+      - eco-store:/app/apps/web/.data
 
   gateway:
     image: nginx:1.27-alpine
@@ -103,9 +110,9 @@ services:
     depends_on:
       - vintage
       - web
-      - nextcloud
 
 volumes:
   vintage-db:
+  eco-store:
   nc-db:
   nc-data:

@@ -1,13 +1,26 @@
 # Ecologikal Nextcloud Tenancy
 
 Ecologikal runs a **dedicated Nextcloud instance** (not Certexi’s NC).
-People and venue assets live here. Certexi remains IdP + proof plane.
+Certexi remains IdP + proof plane.
+
+## What is live today
+
+| Concern | Backend | Notes |
+|---------|---------|-------|
+| Host / guest **accounts** | Nextcloud OCS | Groups + folders when NC is up |
+| Domain data (centers, skills, KINS, …) | **JSON file** `apps/web/.data/eco-store.json` | Tables-shaped types in `packages/domain` |
+| Proof receipts | Local store + optional Certexi stub | Real service tokens = Certexi upstream |
+
+Do not claim NC Tables as wired until a sync layer exists. The store API is the
+migration seam: same shapes, swap implementation later.
+
+Probe: `GET /api/health` (or `/v2/api/health` behind the gateway).
 
 ## Account classes
 
 | Group id | Display | Who | Capabilities |
 |----------|---------|-----|--------------|
-| `eco-admins` | Admins | Platform operators | Create hosts/guests, manage groups/folders, Tables admin |
+| `eco-admins` | Admins | Platform operators | Create hosts/guests, manage groups/folders |
 | `eco-hosts` | Hosts | Eco-center / venue operators | Manage venue folder, workshops, vacancies, attest guests |
 | `eco-guests` | Guests | Econautas / travelers / volunteers | Own profile folder, declare skills, join vacancies |
 
@@ -21,31 +34,32 @@ Map to vintage roles: Admin / Settler-like host staff / Ecotraveler-Volunteer gu
    `centers/{slug}` with host write access.
 4. **Create guest:** OCS user create → add to `eco-guests` → personal folder only.
 5. After Certexi SSO, Ecologikal session `username` should match NC `userid`
-   (or a stored mapping table in Eco Tables).
+   (or a mapping row in the JSON store / future Tables).
 
 API surface used by `packages/certexi-bridge` / admin routes:
 
 - `ocs/v2.php/cloud/users` — create / get user
 - `ocs/v2.php/cloud/groups` — ensure group, add user
 - Group folders app (ops) for per-center isolation
+- `status.php` — health probe
 
-## Tables (domain)
+When NC is down and `ECO_ALLOW_DEV_LOGIN=true`, admin routes keep local profiles
+in the JSON store so demos still work.
 
-Prefer Nextcloud Tables for reference purity:
+## Domain store shapes (JSON now → Tables later)
 
-| Table | Purpose |
-|-------|---------|
+| Collection | Purpose |
+|------------|---------|
 | `profiles` | Guest/host display profile, petal interests |
 | `skills` | Declared skills by petal + level |
-| `skill_references` | Peer/host attestations (+ optional proof id) |
+| `skillReferences` | Peer/host attestations (+ optional proof id) |
 | `centers` | Eco-center venue records |
 | `vacancies` | Petal-tagged volunteer openings |
 | `workshops` | Host workshops |
-| `kins_ledger` | Append-only KINS entries |
-| `proof_receipts` | Certexi proof ids linked to local actions |
-
-If Tables velocity blocks MVP, use local JSON/SQLite in `apps/web` with the
-**same shapes**, and migrate to Tables later — do not invent a second domain language.
+| `kins` | Append-only KINS entries |
+| `proofs` | Certexi proof ids linked to local actions |
+| `places` / `needs` | Discover map |
+| `amplifications` / `broadcasts` | Engagement |
 
 ## Group folders
 
