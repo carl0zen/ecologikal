@@ -9,7 +9,6 @@ import { cookies } from 'next/headers';
 import { flag, getSsoSecret, sessionCookieOptions } from '@/lib/env';
 import { getSession } from '@/lib/auth';
 import { withStore, uid } from '@/lib/store';
-import { revivalPath } from '@/lib/urls';
 
 async function startSso() {
   'use server';
