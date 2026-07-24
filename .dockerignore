@@ -4,6 +4,8 @@ node_modules
 .git
 .cursor
 apps/web/.data
+apps/web/.env
+apps/web/.env.local
 *.log
 .DS_Store
 frontend_bkp

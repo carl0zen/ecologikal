@@ -42,7 +42,7 @@ export default function HomePage() {
           <h2>Vintage</h2>
           <p className="muted">
             PHP 2011–2012 en{' '}
-            <code>{vintage}</code> (gateway <code>:8080/</code> o directo{' '}
+            <code>{vintage}</code> (gateway <code>:8090/</code> o directo{' '}
             <code>:8082</code>).
           </p>
           <ul>

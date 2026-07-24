@@ -87,6 +87,8 @@ services:
       dockerfile: apps/web/Dockerfile
       args:
         NEXT_BASE_PATH: /v2
+        NEXT_PUBLIC_APP_URL: http://localhost:8090/v2
+        NEXT_PUBLIC_VINTAGE_URL: http://localhost:8090
     environment:
       JWT_SECRET: development-only-secret-change-me
       SSO_SECRET: development-only-secret-change-me
