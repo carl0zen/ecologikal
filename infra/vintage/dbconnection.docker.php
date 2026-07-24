@@ -1,11 +1,12 @@
 <?php
 /**
- * Docker-local DB connection (overrides remote credentials inside container only).
+ * Docker-local DB connection (copied over _config/dbconnection.php on container start).
+ * Host defaults to the compose service name so PHP works even when getenv is empty.
  */
-$hostname_ecologikal = getenv('ECO_DB_HOST') ?: 'vintage-db';
-$database_ecologikal = getenv('ECO_DB_NAME') ?: 'ecologikal';
-$username_ecologikal = getenv('ECO_DB_USER') ?: 'eco';
-$password_ecologikal = getenv('ECO_DB_PASSWORD') ?: 'eco';
+$hostname_ecologikal = 'vintage-db';
+$database_ecologikal = 'ecologikal';
+$username_ecologikal = 'eco';
+$password_ecologikal = 'eco';
 $ecologikal = mysql_pconnect(
   $hostname_ecologikal,
   $username_ecologikal,

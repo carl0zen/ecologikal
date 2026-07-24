@@ -14,6 +14,9 @@ services:
     # 5.7 has no arm64 image; amd64 via emulation on Apple Silicon
     image: mysql:5.7
     platform: linux/amd64
+    ports:
+      # Host browse: mysql -h127.0.0.1 -P3307 -ueco -peco ecologikal
+      - '3307:3306'
     environment:
       MYSQL_DATABASE: ecologikal
       MYSQL_USER: eco
@@ -90,8 +93,7 @@ services:
         NEXT_PUBLIC_APP_URL: http://localhost:8090/v2
         NEXT_PUBLIC_VINTAGE_URL: http://localhost:8090
     env_file:
-      - path: .env
-        required: false
+      - .env
     environment:
       JWT_SECRET: ${JWT_SECRET:-development-only-secret-change-me}
       SSO_SECRET: ${SSO_SECRET:-development-only-secret-change-me}

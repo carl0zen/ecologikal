@@ -47,6 +47,10 @@ Cross-links:
 - Missing `_plugins/` → CDN fallbacks for jQuery UI / fancybox (see `load_css_files`)
 - Schema import: `greenble_ecologikalv1.sql` on first MySQL boot (slow)
 - `vintage-db` uses `platform: linux/amd64` (MySQL 5.7 has no arm64 image)
+- Browse DB: host `127.0.0.1:3307` user/pass/db `eco`/`eco`/`ecologikal`
+  - CLI: `pnpm db:cli` · counts: `pnpm db:stats`
+  - GUI: TablePlus / DBeaver → MySQL 5.7, native password, port **3307**
+  - Re-import (wipes volume): `docker compose -f infra/docker-compose.yml down -v` then `pnpm dual:up:lite`
 
 ## Revival notes
 

@@ -1,9 +1,17 @@
 <?php
-# Local / dual-stack: infra/vintage/docker-entrypoint.sh overwrites this file
-# with dbconnection.docker.php. Do not commit live remote credentials.
-$hostname_ecologikal = getenv('ECO_DB_HOST') ?: '127.0.0.1';
-$database_ecologikal = getenv('ECO_DB_NAME') ?: 'ecologikal';
-$username_ecologikal = getenv('ECO_DB_USER') ?: 'eco';
-$password_ecologikal = getenv('ECO_DB_PASSWORD') ?: 'eco';
-$ecologikal = mysql_pconnect($hostname_ecologikal, $username_ecologikal, $password_ecologikal) or trigger_error(mysql_error());
-mysql_select_db($database_ecologikal, $ecologikal);
+/**
+ * Docker-local DB connection (copied over _config/dbconnection.php on container start).
+ * Host defaults to the compose service name so PHP works even when getenv is empty.
+ */
+$hostname_ecologikal = 'vintage-db';
+$database_ecologikal = 'ecologikal';
+$username_ecologikal = 'eco';
+$password_ecologikal = 'eco';
+$ecologikal = mysql_pconnect(
+  $hostname_ecologikal,
+  $username_ecologikal,
+  $password_ecologikal
+) or trigger_error(mysql_error(), E_USER_WARNING);
+if ($ecologikal) {
+  mysql_select_db($database_ecologikal, $ecologikal);
+}
