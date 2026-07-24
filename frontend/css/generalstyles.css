@@ -8,11 +8,8 @@
 }
 @font-face {
     font-family: 'EcoIcon';
-    src: url('fonts/ecoicons-webfont.eot');
-    src: url('fonts/ecoicons-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/ecoicons-webfont.woff') format('woff'),
-         url('fonts/ecoicons-webfont.ttf') format('truetype'),
-         url('fonts/ecoicons-webfont.svg#UntitledRegular') format('svg');
+    /* Original webfont files are not in this checkout; emoji fallback via eco-local-fallback.css */
+    src: local('Apple Color Emoji'), local('Segoe UI Emoji'), local('Noto Color Emoji');
     font-weight: normal;
     font-style: normal;
 

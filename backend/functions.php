@@ -236,6 +236,22 @@ function load_js_scripts($view){
 			<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.pack.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.7/jquery.timeago.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.cycle/3.0.3/jquery.cycle.all.min.js"></script>
+			<script>
+			/* Stubs for plugins not vendored in this checkout */
+			(function($){
+			  if (!$.watermarker) {
+			    $.watermarker = { setDefaults: function(){} };
+			    $.fn.watermark = function(){ return this; };
+			  }
+			  if (!$.fn.tipTip) {
+			    $.fn.tipTip = function(){ return this; };
+			  }
+			  if (!$.fn.livequery) {
+			    $.fn.livequery = function(){ return this; };
+			  }
+			})(jQuery);
+			</script>
 			<script src="'._JS_URL_.'main.js"></script>';
 		}
 		$js_loaded = true;
@@ -361,6 +377,11 @@ function load_css_files($view){
 			echo '
 			<link rel="stylesheet" href="'._CSS_URL_.'main.css" media="screen" />    	
 			<link rel="stylesheet" href="'._CSS_URL_.'generalstyles.css" media="screen" />';
+	$eco_fonts = _CSS_PATH_.'fonts/ecoicons-webfont.woff';
+	if (!is_file($eco_fonts)) {
+		echo '
+			<link rel="stylesheet" href="'._CSS_URL_.'eco-local-fallback.css" media="screen" />';
+	}
 	if (defined('_ECO_PLUGINS_LOCAL_') && _ECO_PLUGINS_LOCAL_) {
 		echo '
     		<link rel="stylesheet" href="'._PLUGINS_URL_.'jquery/css/jquery.ui.theme.css"  type="text/css" />
