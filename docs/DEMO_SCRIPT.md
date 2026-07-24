@@ -10,21 +10,21 @@ Time: ~8 minutes.
 pnpm install
 pnpm dual:up:lite     # recommended for this script (no Nextcloud)
 # or: pnpm dual:up    # + Eco Nextcloud on :8081
-# Gateway:  http://localhost:8080/     → vintage PHP
-#           http://localhost:8080/v2   → revival v2
+# Gateway:  http://localhost:8090/     → vintage PHP
+#           http://localhost:8090/v2   → revival v2
 # Optional hot UI: pnpm dev → :3100 (paths without /v2 prefix)
 ```
 
 Optional: Certexi platform on `:3000` with shared `JWT_SECRET` for real SSO.
 Demo login works with `ECO_ALLOW_DEV_LOGIN=true`.
 
-Paths below assume the **gateway** (`/v2` prefix).
+Paths below assume the **gateway** (`/v2` prefix on `:8090`).
 
 ## Script
 
 ### 1. Pitch (30s)
 
-Open `http://localhost:8080/`.
+Open `http://localhost:8090/`.
 
 > “Certexi is the OS plane — identity and proof. Ecologikal is a second
 > business: regenerative eco-social. Same OS, separate Nextcloud, no monorepo

@@ -7,10 +7,10 @@ reference vertical. Both UIs coexist.
 
 | URL | What |
 |-----|------|
-| http://localhost:8080/ | Vintage PHP |
-| http://localhost:8080/v2 | Revival Next.js |
+| http://localhost:8090/ | Vintage PHP (gateway) |
+| http://localhost:8090/v2 | Revival Next.js |
 | http://localhost:3100 | Revival dev (`pnpm dev`) |
-| http://localhost:8081 | Eco Nextcloud |
+| http://localhost:8081 | Eco Nextcloud (`dual:up`) |
 
 ```bash
 pnpm install
@@ -19,7 +19,7 @@ pnpm dual:up          # above + Eco Nextcloud (:8081)
 pnpm dev              # hot revival on :3100 (optional)
 ```
 
-Health: `http://localhost:8080/v2/api/health` (or `:3100/api/health` with `pnpm dev`).
+Health: `http://localhost:8090/v2/api/health` (or `:3100/api/health` with `pnpm dev`).
 
 Details: [docs/DUAL_STACK.md](docs/DUAL_STACK.md)
 
