@@ -23,3 +23,4 @@ Format: `- YYYY-MM-DD — insight (path)`
 - 2026-07-23 — Next refine candidate: wire store → NC Tables OR delete NC-Tables promises from tenancy doc until real.
 - 2026-07-23 — Dual-stack: gateway `:8080/` vintage + `/v2` revival; PHP 7.4 + mysql polyfill; cross-links via `ECO_REVIVAL_PUBLIC_URL` / `NEXT_PUBLIC_VINTAGE_URL`. Discover places/needs + workshops + seed shipped.
 - 2026-07-23 — Domain SSOT is JSON store; NC is accounts/files only until Tables sync. Health at `/api/health`. Lite dual-stack: `pnpm dual:up:lite` (no NC profile).
+- 2026-07-23 — MySQL 5.7 compose needs `platform: linux/amd64` on Apple Silicon; `dual:up:lite` skips NC for faster bring-up.
