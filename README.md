@@ -1,2 +1,40 @@
-# ecologikal
- Vintage Eco Social Network
+# Ecologikal
+
+Vintage **Eco + Social** network + **revival v2** (Next.js) as a Certexi OS
+reference vertical. Both UIs coexist.
+
+## Dual-stack
+
+| URL | What |
+|-----|------|
+| http://localhost:8080/ | Vintage PHP |
+| http://localhost:8080/v2 | Revival Next.js |
+| http://localhost:3100 | Revival dev (`pnpm dev`) |
+| http://localhost:8081 | Eco Nextcloud |
+
+```bash
+pnpm install
+pnpm dual:up          # vintage + v2 + NC + gateway
+pnpm dev              # hot revival on :3100 (optional)
+```
+
+Details: [docs/DUAL_STACK.md](docs/DUAL_STACK.md)
+
+## Docs
+
+| Doc | Purpose |
+|-----|---------|
+| [CLAUDE.md](CLAUDE.md) | Agent compass |
+| [docs/VERTICAL_PLAYBOOK.md](docs/VERTICAL_PLAYBOOK.md) | Eco × Certexi map |
+| [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md) | Demo walkthrough |
+| [docs/DUAL_STACK.md](docs/DUAL_STACK.md) | Vintage + v2 coexistence |
+
+Certexi methods: `../certexi/architecture/PLATFORM-INTEGRATION.md`
+
+## Revival packages
+
+- `apps/web` — Next.js UI
+- `packages/domain` — petals, flower, KINS, places
+- `packages/certexi-bridge` — SSO / NC / proof
+
+Vintage PHP at repo root remains the classic product surface.

@@ -1,0 +1,13 @@
+node_modules
+.pnpm-store
+.next
+dist
+.turbo
+*.tsbuildinfo
+.env
+.env.local
+*.log
+.DS_Store
+apps/web/.data
+infra/nextcloud-data
+infra/**/volumes

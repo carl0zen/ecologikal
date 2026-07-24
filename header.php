@@ -10,6 +10,13 @@
 
     </head>
    	<body>
+	<?php
+		$eco_revival_url = getenv('ECO_REVIVAL_PUBLIC_URL') ?: 'http://localhost:3100';
+	?>
+	<div id="eco-coexist-banner" style="background:#1a2e22;color:#e8f0e9;padding:8px 16px;font:14px/1.4 sans-serif;display:flex;gap:12px;align-items:center;justify-content:space-between;">
+		<span><strong>Ecologikal dual-stack</strong> — estás en la UI vintage (PHP).</span>
+		<a href="<?php echo htmlspecialchars($eco_revival_url, ENT_QUOTES, 'UTF-8'); ?>" style="color:#7dcea0;font-weight:600;">Abrir revival v2 →</a>
+	</div>
 	<background></background>
 		<div id="header">
 

@@ -1,0 +1,20 @@
+{
+  "name": "ecologikal",
+  "private": true,
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @ecologikal/web dev",
+    "build": "pnpm -r run build",
+    "typecheck": "pnpm -r run typecheck",
+    "test": "pnpm -r run test",
+    "dual:up": "docker compose -f infra/docker-compose.yml up -d --build",
+    "dual:down": "docker compose -f infra/docker-compose.yml down",
+    "dual:logs": "docker compose -f infra/docker-compose.yml logs -f --tail=100"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
