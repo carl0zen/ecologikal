@@ -18,18 +18,18 @@
  * @package WordPress
  */
 
-// ** MySQL settings - You can get this info from your web host ** //
+// ** MySQL settings — placeholders only; never commit live credentials ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'carlitosway_db');
+define('DB_NAME', getenv('ECO_WP_DB_NAME') ?: 'ecologikal_wp');
 
 /** MySQL database username */
-define('DB_USER', 'the_godfather');
+define('DB_USER', getenv('ECO_WP_DB_USER') ?: 'eco');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'elpadrino');
+define('DB_PASSWORD', getenv('ECO_WP_DB_PASSWORD') ?: 'eco');
 
 /** MySQL hostname */
-define('DB_HOST', 'db.carlitosway.club');
+define('DB_HOST', getenv('ECO_WP_DB_HOST') ?: '127.0.0.1');
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');

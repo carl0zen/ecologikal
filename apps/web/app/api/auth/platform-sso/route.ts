@@ -5,21 +5,22 @@ import {
   createSsoSession,
   verifySsoToken,
 } from '@ecologikal/certexi-bridge';
-import { getSsoSecret } from '@/lib/env';
+import { getSsoSecret, sessionCookieOptions } from '@/lib/env';
 import { withStore } from '@/lib/store';
+import { revivalPath } from '@/lib/urls';
 
 export async function GET(req: NextRequest) {
   const token = req.nextUrl.searchParams.get('token');
   const next = req.nextUrl.searchParams.get('next') || '/profile';
 
   if (!token) {
-    return NextResponse.redirect(new URL('/login', req.url));
+    return NextResponse.redirect(new URL(revivalPath('/login'), req.url));
   }
 
   const secret = getSsoSecret();
   const claims = await verifySsoToken(token, secret);
   if (!claims) {
-    return NextResponse.redirect(new URL('/login', req.url));
+    return NextResponse.redirect(new URL(revivalPath('/login'), req.url));
   }
 
   const session = await createSsoSession(
@@ -43,14 +44,14 @@ export async function GET(req: NextRequest) {
   });
 
   const dest =
-    next.startsWith('/') && !next.startsWith('//') ? next : '/profile';
+    next.startsWith('/') && !next.startsWith('//')
+      ? revivalPath(next)
+      : revivalPath('/profile');
   const res = NextResponse.redirect(new URL(dest, req.url));
-  res.cookies.set(SSO_SESSION_COOKIE, session, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    maxAge: SSO_SESSION_MAX_AGE,
-    path: '/',
-  });
+  res.cookies.set(
+    SSO_SESSION_COOKIE,
+    session,
+    sessionCookieOptions(SSO_SESSION_MAX_AGE),
+  );
   return res;
 }

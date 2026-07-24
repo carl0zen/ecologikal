@@ -6,14 +6,18 @@ import {
   SSO_SESSION_MAX_AGE,
 } from '@ecologikal/certexi-bridge';
 import { cookies } from 'next/headers';
-import { flag, getSsoSecret } from '@/lib/env';
+import { flag, getSsoSecret, sessionCookieOptions } from '@/lib/env';
 import { getSession } from '@/lib/auth';
 import { withStore, uid } from '@/lib/store';
+import { revivalPath } from '@/lib/urls';
 
 async function startSso() {
   'use server';
   const platform = process.env.CERTEXI_PLATFORM_URL || 'http://localhost:3000';
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3100';
+  // NEXT_PUBLIC_APP_URL is origin (+ /v2 when behind gateway)
+  const appUrl = (
+    process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3100'
+  ).replace(/\/$/, '');
   const callback = `${appUrl}/api/auth/platform-sso`;
   redirect(buildSsoRedirectUrl(platform, callback));
 }
@@ -30,12 +34,11 @@ async function devLogin(formData: FormData) {
     | 'guest';
   const token = await createDevSession(username, accountClass, getSsoSecret());
   const jar = await cookies();
-  jar.set(SSO_SESSION_COOKIE, token, {
-    httpOnly: true,
-    sameSite: 'lax',
-    path: '/',
-    maxAge: SSO_SESSION_MAX_AGE,
-  });
+  jar.set(
+    SSO_SESSION_COOKIE,
+    token,
+    sessionCookieOptions(SSO_SESSION_MAX_AGE),
+  );
 
   await withStore((db) => {
     if (!db.profiles.find((p) => p.userId === username)) {

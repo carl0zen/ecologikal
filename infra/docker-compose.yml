@@ -89,18 +89,22 @@ services:
         NEXT_BASE_PATH: /v2
         NEXT_PUBLIC_APP_URL: http://localhost:8090/v2
         NEXT_PUBLIC_VINTAGE_URL: http://localhost:8090
+    env_file:
+      - path: .env
+        required: false
     environment:
-      JWT_SECRET: development-only-secret-change-me
-      SSO_SECRET: development-only-secret-change-me
-      CERTEXI_PLATFORM_URL: http://host.docker.internal:3000
+      JWT_SECRET: ${JWT_SECRET:-development-only-secret-change-me}
+      SSO_SECRET: ${SSO_SECRET:-development-only-secret-change-me}
+      CERTEXI_PLATFORM_URL: ${CERTEXI_PLATFORM_URL:-http://host.docker.internal:3000}
       NEXT_PUBLIC_APP_URL: http://localhost:8090/v2
       NEXT_PUBLIC_VINTAGE_URL: http://localhost:8090
       NEXT_BASE_PATH: /v2
-      ECO_ALLOW_DEV_LOGIN: 'true'
-      ECO_ALLOW_PROOF_STUB: 'true'
-      ECO_NEXTCLOUD_URL: http://nextcloud
-      ECO_NEXTCLOUD_ADMIN_USER: ecoadmin
-      ECO_NEXTCLOUD_ADMIN_PASSWORD: ecoadmin-change-me
+      ECO_COOKIE_SECURE: ${ECO_COOKIE_SECURE:-false}
+      ECO_ALLOW_DEV_LOGIN: ${ECO_ALLOW_DEV_LOGIN:-true}
+      ECO_ALLOW_PROOF_STUB: ${ECO_ALLOW_PROOF_STUB:-true}
+      ECO_NEXTCLOUD_URL: ${ECO_NEXTCLOUD_URL:-http://nextcloud}
+      ECO_NEXTCLOUD_ADMIN_USER: ${ECO_NEXTCLOUD_ADMIN_USER:-ecoadmin}
+      ECO_NEXTCLOUD_ADMIN_PASSWORD: ${ECO_NEXTCLOUD_ADMIN_PASSWORD:-ecoadmin-change-me}
     ports:
       - '3101:3100'
     volumes:
