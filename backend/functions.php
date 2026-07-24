@@ -216,7 +216,9 @@ function load_js_scripts($view){
 	if (!$js_loaded){
 		include(_JS_PATH_.'globalvars.php');
 		echo '
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>';
+		if (defined('_ECO_PLUGINS_LOCAL_') && _ECO_PLUGINS_LOCAL_) {
+			echo '
 			<script type="text/javascript" src="'._PLUGINS_URL_.'fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 			<script src="'._PLUGINS_URL_.'jquery/jquery-ui-1.8.14.custom.min.js"></script>
 			<script src="'._PLUGINS_URL_.'jquery/ui/minified/jquery.ui.core.min.js"></script>
@@ -229,6 +231,13 @@ function load_js_scripts($view){
 			<script src="'._PLUGINS_URL_.'jquery.watermark.js"></script>
 			<script src="'._PLUGINS_URL_.'jquery.timeago/jquery.timeago.js"></script>
 			<script src="'._PLUGINS_URL_.'jquery.timeago/jquery.timeago.es.js"></script>';
+		} else {
+			echo '
+			<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.pack.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.7/jquery.timeago.min.js"></script>
+			<script src="'._JS_URL_.'main.js"></script>';
+		}
 		$js_loaded = true;
 	}
 	
@@ -351,11 +360,19 @@ function load_js_scripts($view){
 function load_css_files($view){
 			echo '
 			<link rel="stylesheet" href="'._CSS_URL_.'main.css" media="screen" />    	
-			<link rel="stylesheet" href="'._CSS_URL_.'generalstyles.css" media="screen" />     
+			<link rel="stylesheet" href="'._CSS_URL_.'generalstyles.css" media="screen" />';
+	if (defined('_ECO_PLUGINS_LOCAL_') && _ECO_PLUGINS_LOCAL_) {
+		echo '
     		<link rel="stylesheet" href="'._PLUGINS_URL_.'jquery/css/jquery.ui.theme.css"  type="text/css" />
     		<link rel="stylesheet" href="'._PLUGINS_URL_.'jquery/css/jquery.ui.all.css"  type="text/css" />
     		<link rel="stylesheet" href="'._PLUGINS_URL_.'jquery.fileupload/jquery.fileupload-ui.css" type="text/css" />
 			<link rel="stylesheet" href="'._PLUGINS_URL_.'fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />';
+	} else {
+		// Repo ships without _plugins/; use CDN so dual-stack CSS/UI still renders.
+		echo '
+    		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/themes/ui-darkness/jquery-ui.css" type="text/css" />
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />';
+	}
 	switch ($view){
 		case 'member':
 			echo '<link rel="stylesheet" href="'._CSS_URL_.'global.css" media="screen" />

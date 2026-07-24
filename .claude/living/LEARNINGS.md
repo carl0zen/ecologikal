@@ -25,3 +25,4 @@ Format: `- YYYY-MM-DD — insight (path)`
 - 2026-07-23 — Domain SSOT is JSON store; NC is accounts/files only until Tables sync. Health at `/api/health`. Lite dual-stack: `pnpm dual:up:lite` (no NC profile).
 - 2026-07-23 — MySQL 5.7 compose needs `platform: linux/amd64` on Apple Silicon; `dual:up:lite` skips NC for faster bring-up.
 - 2026-07-23 — Audit follow-up: scrubbed committed DB passwords; basePath-safe SSO redirects; ECO_COOKIE_SECURE (default false) for HTTP gateway; compose reads infra/.env.
+- 2026-07-23 — Vintage CSS broke because `_ROOT_URL_` pointed at dead carlitosway.club and `_plugins/` is absent; bootstrap now uses ECO_VINTAGE_PUBLIC_URL/Host + CDN plugin fallbacks.

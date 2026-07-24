@@ -12,9 +12,31 @@ define('_LANG_', 'es');
 // Global Variables
 
 define('_ROOT_PATH_',dirname(dirname(__FILE__)).'/');
-define('_ROOT_URL_', 'http://carlitosway.club/' );
-define('_PLUGINS_URL_'  		,_ROOT_URL_.'_plugins/' );
+
+/**
+ * Public origin for CSS/JS/links. Prefer ECO_VINTAGE_PUBLIC_URL (compose),
+ * else derive from the current request so dual-stack gateway works locally.
+ */
+$_eco_root = getenv('ECO_VINTAGE_PUBLIC_URL');
+if (!is_string($_eco_root) || $_eco_root === '') {
+	$_eco_https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+		|| (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
+			&& $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
+	$_eco_scheme = $_eco_https ? 'https' : 'http';
+	$_eco_host = isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] !== ''
+		? $_SERVER['HTTP_HOST']
+		: 'localhost:8090';
+	$_eco_root = $_eco_scheme . '://' . $_eco_host . '/';
+} else {
+	$_eco_root = rtrim($_eco_root, '/') . '/';
+}
+define('_ROOT_URL_', $_eco_root);
+unset($_eco_root, $_eco_https, $_eco_scheme, $_eco_host);
+
 define('_PLUGINS_PATHL_'		,_ROOT_PATH_. '_plugins/' );
+// Local tree when present; otherwise load_css/js use CDN fallbacks.
+define('_PLUGINS_URL_'  		,_ROOT_URL_.'_plugins/' );
+define('_ECO_PLUGINS_LOCAL_', is_dir(_PLUGINS_PATHL_));
 define('_FRONTEND_URL_'			,_ROOT_URL_.'frontend/');
 define('_FRONTEND_PATH_'		,_ROOT_PATH_. 'frontend/');
 define('_BACKEND_URL_'			,_ROOT_URL_.'backend/');
