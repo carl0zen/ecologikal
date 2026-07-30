@@ -25,6 +25,8 @@ export interface Profile {
   displayName: string;
   accountClass: 'admin' | 'host' | 'guest';
   bio?: string;
+  /** ISO timestamp set when guest finishes the onboarding wizard. */
+  onboardedAt?: string;
   createdAt: string;
 }
 
