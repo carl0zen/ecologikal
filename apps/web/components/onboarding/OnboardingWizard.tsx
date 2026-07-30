@@ -1,7 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import type { FlowerSnapshot, PetalId, Skill } from '@ecologikal/domain';
+import type {
+  FlowerSnapshot,
+  PetalId,
+  Skill,
+} from '@ecologikal/domain';
 import { PetalPicker } from './PetalPicker';
 import { SkillStep, type SkillDraft } from './SkillStep';
 import { FlowerReveal } from './FlowerReveal';
@@ -15,6 +19,8 @@ type Props = {
 };
 
 type CompleteResponse = {
+  userId: string;
+  petalIds: PetalId[];
   profile: { displayName: string };
   skills: Skill[];
   snapshot: FlowerSnapshot;
@@ -115,6 +121,8 @@ export function OnboardingWizard({
   }
 
   if (step === 3 && result) {
+    const handoffPetalId =
+      result.petalIds[0] ?? petals[0] ?? (4 as PetalId);
     return (
       <div className="onboard">
         <Progress step={3} />
@@ -123,6 +131,8 @@ export function OnboardingWizard({
           skills={result.skills}
           kinsEarned={result.kinsEarned}
           displayName={result.profile.displayName}
+          userId={result.userId}
+          handoffPetalId={handoffPetalId}
         />
       </div>
     );
@@ -135,9 +145,7 @@ export function OnboardingWizard({
       {step === 0 ? (
         <section className="onboard-step" data-stagger>
           <h1>Cómo te presentas</h1>
-          <p className="muted">
-            Empieza tu flor. Luego eliges en qué pétalos creces.
-          </p>
+          <p className="muted">Así te verán en tu flor pública.</p>
           <label htmlFor="displayName">Nombre</label>
           <input
             id="displayName"
@@ -161,7 +169,7 @@ export function OnboardingWizard({
           </p>
           <div className="onboard-actions">
             <button className="btn" type="button" onClick={goIdentityNext}>
-              Seguir
+              Continuar
             </button>
           </div>
         </section>
@@ -169,9 +177,9 @@ export function OnboardingWizard({
 
       {step === 1 ? (
         <section className="onboard-step" data-stagger>
-          <h1>Elige tus pétalos</h1>
+          <h1>¿En qué pétalos creces?</h1>
           <p className="muted">
-            Escoge 2 o 3 áreas donde quieres crecer y aportar.
+            Elige 2 o 3. Filtran Conoce y tu flor.
           </p>
           <PetalPicker selected={petals} onChange={syncDrafts} />
           {petalError ? <p className="field-error">{petalError}</p> : null}
@@ -184,7 +192,7 @@ export function OnboardingWizard({
               Atrás
             </button>
             <button className="btn" type="button" onClick={goPetalsNext}>
-              Seguir
+              Continuar
             </button>
           </div>
         </section>
@@ -192,9 +200,9 @@ export function OnboardingWizard({
 
       {step === 2 ? (
         <section className="onboard-step" data-stagger>
-          <h1>Tus primeras habilidades</h1>
+          <h1>Nombra lo que sabes</h1>
           <p className="muted">
-            Un nombre y un nivel por pétalo. Puedes añadir más después.
+            Nivel 1–5. Cada skill suma +3 KINS al completar.
           </p>
           <SkillStep
             petals={petals}
@@ -219,7 +227,7 @@ export function OnboardingWizard({
               disabled={pending}
               aria-busy={pending}
             >
-              {pending ? 'Creando tu flor…' : 'Crear mi flor'}
+              {pending ? 'Creando tu flor…' : 'Completar mi flor'}
             </button>
           </div>
         </section>
