@@ -664,3 +664,64 @@ label {
   font-size: 0.9rem;
   font-weight: 600;
 }
+
+.copy-link-wrap {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.copy-toast {
+  font-size: 0.8rem;
+  color: var(--green-bright);
+  animation: onboard-in var(--duration-ui) var(--ease-out) both;
+}
+
+.meet-handoff-banner {
+  margin: 0.85rem 0 0;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--green-bright) 35%, var(--line));
+  background: color-mix(in srgb, var(--green) 14%, var(--bg-elev));
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
+.home-hero {
+  padding: 2rem 0 1rem;
+  max-width: 36rem;
+}
+
+.home-hero .brand-mark {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0 0 1rem;
+  color: var(--ink);
+}
+
+.home-hero .brand-mark em {
+  font-style: normal;
+  color: var(--green-bright);
+}
+
+.home-hero .promise {
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 0 0 0.65rem;
+}
+
+.home-support {
+  margin: 0;
+  max-width: 28rem;
+  font-size: 0.95rem;
+}
+
+.home-dev {
+  margin-top: 2rem;
+  opacity: 0.85;
+}
