@@ -63,9 +63,9 @@ export function LoginClient({ allowDevLogin, startSso, devLogin }: Props) {
 
         {allowDevLogin ? (
           <div className="login-demo">
-            <h2>Demo local</h2>
+            <h2>Demo econauta</h2>
             <p className="muted" style={{ fontSize: '0.8rem', margin: '0 0 0.75rem' }}>
-              Sin platform — solo desarrollo.
+              Sin platform — solo desarrollo. Guest es el camino hero.
             </p>
             <form action={devLogin}>
               <label htmlFor="username">Usuario</label>
