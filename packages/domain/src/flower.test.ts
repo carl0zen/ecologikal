@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { flowerGrade, petalGrade } from './flower';
+import { flowerGrade, flowerSnapshot, petalGrade } from './flower';
 import type { Skill, SkillReference } from './skills';
 
 describe('flower grades', () => {
@@ -58,4 +58,28 @@ describe('flower grades', () => {
     assert.equal(petalGrade(skills, refs, 1), 4);
     assert.ok(flowerGrade(skills, refs) > 0);
   });
+
+  it('flowerSnapshot lists all 7 petals with empty petals at 0', () => {
+    const skills: Skill[] = [
+      {
+        id: 's1',
+        userId: 'u1',
+        petalId: 4,
+        name: 'Permaculture',
+        level: 3,
+        createdAt: '2026-01-01',
+      },
+    ];
+    const snap = flowerSnapshot(skills, []);
+    assert.equal(snap.petals.length, 7);
+    assert.equal(snap.overall, 3);
+    for (const p of snap.petals) {
+      if (p.petalId === 4) {
+        assert.equal(p.grade, 3);
+      } else {
+        assert.equal(p.grade, 0);
+      }
+    }
+  });
 });
+

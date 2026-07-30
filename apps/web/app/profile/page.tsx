@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { flowerSnapshot, balanceFor, getPetal } from '@ecologikal/domain';
 import { getSession } from '@/lib/auth';
@@ -23,8 +24,17 @@ export default async function ProfilePage() {
         <p className="muted">
           Clase <span className="badge">{session.accountClass}</span> · KINS{' '}
           <strong>{kins}</strong>
+          {' · '}
+          <Link href={`/profile/${encodeURIComponent(session.username)}`}>
+            Ver perfil público
+          </Link>
         </p>
-        <FlowerViz snapshot={snapshot} />
+        <FlowerViz
+          snapshot={snapshot}
+          skills={skills}
+          refs={refs}
+          proofs={proofs.map((p) => ({ id: p.id, stub: p.stub }))}
+        />
       </section>
 
       <section className="grid">

@@ -1,51 +1,38 @@
-import { flowerSnapshot, getPetal } from '@ecologikal/domain';
+import { isPetalId, type PetalId } from '@ecologikal/domain';
+import { getSession } from '@/lib/auth';
 import { readStore } from '@/lib/store';
-import { FlowerViz } from '@/components/FlowerViz';
+import { MeetDirectory } from '@/components/MeetDirectory';
 
-export default async function MeetPage() {
+type Props = {
+  searchParams: Promise<{ petal?: string; from?: string }>;
+};
+
+export default async function MeetPage({ searchParams }: Props) {
+  const session = await getSession();
+  const q = await searchParams;
+  const petalNum = Number(q.petal);
+  const initialPetal: PetalId | null = isPetalId(petalNum) ? petalNum : null;
+  const fromOnboarding = q.from === 'onboarding';
+
   const db = await readStore();
-  const guests = db.profiles.filter((p) => p.accountClass !== 'admin');
+  const guests = db.profiles
+    .filter((p) => p.accountClass !== 'admin')
+    .map((p) => ({
+      userId: p.userId,
+      displayName: p.displayName,
+      accountClass: p.accountClass,
+      skills: db.skills.filter((s) => s.userId === p.userId),
+      refs: db.skillReferences.filter((r) => r.toUserId === p.userId),
+    }));
 
   return (
-    <main className="stack">
-      <section className="card">
-        <h1>Conoce</h1>
-        <p className="muted">
-          Econautas por flor de skills — reputación visual, no keyword spam.
-        </p>
-      </section>
-
-      <section className="grid">
-        {guests.length === 0 ? (
-          <div className="card">
-            <p className="muted">Sin perfiles aún.</p>
-          </div>
-        ) : (
-          guests.map((p) => {
-            const skills = db.skills.filter((s) => s.userId === p.userId);
-            const refs = db.skillReferences.filter(
-              (r) => r.toUserId === p.userId,
-            );
-            const snap = flowerSnapshot(skills, refs);
-            return (
-              <article key={p.userId} className="card">
-                <h2>{p.displayName}</h2>
-                <p className="muted">
-                  <span className="badge">{p.accountClass}</span>
-                </p>
-                <FlowerViz snapshot={snap} />
-                <ul>
-                  {skills.slice(0, 5).map((s) => (
-                    <li key={s.id}>
-                      {s.name} · {getPetal(s.petalId).nameEs}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            );
-          })
-        )}
-      </section>
+    <main>
+      <MeetDirectory
+        guests={guests}
+        sessionUserId={session?.username ?? null}
+        initialPetal={initialPetal}
+        fromOnboarding={fromOnboarding}
+      />
     </main>
   );
 }

@@ -101,8 +101,16 @@ export async function POST(req: Request) {
     );
     const snapshot = flowerSnapshot(created, refs);
     const kinsEarned = created.length * skillDelta;
+    const petalIds = [...new Set(created.map((s) => s.petalId))];
 
-    return { profile, skills: created, snapshot, kinsEarned };
+    return {
+      userId: session.username,
+      petalIds,
+      profile,
+      skills: created,
+      snapshot,
+      kinsEarned,
+    };
   });
 
   return NextResponse.json(result);

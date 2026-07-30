@@ -121,14 +121,18 @@ export function AddSkillForm() {
 
 export function AddReferenceForm({
   skills,
+  toUserId,
 }: {
   skills: Array<{ id: string; name: string; userId: string }>;
+  /** When set, all skills belong to this user (public profile). */
+  toUserId?: string;
 }) {
   const router = useRouter();
   const [msg, setMsg] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   if (skills.length === 0) {
-    return <p className="muted">No hay skills de otros usuarios para atestar.</p>;
+    return <p className="muted">No hay skills para atestar.</p>;
   }
 
   return (
@@ -136,21 +140,27 @@ export function AddReferenceForm({
       className="stack"
       onSubmit={async (e) => {
         e.preventDefault();
+        setError(null);
+        setMsg(null);
         const fd = new FormData(e.currentTarget);
         const skillId = String(fd.get('skillId'));
         const skill = skills.find((s) => s.id === skillId);
-        const data = await postJson('/api/references', {
-          skillId,
-          toUserId: skill?.userId,
-          grade: Number(fd.get('grade')),
-          note: fd.get('note'),
-        });
-        setMsg(
-          data.proof?.stub
-            ? `Atestado (proof stub ${data.proof.id})`
-            : `Atestado verificado ${data.proof?.id}`,
-        );
-        router.refresh();
+        try {
+          const data = await postJson('/api/references', {
+            skillId,
+            toUserId: toUserId ?? skill?.userId,
+            grade: Number(fd.get('grade')),
+            note: fd.get('note'),
+          });
+          setMsg(
+            data.proof?.stub
+              ? `Atestado (proof stub ${data.proof.id})`
+              : `Atestado verificado ${data.proof?.id}`,
+          );
+          router.refresh();
+        } catch (err) {
+          setError(err instanceof Error ? err.message : 'error');
+        }
       }}
     >
       <label>
@@ -158,7 +168,7 @@ export function AddReferenceForm({
         <select name="skillId">
           {skills.map((s) => (
             <option key={s.id} value={s.id}>
-              {s.name} ({s.userId})
+              {toUserId ? s.name : `${s.name} (${s.userId})`}
             </option>
           ))}
         </select>
@@ -175,6 +185,7 @@ export function AddReferenceForm({
         Atestar (+ proof Certexi)
       </button>
       {msg ? <p className="badge verified">{msg}</p> : null}
+      {error ? <p className="muted">{error}</p> : null}
     </form>
   );
 }
