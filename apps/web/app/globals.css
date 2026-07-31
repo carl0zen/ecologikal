@@ -1,22 +1,42 @@
 @import 'tailwindcss';
 
+/* Eco brand tokens — specimen at /brand-system · docs/BRAND_SYSTEM.md */
 :root {
-  --bg: #121c16;
-  --bg-elev: #1a2820;
-  --ink: #eef2eb;
-  --muted: #9aab9c;
-  --green: #3d7348;
-  --green-bright: #6aad72;
-  --accent: #b8964e;
-  --pink: #c45a72;
+  --eco-bg: #121c16;
+  --eco-raised: #1a2820;
+  --eco-elevated: #243028;
+  --eco-ink: #eef2eb;
+  --eco-muted: #9aab9c;
+  --eco-faint: #6b7a6e;
+  --eco-canopy: #3d7348;
+  --eco-leaf: #6aad72;
+  --eco-kin: #b8964e;
+  --eco-alert: #c45a72;
+  --eco-line: rgba(238, 242, 235, 0.12);
+  --eco-line-strong: rgba(238, 242, 235, 0.22);
+  --eco-radius: 12px;
+  --eco-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --eco-duration-ui: 180ms;
+
+  /* Backward-compatible aliases used across v2 UI */
+  --bg: var(--eco-bg);
+  --bg-elev: var(--eco-raised);
+  --ink: var(--eco-ink);
+  --muted: var(--eco-muted);
+  --green: var(--eco-canopy);
+  --green-bright: var(--eco-leaf);
+  --accent: var(--eco-kin);
+  --pink: var(--eco-alert);
   --blue: #4a6580;
-  --line: rgba(238, 242, 235, 0.12);
-  --radius: 12px;
-  --font: var(--font-geist-sans), 'Segoe UI', 'Avenir Next', system-ui,
+  --line: var(--eco-line);
+  --radius: var(--eco-radius);
+  --font-display: var(--font-petrona), Petrona, Georgia, serif;
+  --font-body: var(--font-source), 'Source Sans 3', 'Segoe UI', system-ui,
     sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --duration-ui: 180ms;
+  --font: var(--font-body);
+  --font-mono: var(--font-jetbrains), 'JetBrains Mono', ui-monospace, monospace;
+  --ease-out: var(--eco-ease);
+  --duration-ui: var(--eco-duration-ui);
 }
 
 * {
@@ -63,14 +83,15 @@ a:hover {
 }
 
 .brand {
+  font-family: var(--font-display);
   font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  letter-spacing: -0.02em;
   color: var(--ink);
 }
 
 .brand span {
-  color: var(--green-bright);
+  color: var(--eco-leaf);
 }
 
 .pillars {
@@ -114,14 +135,31 @@ a:hover {
 }
 
 h1 {
+  font-family: var(--font-display);
   font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
   margin: 0 0 0.5rem;
   line-height: 1.15;
 }
 
 h2 {
-  font-size: 1.2rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
   margin: 0 0 0.75rem;
+}
+
+.eco-wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.eco-wordmark em {
+  font-style: normal;
+  color: var(--eco-leaf);
 }
 
 .muted {
@@ -388,8 +426,9 @@ label {
 }
 
 .login-brand .brand-mark {
+  font-family: var(--font-display);
   font-size: clamp(2.4rem, 5vw, 3.6rem);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.05;
   margin: 0 0 1rem;
@@ -398,7 +437,7 @@ label {
 
 .login-brand .brand-mark em {
   font-style: normal;
-  color: var(--green-bright);
+  color: var(--eco-leaf);
 }
 
 .login-brand .promise {
@@ -695,8 +734,9 @@ label {
 }
 
 .home-hero .brand-mark {
+  font-family: var(--font-display);
   font-size: clamp(2.4rem, 5vw, 3.4rem);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.05;
   margin: 0 0 1rem;
@@ -705,7 +745,7 @@ label {
 
 .home-hero .brand-mark em {
   font-style: normal;
-  color: var(--green-bright);
+  color: var(--eco-leaf);
 }
 
 .home-hero .promise {

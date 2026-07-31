@@ -53,6 +53,18 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="card" style={{ marginTop: '1rem' }}>
+        <h2>Brand system</h2>
+        <p className="muted">
+          Voz, identidad, color, tipografía y don&apos;ts — tokens en vivo.
+        </p>
+        <div className="row" style={{ marginTop: '0.75rem' }}>
+          <Link className="btn secondary" href="/brand-system">
+            Ver sistema de marca
+          </Link>
+        </div>
+      </section>
+
       {allowDev ? (
         <section className="card home-dev">
           <h2>Desarrollo</h2>

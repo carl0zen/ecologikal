@@ -85,6 +85,8 @@ Full protocol: [`.claude/EVOLVE.md`](.claude/EVOLVE.md)
 | Doc | Contents |
 |-----|----------|
 | [docs/VERTICAL_PLAYBOOK.md](docs/VERTICAL_PLAYBOOK.md) | Vertical integration kit |
+| [docs/BRAND_SYSTEM.md](docs/BRAND_SYSTEM.md) | Brand voice, identity, tokens |
+| [DESIGN.md](DESIGN.md) · [PRODUCT.md](PRODUCT.md) | Design tokens · product context |
 | [`.claude/README.md`](.claude/README.md) | Knowledge base index |
 | [`.claude/EVOLVE.md`](.claude/EVOLVE.md) | Evolve protocol |
 | [`.claude/product/VISION.md`](.claude/product/VISION.md) | Pitch / journeys |
