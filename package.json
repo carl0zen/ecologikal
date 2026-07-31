@@ -13,7 +13,10 @@
     "dual:up": "docker compose -f infra/docker-compose.yml --profile nc up -d --build",
     "dual:up:lite": "docker compose -f infra/docker-compose.yml up -d --build",
     "dual:down": "docker compose -f infra/docker-compose.yml --profile nc down",
-    "dual:logs": "docker compose -f infra/docker-compose.yml logs -f --tail=100"
+    "dual:logs": "docker compose -f infra/docker-compose.yml logs -f --tail=100",
+    "db:cli": "docker exec -it infra-vintage-db-1 mysql -h127.0.0.1 -ueco -peco ecologikal",
+    "db:tables": "docker exec infra-vintage-db-1 mysql -h127.0.0.1 -ueco -peco ecologikal -e 'SHOW TABLES;'",
+    "db:stats": "docker exec infra-vintage-db-1 mysql -h127.0.0.1 -ueco -peco ecologikal -e \"SELECT 'miembros' t, COUNT(*) n FROM miembros UNION ALL SELECT 'ecocenters', COUNT(*) FROM ecocenters UNION ALL SELECT 'place', COUNT(*) FROM place UNION ALL SELECT 'idea', COUNT(*) FROM idea UNION ALL SELECT 'member_skills', COUNT(*) FROM member_skills UNION ALL SELECT 'messages', COUNT(*) FROM messages;\""
   },
   "devDependencies": {
     "typescript": "^5.7.3"

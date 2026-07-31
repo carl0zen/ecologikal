@@ -6,14 +6,18 @@ import {
   SSO_SESSION_MAX_AGE,
 } from '@ecologikal/certexi-bridge';
 import { cookies } from 'next/headers';
-import { flag, getSsoSecret } from '@/lib/env';
+import { flag, getSsoSecret, sessionCookieOptions } from '@/lib/env';
 import { getSession } from '@/lib/auth';
-import { withStore, uid } from '@/lib/store';
+import { withStore, uid, readStore } from '@/lib/store';
+import { postAuthPath } from '@/lib/onboarding';
+import { LoginClient } from '@/components/onboarding/LoginClient';
 
 async function startSso() {
   'use server';
   const platform = process.env.CERTEXI_PLATFORM_URL || 'http://localhost:3000';
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3100';
+  const appUrl = (
+    process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3100'
+  ).replace(/\/$/, '');
   const callback = `${appUrl}/api/auth/platform-sso`;
   redirect(buildSsoRedirectUrl(platform, callback));
 }
@@ -30,12 +34,11 @@ async function devLogin(formData: FormData) {
     | 'guest';
   const token = await createDevSession(username, accountClass, getSsoSecret());
   const jar = await cookies();
-  jar.set(SSO_SESSION_COOKIE, token, {
-    httpOnly: true,
-    sameSite: 'lax',
-    path: '/',
-    maxAge: SSO_SESSION_MAX_AGE,
-  });
+  jar.set(
+    SSO_SESSION_COOKIE,
+    token,
+    sessionCookieOptions(SSO_SESSION_MAX_AGE),
+  );
 
   await withStore((db) => {
     if (!db.profiles.find((p) => p.userId === username)) {
@@ -46,6 +49,9 @@ async function devLogin(formData: FormData) {
         createdAt: new Date().toISOString(),
         bio: '',
       });
+    } else {
+      const existing = db.profiles.find((p) => p.userId === username)!;
+      existing.accountClass = accountClass;
     }
     if (db.posts.length === 0) {
       db.posts.push({
@@ -60,49 +66,28 @@ async function devLogin(formData: FormData) {
     }
   });
 
-  redirect('/profile');
+  const db = await readStore();
+  const profile = db.profiles.find((p) => p.userId === username);
+  const skillCount = db.skills.filter((s) => s.userId === username).length;
+  redirect(postAuthPath(profile, skillCount));
 }
 
 export default async function LoginPage() {
   const session = await getSession();
-  if (session) redirect('/profile');
+  if (session) {
+    const db = await readStore();
+    const profile = db.profiles.find((p) => p.userId === session.username);
+    const skillCount = db.skills.filter(
+      (s) => s.userId === session.username,
+    ).length;
+    redirect(postAuthPath(profile, skillCount));
+  }
 
   return (
-    <main className="grid">
-      <section className="card">
-        <h1>Entrar</h1>
-        <p className="muted">
-          Patrón bot de Certexi: redirige al IdP de platform, recibe JWT corto,
-          crea sesión local <code>eco-session</code>.
-        </p>
-        <form action={startSso} style={{ marginTop: '1rem' }}>
-          <button className="btn" type="submit">
-            Continuar con Certexi SSO
-          </button>
-        </form>
-      </section>
-
-      {flag('ECO_ALLOW_DEV_LOGIN') ? (
-        <section className="card">
-          <h2>Demo local (sin platform)</h2>
-          <p className="muted">
-            Solo con <code>ECO_ALLOW_DEV_LOGIN=true</code>.
-          </p>
-          <form action={devLogin}>
-            <label htmlFor="username">Usuario NC</label>
-            <input id="username" name="username" defaultValue="guest1" />
-            <label htmlFor="accountClass">Clase</label>
-            <select id="accountClass" name="accountClass" defaultValue="guest">
-              <option value="guest">guest</option>
-              <option value="host">host</option>
-              <option value="admin">admin</option>
-            </select>
-            <button className="btn secondary" type="submit">
-              Entrar en demo
-            </button>
-          </form>
-        </section>
-      ) : null}
-    </main>
+    <LoginClient
+      allowDevLogin={flag('ECO_ALLOW_DEV_LOGIN')}
+      startSso={startSso}
+      devLogin={devLogin}
+    />
   );
 }

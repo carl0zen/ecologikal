@@ -1,7 +1,27 @@
 import Link from 'next/link';
 import { PILLARS } from '@ecologikal/domain';
+import {
+  BookOpen,
+  Compass,
+  GameController,
+  Handshake,
+  AirplaneTilt,
+  UsersThree,
+} from '@phosphor-icons/react/ssr';
 import { getSession } from '@/lib/auth';
 import { vintageUrl } from '@/lib/urls';
+
+const PILLAR_ICONS: Record<
+  string,
+  React.ComponentType<{ size?: number; weight?: 'bold'; 'aria-hidden'?: boolean }>
+> = {
+  play: GameController,
+  travel: AirplaneTilt,
+  discover: Compass,
+  learn: BookOpen,
+  meet: UsersThree,
+  cooperate: Handshake,
+};
 
 export async function Nav() {
   const session = await getSession();
@@ -16,11 +36,19 @@ export async function Nav() {
         </span>
       </Link>
       <nav className="pillars" aria-label="Pillars">
-        {PILLARS.map((p) => (
-          <Link key={p.id} href={p.href}>
-            {p.labelEs}
-          </Link>
-        ))}
+        {PILLARS.map((p) => {
+          const Icon = PILLAR_ICONS[p.id];
+          return (
+            <Link
+              key={p.id}
+              href={p.href}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
+            >
+              {Icon ? <Icon size={15} weight="bold" aria-hidden /> : null}
+              {p.labelEs}
+            </Link>
+          );
+        })}
       </nav>
       <div className="row">
         <a className="btn secondary" href={vintage} title="Vintage PHP UI">

@@ -1,4 +1,3 @@
-
 <?php require_once($_SERVER['DOCUMENT_ROOT']."/_config/bootstrap.php"); ?>
 <!DOCTYPE html>
 <html>
@@ -304,7 +303,9 @@
 <script type="text/javascript">
 document.write('<scr' + 'ipt src="' + document.location.protocol + '//fby.s3.amazonaws.com/fby.js?100"></scr' + 'ipt>');
 </script>
+<?php if (defined('_ECO_PLUGINS_LOCAL_') && _ECO_PLUGINS_LOCAL_) { ?>
 <script src="_plugins/cycle.js" type="text/javascript" charset="utf-8"></script>
+<?php } /* else: jquery.cycle loaded via load_js_scripts CDN fallback */ ?>
 
 <script type="text/javascript">
 FBY.showTab({id: '2551', position: 'left', color: '#DC0F65'});

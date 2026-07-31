@@ -1,0 +1,22 @@
+/**
+ * Dual-stack fallback when EcoIcon / IconicStroke webfonts are absent.
+ * Keeps pillar icons and nav readable without the original font files.
+ */
+@font-face {
+  font-family: 'EcoIcon';
+  src: local('Apple Color Emoji'), local('Segoe UI Emoji'), local('Noto Color Emoji');
+}
+
+.ecoicon:before {
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
+  text-shadow: none !important;
+}
+
+.ecoicon.kin:before { content: '🌱' !important; }
+.ecoicon.backpack:before { content: '🎒' !important; }
+.ecoicon.flag:before { content: '🚩' !important; }
+.ecoicon.book:before { content: '📖' !important; }
+.ecoicon.chat:before { content: '💬' !important; }
+.ecoicon.tree:before { content: '🌳' !important; }
+.ecoicon.heart:before { content: '💚' !important; }
+.ecoicon.marker:before { content: '📍' !important; }

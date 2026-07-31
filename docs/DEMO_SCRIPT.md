@@ -34,9 +34,9 @@ Point to docs: `VERTICAL_PLAYBOOK.md` (+ Certexi `architecture/PLATFORM-INTEGRAT
 
 ### 2. Guest identity + flower (2m)
 
-1. `/v2/login` → **Demo local** as `guest1` / guest.
-2. `/v2/profile` → declare skill *Permacultura*, petal Tierra, level 3.
-3. Show flower bars + KINS +3.
+1. `/v2/login` → **Demo econauta** as a fresh guest (or `guest1` if not onboarded).
+2. `/v2/onboarding` → name → 2–3 pétalos → skill (e.g. *Permacultura*, Tierra, nivel 3) → **Completar mi flor**.
+3. Reveal: **Copiar enlace** / open `/v2/profile/{user}` — polar flower + KINS +3; then **Ver Conoce** (petal filter pre-set).
 
 ### 3. Host + eco-center (2m)
 
@@ -49,19 +49,20 @@ Point to docs: `VERTICAL_PLAYBOOK.md` (+ Certexi `architecture/PLATFORM-INTEGRAT
 
 Still as host:
 
-1. If `guest1` has a skill, **Atestar skill** → badge shows proof id (stub or live).
-2. **Completar voluntariado** for `guest1` on the vacancy → proof + KINS.
+1. Open `/v2/profile/guest1` (or Conoce → card → **Atestar**) → attest *Permacultura* → proof badge.
+2. Or use `/v2/admin` **Atestar skill** for the same loop.
+3. **Completar voluntariado** for `guest1` on the vacancy → proof + KINS.
 
 Switch to `guest1`:
 
-1. `/v2/profile` — references + verified badges.
+1. `/v2/profile` — polar flower + references + verified badges.
 2. `/v2/play` — ledger shows skill / reference / volunteer earns.
 3. `/v2/cooperate` — vacancy shows completion.
 
 ### 5. Intent IA (1m)
 
-Click pillars: Viaja (center), Aprende (Amplificate/Broadcast), Conoce (flowers),
-Descubre (places/needs).
+Click pillars: Viaja (center), Aprende (Amplificate/Broadcast), **Conoce**
+(filter Tierra, sort by flower, open public profile), Descubre (places/needs).
 
 ### 6. Close (30s)
 

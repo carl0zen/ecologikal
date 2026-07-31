@@ -14,6 +14,9 @@ services:
     # 5.7 has no arm64 image; amd64 via emulation on Apple Silicon
     image: mysql:5.7
     platform: linux/amd64
+    ports:
+      # Host browse: mysql -h127.0.0.1 -P3307 -ueco -peco ecologikal
+      - '3307:3306'
     environment:
       MYSQL_DATABASE: ecologikal
       MYSQL_USER: eco
@@ -89,18 +92,21 @@ services:
         NEXT_BASE_PATH: /v2
         NEXT_PUBLIC_APP_URL: http://localhost:8090/v2
         NEXT_PUBLIC_VINTAGE_URL: http://localhost:8090
+    env_file:
+      - .env
     environment:
-      JWT_SECRET: development-only-secret-change-me
-      SSO_SECRET: development-only-secret-change-me
-      CERTEXI_PLATFORM_URL: http://host.docker.internal:3000
+      JWT_SECRET: ${JWT_SECRET:-development-only-secret-change-me}
+      SSO_SECRET: ${SSO_SECRET:-development-only-secret-change-me}
+      CERTEXI_PLATFORM_URL: ${CERTEXI_PLATFORM_URL:-http://host.docker.internal:3000}
       NEXT_PUBLIC_APP_URL: http://localhost:8090/v2
       NEXT_PUBLIC_VINTAGE_URL: http://localhost:8090
       NEXT_BASE_PATH: /v2
-      ECO_ALLOW_DEV_LOGIN: 'true'
-      ECO_ALLOW_PROOF_STUB: 'true'
-      ECO_NEXTCLOUD_URL: http://nextcloud
-      ECO_NEXTCLOUD_ADMIN_USER: ecoadmin
-      ECO_NEXTCLOUD_ADMIN_PASSWORD: ecoadmin-change-me
+      ECO_COOKIE_SECURE: ${ECO_COOKIE_SECURE:-false}
+      ECO_ALLOW_DEV_LOGIN: ${ECO_ALLOW_DEV_LOGIN:-true}
+      ECO_ALLOW_PROOF_STUB: ${ECO_ALLOW_PROOF_STUB:-true}
+      ECO_NEXTCLOUD_URL: ${ECO_NEXTCLOUD_URL:-http://nextcloud}
+      ECO_NEXTCLOUD_ADMIN_USER: ${ECO_NEXTCLOUD_ADMIN_USER:-ecoadmin}
+      ECO_NEXTCLOUD_ADMIN_PASSWORD: ${ECO_NEXTCLOUD_ADMIN_PASSWORD:-ecoadmin-change-me}
     ports:
       - '3101:3100'
     volumes:
