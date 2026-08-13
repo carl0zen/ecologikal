@@ -22,10 +22,11 @@ import { execSync } from 'node:child_process';
 import { readFileSync, existsSync } from 'node:fs';
 
 const ALL = process.argv.includes('--all');
-const RESET = '\x1b[0m';
-const RED = '\x1b[31m';
-const GREEN = '\x1b[32m';
-const YELLOW = '\x1b[33m';
+const TTY = process.stdout.isTTY;
+const RESET = TTY ? '\x1b[0m' : '';
+const RED = TTY ? '\x1b[31m' : '';
+const GREEN = TTY ? '\x1b[32m' : '';
+const YELLOW = TTY ? '\x1b[33m' : '';
 
 const failures = [];
 const notes = [];
@@ -70,12 +71,26 @@ const CANONICAL_PETALS = [
   [7, 'Health & Spirituality'],
 ];
 
+function petalSource() {
+  // In hook (staged) mode, judge the *staged* content, not the working tree, so a
+  // staged change can't hide behind a reverted working copy. Fall back to disk.
+  if (!ALL) {
+    try {
+      return sh(`git show :${PETALS_FILE}`);
+    } catch {
+      /* not staged / not in index — use working tree below */
+    }
+  }
+  if (!existsSync(PETALS_FILE)) return null;
+  return readFileSync(PETALS_FILE, 'utf8');
+}
+
 function checkPetals() {
-  if (!existsSync(PETALS_FILE)) {
+  const src = petalSource();
+  if (src === null) {
     failures.push(`Petal SSOT missing: ${PETALS_FILE}`);
     return;
   }
-  const src = readFileSync(PETALS_FILE, 'utf8');
   for (const [id, name] of CANONICAL_PETALS) {
     const idOk = new RegExp(`\\bid:\\s*${id}\\b`).test(src);
     const nameOk = src.includes(`name: '${name}'`) || src.includes(`name: "${name}"`);
