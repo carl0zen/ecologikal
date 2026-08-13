@@ -6,6 +6,9 @@
     "node": ">=20.0.0"
   },
   "scripts": {
+    "prepare": "git config core.hooksPath .githooks || true",
+    "gate": "node scripts/gate-invariants.mjs",
+    "gate:all": "node scripts/gate-invariants.mjs --all",
     "dev": "pnpm --filter @ecologikal/web dev",
     "build": "pnpm -r run build",
     "typecheck": "pnpm -r run typecheck",
