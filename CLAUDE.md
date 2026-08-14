@@ -122,6 +122,7 @@ Health: `http://localhost:8090/v2/api/health` · Checks: `pnpm typecheck`, `pnpm
 | Read first | Purpose |
 |------------|---------|
 | [docs/VERTICAL_PLAYBOOK.md](docs/VERTICAL_PLAYBOOK.md) | Eco map + dual-business claim |
+| [docs/BRAND_SYSTEM.md](docs/BRAND_SYSTEM.md) · [DESIGN.md](DESIGN.md) · [PRODUCT.md](PRODUCT.md) | Brand · tokens · product context |
 | [`.claude/knowledge/PRIMITIVES.md`](.claude/knowledge/PRIMITIVES.md) | The 8 primitives, in depth |
 | [`.claude/living/STATUS.md`](.claude/living/STATUS.md) | Living / dormant / archive / parasitic map |
 | [docs/DUAL_STACK.md](docs/DUAL_STACK.md) | Vintage + v2 coexistence |

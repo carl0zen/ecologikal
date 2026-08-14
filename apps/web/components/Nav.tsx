@@ -1,27 +1,9 @@
 import Link from 'next/link';
 import { PILLARS } from '@ecologikal/domain';
-import {
-  BookOpen,
-  Compass,
-  GameController,
-  Handshake,
-  AirplaneTilt,
-  UsersThree,
-} from '@phosphor-icons/react/ssr';
+import { EcoWordmark, FlowerMark } from '@/components/brand/FlowerMark';
+import { PILLAR_ICONS } from '@/components/brand/pillarIcons';
 import { getSession } from '@/lib/auth';
 import { vintageUrl } from '@/lib/urls';
-
-const PILLAR_ICONS: Record<
-  string,
-  React.ComponentType<{ size?: number; weight?: 'bold'; 'aria-hidden'?: boolean }>
-> = {
-  play: GameController,
-  travel: AirplaneTilt,
-  discover: Compass,
-  learn: BookOpen,
-  meet: UsersThree,
-  cooperate: Handshake,
-};
 
 export async function Nav() {
   const session = await getSession();
@@ -29,9 +11,10 @@ export async function Nav() {
 
   return (
     <header className="nav">
-      <Link href="/" className="brand">
-        Eco<span>logikal</span>
-        <span className="badge" style={{ marginLeft: '0.5rem' }}>
+      <Link href="/" className="eco-lockup">
+        <FlowerMark size={28} decorative />
+        <EcoWordmark />
+        <span className="badge" style={{ marginLeft: '0.35rem' }}>
           v2
         </span>
       </Link>
@@ -39,12 +22,8 @@ export async function Nav() {
         {PILLARS.map((p) => {
           const Icon = PILLAR_ICONS[p.id];
           return (
-            <Link
-              key={p.id}
-              href={p.href}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
-            >
-              {Icon ? <Icon size={15} weight="bold" aria-hidden /> : null}
+            <Link key={p.id} href={p.href}>
+              <Icon size={15} weight="bold" aria-hidden />
               {p.labelEs}
             </Link>
           );
