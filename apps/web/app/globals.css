@@ -356,6 +356,8 @@ h2 {
 
 /* ——— Buttons ——— */
 .btn {
+  position: relative;
+  overflow: clip;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -550,10 +552,9 @@ label {
   font-size: 0.95rem;
 }
 
-/* Entrance: fade + gentle rise, once */
-.cine-panel,
-.rail,
-.flagship {
+/* Entrance: the glass panel arrives once; its content is choreographed
+   word-by-word in the Living Land block at the end of this file. */
+.cine-panel {
   opacity: 1;
   transform: translateY(0);
   transition:
@@ -564,15 +565,6 @@ label {
     opacity: 0;
     transform: translateY(10px);
   }
-}
-
-.rail {
-  transition-delay: 90ms;
-}
-
-.flagship-inner,
-.home-dev {
-  transition-delay: 140ms;
 }
 
 /* ——— Pillar rail (streaming-row feel) ——— */
@@ -1025,9 +1017,7 @@ label {
     transform: none;
   }
 
-  .cine-panel,
-  .rail,
-  .flagship {
+  .cine-panel {
     transition-property: opacity;
 
     @starting-style {
@@ -1253,4 +1243,305 @@ label {
 .home-dev {
   margin-top: 2rem;
   opacity: 0.85;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Living Land — the landing breathes.
+   All motion is opt-in via prefers-reduced-motion: no-preference.
+   Scroll-driven choreography is @supports-guarded; without support the
+   page is simply still and fully visible. Transform/opacity only,
+   except the one-shot crop-row draw (small area, scroll-scrubbed).
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Word layout is unconditional — motion preference must never change copy. */
+.hero-word {
+  display: inline-block;
+  margin-right: 0.28em;
+}
+
+.hero-word:last-child {
+  margin-right: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* — Hero orchestration: kicker → words → promise → actions — */
+  .hero-rise,
+  .hero-word {
+    opacity: 0;
+    animation: hero-rise 700ms var(--ease-out) both;
+    animation-delay: calc(180ms + var(--i, 0) * 85ms);
+  }
+
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+      filter: blur(7px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  /* — Birds: slow thermal drift, each on its own clock — */
+  .birds path {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: bird-drift 11s ease-in-out infinite alternate;
+  }
+
+  .birds path:nth-child(2) {
+    animation-duration: 14s;
+    animation-delay: -4s;
+  }
+
+  .birds path:nth-child(3) {
+    animation-duration: 9s;
+    animation-delay: -7s;
+  }
+
+  @keyframes bird-drift {
+    from {
+      transform: translate(0, 0);
+    }
+    to {
+      transform: translate(30px, -12px);
+    }
+  }
+
+  /* — Campus lamps breathe (staggered inline delays) — */
+  .lamp {
+    animation: lamp-breathe 4.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes lamp-breathe {
+    from {
+      opacity: 0.65;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* — Runway approach lights: a slow chase down the strip — */
+  .strip-lights rect {
+    animation: strip-chase 2.45s linear infinite;
+  }
+
+  .strip-lights rect:nth-child(1) { animation-delay: 0s; }
+  .strip-lights rect:nth-child(2) { animation-delay: 0.35s; }
+  .strip-lights rect:nth-child(3) { animation-delay: 0.7s; }
+  .strip-lights rect:nth-child(4) { animation-delay: 1.05s; }
+  .strip-lights rect:nth-child(5) { animation-delay: 1.4s; }
+  .strip-lights rect:nth-child(6) { animation-delay: 1.75s; }
+  .strip-lights rect:nth-child(7) { animation-delay: 2.1s; }
+
+  @keyframes strip-chase {
+    0%,
+    58% {
+      opacity: 0.35;
+    }
+    66% {
+      opacity: 1;
+    }
+    76%,
+    100% {
+      opacity: 0.35;
+    }
+  }
+
+  /* — Laguna shimmer — */
+  .laguna {
+    animation: laguna-shimmer 7s ease-in-out infinite alternate;
+  }
+
+  @keyframes laguna-shimmer {
+    from {
+      opacity: 0.86;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* — Rail icons lean into the hover — */
+  .rail-card .rail-icon {
+    transition: transform 200ms var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .rail-card:hover .rail-icon {
+      transform: translateY(-2px) scale(1.06);
+    }
+
+    /* — One indulgence: light sweeps across the gold CTA — */
+    .btn.gold::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -45%;
+      width: 38%;
+      background: linear-gradient(
+        105deg,
+        transparent,
+        color-mix(in oklab, white 55%, transparent),
+        transparent
+      );
+      transform: skewX(-18deg);
+      pointer-events: none;
+    }
+
+    .btn.gold:hover::after {
+      animation: gold-shine 900ms var(--ease-out);
+    }
+
+    @keyframes gold-shine {
+      to {
+        transform: skewX(-18deg) translateX(420%);
+      }
+    }
+  }
+
+  /* — Scroll choreography (progressive enhancement) — */
+  @supports (animation-timeline: scroll()) {
+    /* hero parallax: near layers exit faster, content recedes like a
+       camera pulling up and away */
+    .cine-hero .ridge-far,
+    .cine-hero .ridge-mid,
+    .cine-hero .ridge-near,
+    .cine-hero .terrace {
+      animation: linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 90vh;
+    }
+
+    .cine-hero .ridge-far {
+      animation-name: par-far;
+    }
+    .cine-hero .ridge-mid {
+      animation-name: par-mid;
+    }
+    .cine-hero .ridge-near {
+      animation-name: par-near;
+    }
+    .cine-hero .terrace {
+      animation-name: par-terrace;
+    }
+
+    @keyframes par-far {
+      to {
+        transform: translateY(-10px);
+      }
+    }
+    @keyframes par-mid {
+      to {
+        transform: translateY(-26px);
+      }
+    }
+    @keyframes par-near {
+      to {
+        transform: translateY(-46px);
+      }
+    }
+    @keyframes par-terrace {
+      to {
+        transform: translateY(-64px);
+      }
+    }
+
+    .cine-hero .cine-content {
+      animation: hero-recede linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 80vh;
+    }
+
+    @keyframes hero-recede {
+      to {
+        opacity: 0.3;
+        transform: translateY(34px);
+      }
+    }
+
+    /* sections rise as they enter the viewport */
+    .section-head {
+      animation: rise-in var(--ease-out) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+
+    .rail {
+      view-timeline: --rail block;
+    }
+
+    .rail-card {
+      animation: rise-in var(--ease-out) both;
+      animation-timeline: --rail;
+      animation-range: entry 0% entry 70%;
+    }
+
+    .rail-card:nth-child(2) { animation-range: entry 8% entry 78%; }
+    .rail-card:nth-child(3) { animation-range: entry 16% entry 86%; }
+    .rail-card:nth-child(4) { animation-range: entry 24% entry 94%; }
+    .rail-card:nth-child(5) { animation-range: entry 30% entry 100%; }
+    .rail-card:nth-child(6) { animation-range: entry 36% entry 100%; }
+
+    .flagship {
+      view-timeline: --flagship block;
+    }
+
+    .flagship-inner {
+      animation: rise-in var(--ease-out) both;
+      animation-timeline: --flagship;
+      animation-range: entry 20% entry 90%;
+    }
+
+    /* the fields plant themselves */
+    .crop-row {
+      stroke-dasharray: 1;
+      animation: crop-draw linear both;
+      animation-timeline: --flagship;
+      animation-range: entry 5% entry 60%;
+    }
+
+    .crop-row:nth-child(2) { animation-range: entry 13% entry 68%; }
+    .crop-row:nth-child(3) { animation-range: entry 21% entry 76%; }
+    .crop-row:nth-child(4) { animation-range: entry 29% entry 84%; }
+    .crop-row:nth-child(5) { animation-range: entry 37% entry 92%; }
+
+    @keyframes crop-draw {
+      from {
+        stroke-dashoffset: 1;
+      }
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .petal-strip {
+      view-timeline: --petals block;
+    }
+
+    .petal-strip .badge {
+      animation: rise-in var(--ease-out) both;
+      animation-timeline: --petals;
+      animation-range: entry 0% entry 100%;
+    }
+
+    .petal-strip .badge:nth-child(2) { animation-range: entry 6% entry 100%; }
+    .petal-strip .badge:nth-child(3) { animation-range: entry 12% entry 100%; }
+    .petal-strip .badge:nth-child(4) { animation-range: entry 18% entry 100%; }
+    .petal-strip .badge:nth-child(5) { animation-range: entry 24% entry 100%; }
+    .petal-strip .badge:nth-child(6) { animation-range: entry 30% entry 100%; }
+    .petal-strip .badge:nth-child(7) { animation-range: entry 36% entry 100%; }
+
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translateY(26px);
+      }
+    }
+  }
 }

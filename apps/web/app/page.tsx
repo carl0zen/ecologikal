@@ -71,15 +71,31 @@ export default function HomePage() {
         <ValleScene hideSky />
         <div className="cine-content">
           <div className="cine-panel glass-panel">
-            <p className="kicker">La red regenerativa</p>
-            <p className="brand-mark">
-              Tu flor es tu <em>reputación</em>
+            <p className="kicker hero-rise" style={{ ['--i' as string]: 0 }}>
+              La red regenerativa
             </p>
-            <p className="promise">
+            <p className="brand-mark">
+              {['Tu', 'flor', 'es', 'tu'].map((word, i) => (
+                <span
+                  key={word + i}
+                  className="hero-word"
+                  style={{ ['--i' as string]: i + 1 }}
+                >
+                  {word}
+                </span>
+              ))}
+              <em className="hero-word" style={{ ['--i' as string]: 5 }}>
+                reputación
+              </em>
+            </p>
+            <p className="promise hero-rise" style={{ ['--i' as string]: 6 }}>
               Declara pétalos, gana KINS y encuentra tu lugar en la tierra que
               estamos regenerando.
             </p>
-            <div className="row" style={{ marginTop: '1.4rem' }}>
+            <div
+              className="row hero-rise"
+              style={{ marginTop: '1.4rem', ['--i' as string]: 7 }}
+            >
               <Link className="btn" href="/login">
                 Empezar mi flor
               </Link>

@@ -43,6 +43,7 @@ export function ValleScene({ hideSky = false }: { hideSky?: boolean }) {
 
         {/* far ridge */}
         <path
+          className="ridge-far"
           d="M0 300 C 180 258, 340 292, 520 274 C 700 256, 830 296, 1010 282 C 1190 268, 1320 296, 1440 278 L 1440 640 L 0 640 Z"
           fill="var(--ridge-far)"
         />
@@ -50,26 +51,31 @@ export function ValleScene({ hideSky = false }: { hideSky?: boolean }) {
 
         {/* mid ridge */}
         <path
+          className="ridge-mid"
           d="M0 384 C 210 342, 380 388, 560 368 C 760 346, 900 396, 1090 378 C 1260 362, 1360 388, 1440 374 L 1440 640 L 0 640 Z"
           fill="var(--ridge-mid)"
         />
 
         {/* near ridge */}
         <path
+          className="ridge-near"
           d="M0 462 C 190 428, 400 470, 610 452 C 830 432, 1010 476, 1210 458 C 1320 448, 1390 462, 1440 456 L 1440 640 L 0 640 Z"
           fill="var(--ridge-near)"
         />
 
         {/* terraced foreground */}
-        <path d="M0 520 C 320 492, 760 540, 1440 508 L 1440 640 L 0 640 Z" fill="var(--field)" />
-        <g stroke="var(--field-row)" strokeWidth="6" fill="none" opacity="0.75">
-          <path d="M-30 552 C 330 522, 750 566, 1470 536" />
-          <path d="M-30 584 C 330 556, 750 598, 1470 566" />
-          <path d="M-30 616 C 330 590, 750 630, 1470 598" />
+        <g className="terrace">
+          <path d="M0 520 C 320 492, 760 540, 1440 508 L 1440 640 L 0 640 Z" fill="var(--field)" />
+          <g stroke="var(--field-row)" strokeWidth="6" fill="none" opacity="0.75">
+            <path d="M-30 552 C 330 522, 750 566, 1470 536" />
+            <path d="M-30 584 C 330 556, 750 598, 1470 566" />
+            <path d="M-30 616 C 330 590, 750 630, 1470 598" />
+          </g>
         </g>
 
         {/* birds */}
         <g
+          className="birds"
           stroke="var(--ink)"
           strokeWidth="2.5"
           strokeLinecap="round"
@@ -123,17 +129,17 @@ export function FlagshipScene() {
 
         {/* curved crop rows */}
         <g stroke="var(--field-row)" strokeWidth="9" fill="none" opacity="0.85">
-          <path d="M120 430 C 240 330, 250 220, 160 110" />
-          <path d="M170 442 C 300 336, 312 212, 210 92" />
-          <path d="M224 452 C 360 342, 374 206, 262 78" />
-          <path d="M282 458 C 420 348, 436 202, 318 68" />
-          <path d="M344 462 C 480 354, 498 200, 378 62" />
+          <path className="crop-row" pathLength={1} d="M120 430 C 240 330, 250 220, 160 110" />
+          <path className="crop-row" pathLength={1} d="M170 442 C 300 336, 312 212, 210 92" />
+          <path className="crop-row" pathLength={1} d="M224 452 C 360 342, 374 206, 262 78" />
+          <path className="crop-row" pathLength={1} d="M282 458 C 420 348, 436 202, 318 68" />
+          <path className="crop-row" pathLength={1} d="M344 462 C 480 354, 498 200, 378 62" />
         </g>
 
         {/* airstrip */}
         <g transform="rotate(-14 880 120)">
           <rect x="640" y="96" width="480" height="46" rx="10" fill="var(--ridge-mid)" />
-          <g fill="var(--haze)" opacity="0.85">
+          <g className="strip-lights" fill="var(--haze)" opacity="0.85">
             <rect x="668" y="116" width="34" height="6" rx="3" />
             <rect x="730" y="116" width="34" height="6" rx="3" />
             <rect x="792" y="116" width="34" height="6" rx="3" />
@@ -146,22 +152,23 @@ export function FlagshipScene() {
 
         {/* laguna */}
         <path
+          className="laguna"
           d="M760 320 C 800 288, 872 292, 908 320 C 944 348, 936 392, 892 406 C 844 420, 776 412, 752 380 C 734 356, 736 338, 760 320 Z"
           fill="var(--water)"
         />
 
         {/* campus — palapa circles, lit at dusk */}
         <g>
-          <circle cx="560" cy="250" r="60" fill="url(#fs-lamp)" />
+          <circle className="lamp" cx="560" cy="250" r="60" fill="url(#fs-lamp)" />
           <circle cx="560" cy="250" r="26" fill="var(--ridge-near)" />
           <circle cx="560" cy="250" r="26" fill="none" stroke="var(--sun)" strokeWidth="3" opacity="0.9" />
-          <circle cx="648" cy="300" r="44" fill="url(#fs-lamp)" />
+          <circle className="lamp" style={{ animationDelay: '-1.6s' }} cx="648" cy="300" r="44" fill="url(#fs-lamp)" />
           <circle cx="648" cy="300" r="18" fill="var(--ridge-near)" />
           <circle cx="648" cy="300" r="18" fill="none" stroke="var(--sun)" strokeWidth="3" opacity="0.9" />
-          <circle cx="620" cy="188" r="40" fill="url(#fs-lamp)" />
+          <circle className="lamp" style={{ animationDelay: '-3.1s' }} cx="620" cy="188" r="40" fill="url(#fs-lamp)" />
           <circle cx="620" cy="188" r="15" fill="var(--ridge-near)" />
           <circle cx="620" cy="188" r="15" fill="none" stroke="var(--sun)" strokeWidth="3" opacity="0.9" />
-          <circle cx="700" cy="232" r="34" fill="url(#fs-lamp)" />
+          <circle className="lamp" style={{ animationDelay: '-2.2s' }} cx="700" cy="232" r="34" fill="url(#fs-lamp)" />
           <circle cx="700" cy="232" r="12" fill="var(--ridge-near)" />
           <circle cx="700" cy="232" r="12" fill="none" stroke="var(--sun)" strokeWidth="3" opacity="0.9" />
         </g>
