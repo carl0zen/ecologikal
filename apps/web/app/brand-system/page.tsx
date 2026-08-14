@@ -1,16 +1,10 @@
-import type { ComponentType } from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import {
-  BookOpen,
-  Compass,
-  GameController,
-  Handshake,
-  AirplaneTilt,
-  UsersThree,
-} from '@phosphor-icons/react/ssr';
+import { notFound } from 'next/navigation';
 import { PETALS, PILLARS } from '@ecologikal/domain';
 import { EcoWordmark, FlowerMark } from '@/components/brand/FlowerMark';
+import { PILLAR_ICONS } from '@/components/brand/pillarIcons';
+import { flag } from '@/lib/env';
 import './brand-system.css';
 
 export const metadata: Metadata = {
@@ -35,70 +29,53 @@ const TOC = [
 ] as const;
 
 const SURFACES = [
-  { name: 'Page base', token: '--eco-bg', hex: '#121c16', bg: 'var(--eco-bg)' },
-  {
-    name: 'Raised',
-    token: '--eco-raised',
-    hex: '#1a2820',
-    bg: 'var(--eco-raised)',
-  },
-  {
-    name: 'Elevated',
-    token: '--eco-elevated',
-    hex: '#243028',
-    bg: 'var(--eco-elevated)',
-  },
+  { name: 'Page base', token: '--eco-bg' },
+  { name: 'Raised', token: '--eco-raised' },
+  { name: 'Elevated', token: '--eco-elevated' },
 ] as const;
 
 const TEXT_SWATCHES = [
-  { name: 'Ink', token: '--eco-ink', hex: '#eef2eb', bg: '#eef2eb' },
-  { name: 'Muted', token: '--eco-muted', hex: '#9aab9c', bg: '#9aab9c' },
-  { name: 'Faint', token: '--eco-faint', hex: '#6b7a6e', bg: '#6b7a6e' },
+  { name: 'Ink', token: '--eco-ink' },
+  { name: 'Muted', token: '--eco-muted' },
+  { name: 'Faint', token: '--eco-faint' },
 ] as const;
 
 const SIGNAL_SWATCHES = [
-  { name: 'Leaf', token: '--eco-leaf', hex: '#6aad72', bg: '#6aad72' },
-  { name: 'Canopy', token: '--eco-canopy', hex: '#3d7348', bg: '#3d7348' },
-  { name: 'Kin', token: '--eco-kin', hex: '#b8964e', bg: '#b8964e' },
-  { name: 'Alert', token: '--eco-alert', hex: '#c45a72', bg: '#c45a72' },
+  { name: 'Leaf', token: '--eco-leaf' },
+  { name: 'Canopy', token: '--eco-canopy' },
+  { name: 'Kin', token: '--eco-kin' },
+  { name: 'Alert', token: '--eco-alert' },
 ] as const;
-
-const PILLAR_ICONS: Record<
-  string,
-  ComponentType<{ size?: number; weight?: 'bold'; 'aria-hidden'?: boolean }>
-> = {
-  play: GameController,
-  travel: AirplaneTilt,
-  discover: Compass,
-  learn: BookOpen,
-  meet: UsersThree,
-  cooperate: Handshake,
-};
 
 function Swatch({
   name,
   token,
-  hex,
-  bg,
+  fill,
 }: {
   name: string;
   token: string;
-  hex: string;
-  bg: string;
+  /** CSS color — prefer `var(--token)`; petals may use domain hex */
+  fill: string;
 }) {
   return (
     <div className="bs-swatch">
-      <div className="chip" style={{ background: bg }} />
+      <div className="chip" style={{ background: fill }} />
       <div className="meta">
         <p className="name">{name}</p>
         <p className="token">{token}</p>
-        <p className="hex">{hex}</p>
       </div>
     </div>
   );
 }
 
 export default function BrandSystemPage() {
+  if (
+    !flag('ECO_ALLOW_DEV_LOGIN') &&
+    !flag('ECO_ALLOW_PROOF_STUB')
+  ) {
+    notFound();
+  }
+
   return (
     <main className="bs-page">
       <header className="bs-hero">
@@ -137,15 +114,15 @@ export default function BrandSystemPage() {
             <span className="label">Mark · mono leaf</span>
           </div>
           <div className="bs-mark-card" style={{ minWidth: '16rem' }}>
-            <div className="bs-lockup">
-              <FlowerMark size={44} />
+            <div className="eco-lockup bs-lockup">
+              <FlowerMark size={44} decorative />
               <EcoWordmark as="p" />
             </div>
             <span className="label">Primary lockup</span>
           </div>
           <div className="bs-mark-card" style={{ minWidth: '16rem' }}>
-            <div className="bs-lockup">
-              <FlowerMark size={44} mono />
+            <div className="eco-lockup bs-lockup">
+              <FlowerMark size={44} mono decorative />
               <div>
                 <EcoWordmark as="p" />
                 <p
@@ -233,31 +210,31 @@ export default function BrandSystemPage() {
             signal; kin marks earned value; petals are taxonomy only.
           </p>
         </div>
-        <p className="bs-eyebrow" style={{ marginBottom: '0.75rem' }}>
+        <p className="bs-eyebrow">
           <span className="sq" /> Surfaces
         </p>
         <div className="bs-grid" style={{ marginBottom: '1.5rem' }}>
           {SURFACES.map((s) => (
-            <Swatch key={s.token} {...s} />
+            <Swatch key={s.token} name={s.name} token={s.token} fill={`var(${s.token})`} />
           ))}
         </div>
-        <p className="bs-eyebrow" style={{ marginBottom: '0.75rem' }}>
+        <p className="bs-eyebrow">
           <span className="sq" /> Type
         </p>
         <div className="bs-grid" style={{ marginBottom: '1.5rem' }}>
           {TEXT_SWATCHES.map((s) => (
-            <Swatch key={s.token} {...s} />
+            <Swatch key={s.token} name={s.name} token={s.token} fill={`var(${s.token})`} />
           ))}
         </div>
-        <p className="bs-eyebrow" style={{ marginBottom: '0.75rem' }}>
+        <p className="bs-eyebrow">
           <span className="sq" /> Signal
         </p>
         <div className="bs-grid" style={{ marginBottom: '1.5rem' }}>
           {SIGNAL_SWATCHES.map((s) => (
-            <Swatch key={s.token} {...s} />
+            <Swatch key={s.token} name={s.name} token={s.token} fill={`var(${s.token})`} />
           ))}
         </div>
-        <p className="bs-eyebrow" style={{ marginBottom: '0.75rem' }}>
+        <p className="bs-eyebrow">
           <span className="sq" /> Petal spectrum · IDs 1–7 stable forever
         </p>
         <div className="bs-grid">
@@ -265,9 +242,8 @@ export default function BrandSystemPage() {
             <Swatch
               key={petal.id}
               name={`${petal.id}. ${petal.nameEs}`}
-              token={`petal-${petal.id}`}
-              hex={petal.color}
-              bg={petal.color}
+              token={`PETALS[${petal.id - 1}]`}
+              fill={petal.color}
             />
           ))}
         </div>
@@ -326,12 +302,10 @@ export default function BrandSystemPage() {
               <div
                 key={s.token}
                 className="bs-surface"
-                style={{ background: s.bg }}
+                style={{ background: `var(${s.token})` }}
               >
                 <strong>{s.name}</strong>
-                <code>
-                  {s.token} · {s.hex}
-                </code>
+                <code>{s.token}</code>
               </div>
             ))}
           </div>
@@ -368,7 +342,7 @@ export default function BrandSystemPage() {
             the system extends — it doesn&apos;t redesign.
           </p>
         </div>
-        <p className="bs-eyebrow" style={{ marginBottom: '0.75rem' }}>
+        <p className="bs-eyebrow">
           <span className="sq" /> Buttons
         </p>
         <div className="bs-comp-row">
@@ -380,16 +354,16 @@ export default function BrandSystemPage() {
           </button>
           <Link href="/meet">Quiet link · Conoce</Link>
         </div>
-        <p className="bs-eyebrow" style={{ marginBottom: '0.75rem' }}>
+        <p className="bs-eyebrow">
           <span className="sq" /> Badges & chips
         </p>
         <div className="bs-comp-row">
           <span className="badge">240 KINS</span>
           <span className="badge verified">Referencia verificada</span>
-          <span className="bs-eyebrow">
-            <span className="sq" /> Intent signals
-          </span>
         </div>
+        <p className="bs-eyebrow">
+          <span className="sq" /> Intent signals
+        </p>
         <div className="bs-petal-row" style={{ marginBottom: '1.5rem' }}>
           {PETALS.map((petal) => (
             <span
@@ -402,7 +376,7 @@ export default function BrandSystemPage() {
             </span>
           ))}
         </div>
-        <p className="bs-eyebrow" style={{ marginBottom: '0.75rem' }}>
+        <p className="bs-eyebrow">
           <span className="sq" /> Six pillars
         </p>
         <div className="bs-pillar-grid">
@@ -410,7 +384,7 @@ export default function BrandSystemPage() {
             const Icon = PILLAR_ICONS[p.id];
             return (
               <div key={p.id} className="bs-pillar">
-                {Icon ? <Icon size={22} weight="bold" aria-hidden /> : null}
+                <Icon size={22} weight="bold" aria-hidden />
                 <strong>{p.labelEs}</strong>
                 <span>{p.labelEn}</span>
               </div>
@@ -439,7 +413,7 @@ export default function BrandSystemPage() {
                 title={p.labelEs}
                 style={{ gap: '0.5rem' }}
               >
-                {Icon ? <Icon size={18} weight="bold" aria-hidden /> : null}
+                <Icon size={18} weight="bold" aria-hidden />
                 {p.labelEs}
               </span>
             );
@@ -470,9 +444,9 @@ export default function BrandSystemPage() {
             <p>
               UI · 180ms
               <br />
-              Rise-in · 0.65s
+              Rise-in · --eco-rise-in (0.65s, on load)
               <br />
-              Stagger · 70ms
+              Stagger · --eco-stagger (70ms)
             </p>
           </div>
           <div className="bs-panel">
@@ -592,7 +566,16 @@ export default function BrandSystemPage() {
             <h3>Code</h3>
             <ul>
               <li>
+                <code>apps/web/components/brand/flowerMarkGeometry.ts</code>
+              </li>
+              <li>
+                <code>apps/web/components/brand/brandPalette.ts</code>
+              </li>
+              <li>
                 <code>apps/web/components/brand/FlowerMark.tsx</code>
+              </li>
+              <li>
+                <code>apps/web/app/icon.tsx</code>
               </li>
               <li>
                 <code>apps/web/app/globals.css</code>

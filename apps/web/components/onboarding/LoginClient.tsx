@@ -3,6 +3,7 @@
 import type { ReactNode } from 'react';
 import { useFormStatus } from 'react-dom';
 import { Plant, SignIn } from '@phosphor-icons/react';
+import { EcoWordmark, FlowerMark } from '@/components/brand/FlowerMark';
 
 type Props = {
   allowDevLogin: boolean;
@@ -40,9 +41,10 @@ export function LoginClient({ allowDevLogin, startSso, devLogin }: Props) {
   return (
     <main className="login-stage">
       <section className="login-brand">
-        <p className="brand-mark">
-          Eco<em>logikal</em>
-        </p>
+        <div className="eco-lockup">
+          <FlowerMark size={56} decorative />
+          <EcoWordmark as="p" />
+        </div>
         <p className="promise">
           Tu flor de habilidades es tu reputación.
         </p>

@@ -1,4 +1,5 @@
 import { PETALS } from '@ecologikal/domain';
+import { FLOWER_MARK, petalPose } from './flowerMarkGeometry';
 
 type FlowerMarkProps = {
   size?: number;
@@ -7,11 +8,14 @@ type FlowerMarkProps = {
   monoColor?: string;
   className?: string;
   title?: string;
+  /** Hide from AT when paired with visible wordmark */
+  decorative?: boolean;
 };
 
 /**
  * Seven-petal brand mark. Petal colours follow domain taxonomy;
  * centre uses kin gold. Mono mode collapses to one fill.
+ * Geometry: `flowerMarkGeometry.ts` (shared with favicon).
  */
 export function FlowerMark({
   size = 64,
@@ -19,28 +23,34 @@ export function FlowerMark({
   monoColor = 'var(--eco-leaf)',
   className,
   title = 'Ecologikal',
+  decorative = false,
 }: FlowerMarkProps) {
-  const cx = 50;
-  const cy = 50;
-  const petalLength = 28;
-  const petalWidth = 14;
-  const startAngle = -90;
+  const {
+    viewBox,
+    cx,
+    cy,
+    petalLength,
+    petalWidth,
+    centerR,
+    pupilR,
+    monoOpacity,
+    colorOpacity,
+    pupilOpacity,
+  } = FLOWER_MARK;
 
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 100 100"
+      viewBox={`0 0 ${viewBox} ${viewBox}`}
       className={className}
-      role="img"
-      aria-label={title}
+      role={decorative ? 'presentation' : 'img'}
+      aria-hidden={decorative ? true : undefined}
+      aria-label={decorative ? undefined : title}
     >
-      <title>{title}</title>
+      {decorative ? null : <title>{title}</title>}
       {PETALS.map((petal, i) => {
-        const angle = ((startAngle + i * (360 / 7)) * Math.PI) / 180;
-        const tx = cx + Math.cos(angle) * 22;
-        const ty = cy + Math.sin(angle) * 22;
-        const rot = startAngle + i * (360 / 7) + 90;
+        const { tx, ty, rot } = petalPose(i);
         const fill = mono ? monoColor : petal.color;
         return (
           <ellipse
@@ -51,36 +61,40 @@ export function FlowerMark({
             ry={petalLength}
             fill={fill}
             transform={`rotate(${rot} ${tx} ${ty})`}
-            opacity={mono ? 1 : 0.92}
+            opacity={mono ? monoOpacity : colorOpacity}
           />
         );
       })}
       <circle
         cx={cx}
         cy={cy}
-        r={10}
-        fill={mono ? monoColor : 'var(--eco-kin, #b8964e)'}
+        r={centerR}
+        fill={mono ? monoColor : 'var(--eco-kin)'}
       />
       <circle
         cx={cx}
         cy={cy}
-        r={4.5}
-        fill={mono ? 'var(--eco-bg, #121c16)' : 'var(--eco-bg, #121c16)'}
-        opacity={0.35}
+        r={pupilR}
+        fill="var(--eco-bg)"
+        opacity={pupilOpacity}
       />
     </svg>
   );
 }
 
 type WordmarkProps = {
-  className?: string;
   as?: 'p' | 'span' | 'h1';
+  /** Extra classes; base `eco-wordmark` is always applied */
+  className?: string;
 };
 
 /** Eco + leaf-emphasized logikal */
 export function EcoWordmark({ className, as: Tag = 'span' }: WordmarkProps) {
+  const classes = className
+    ? `eco-wordmark ${className}`
+    : 'eco-wordmark';
   return (
-    <Tag className={className ?? 'eco-wordmark'}>
+    <Tag className={classes}>
       Eco<em>logikal</em>
     </Tag>
   );

@@ -1,9 +1,6 @@
 /* Brand system specimen — composed from live Eco tokens */
 
 .bs-page {
-  --bs-max: 72rem;
-  max-width: var(--bs-max);
-  margin: 0 auto;
   padding-bottom: 6rem;
 }
 
@@ -203,24 +200,7 @@
 }
 
 .bs-lockup {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-}
-
-.bs-lockup .eco-wordmark {
-  font-family: var(--font-display);
-  font-size: 1.85rem;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  color: var(--eco-ink);
-  margin: 0;
-}
-
-.bs-lockup .eco-wordmark em,
-.eco-wordmark em {
-  font-style: normal;
-  color: var(--eco-leaf);
+  --eco-wordmark-size: 1.85rem;
 }
 
 .bs-thesis {
@@ -344,13 +324,6 @@
   margin: 0;
 }
 
-.bs-swatch .hex {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--eco-muted);
-  margin: 0.35rem 0 0;
-}
-
 .bs-type-row {
   display: grid;
   gap: 1rem;
@@ -374,7 +347,7 @@
 
 .bs-type-display {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(2.4rem, 5.4vw, 4rem);
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.08;
@@ -383,7 +356,7 @@
 
 .bs-type-section {
   font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+  font-size: clamp(1.5rem, 3.2vw, 2.35rem);
   font-weight: 600;
   letter-spacing: -0.02em;
   margin: 0;
@@ -443,6 +416,7 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--eco-muted);
+  margin: 0 0 0.75rem;
 }
 
 .bs-eyebrow .sq {
@@ -539,7 +513,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .bs-section {
-    animation: bs-rise 0.65s var(--ease-out) both;
+    animation: bs-rise var(--eco-rise-in) var(--ease-out) both;
   }
 }
 

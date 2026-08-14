@@ -15,7 +15,7 @@ A **seven-petal flower** with a kin-gold centre. Geometry is radial and even —
 
 | Form | Use |
 |------|-----|
-| Mark | App icon, favicon, avatar fallback, tight UI |
+| Mark | Favicon (`app/icon.tsx` ← `flowerMarkGeometry.ts`), nav lockup, login/home/reveal, tight UI |
 | Wordmark | `Eco` + `logikal` (leaf emphasis on *logikal*) |
 | Primary lockup | Mark + wordmark |
 | Extended | Lockup + “red regenerativa” / “regenerative network” |
@@ -124,7 +124,7 @@ Canonical set (extend, don’t redesign):
 
 ## 08 · Motion
 
-One organic ease: `cubic-bezier(0.23, 1, 0.32, 1)`. Rise-in on scroll for brand pages; short UI transitions (`180ms`) in product. Flower reveal may breathe once — never bounce, never infinite neon pulse. Honour `prefers-reduced-motion`.
+One organic ease: `cubic-bezier(0.23, 1, 0.32, 1)`. Rise-in on load for brand specimen pages (`--eco-rise-in`); short UI transitions (`--eco-duration-ui`) in product. Flower reveal may breathe once — never bounce, never infinite neon pulse. Honour `prefers-reduced-motion`.
 
 ---
 
@@ -152,19 +152,7 @@ One organic ease: `cubic-bezier(0.23, 1, 0.32, 1)`. Rise-in on scroll for brand 
 
 ---
 
-## 11 · Assets
-
-| Asset | Location |
-|-------|----------|
-| Live system | `apps/web/app/brand-system` |
-| Flower mark component | `apps/web/components/brand/FlowerMark.tsx` |
-| CSS tokens | `apps/web/app/globals.css` |
-| Petal colours (domain) | `packages/domain/src/petals.ts` |
-| Design token table | `DESIGN.md` |
-
----
-
-## 12 · Product primitives in the brand
+## 11 · Product primitives in the brand
 
 The brand encodes the product OS:
 
@@ -178,3 +166,18 @@ The brand encodes the product OS:
 8. Collaborative travel diary  
 
 If a visual pattern contradicts a primitive, the primitive wins.
+
+---
+
+## 12 · Assets
+
+| Asset | Location |
+|-------|----------|
+| Live system | `apps/web/app/brand-system` |
+| Mark geometry (shared) | `apps/web/components/brand/flowerMarkGeometry.ts` |
+| Brand hexes (OG/favicon) | `apps/web/components/brand/brandPalette.ts` |
+| Flower mark component | `apps/web/components/brand/FlowerMark.tsx` |
+| Favicon | `apps/web/app/icon.tsx` |
+| CSS tokens | `apps/web/app/globals.css` |
+| Petal colours (domain) | `packages/domain/src/petals.ts` |
+| Design token table | `DESIGN.md` |

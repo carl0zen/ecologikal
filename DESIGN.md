@@ -20,6 +20,7 @@ Narrative guidelines: `docs/BRAND_SYSTEM.md`.
 | `--eco-elevated` | `#243028` | Insets, hover strips |
 | `--eco-line` | `rgba(238,242,235,0.12)` | Default hairline |
 | `--eco-line-strong` | `rgba(238,242,235,0.22)` | Emphasised edge |
+| `--eco-canopy-mist` | `#1a3324` | Body vignette only |
 
 ### Type
 
@@ -27,7 +28,7 @@ Narrative guidelines: `docs/BRAND_SYSTEM.md`.
 |-------|-----|------|
 | `--eco-ink` | `#eef2eb` | Primary text |
 | `--eco-muted` | `#9aab9c` | Secondary |
-| `--eco-faint` | `#6b7a6e` | Tertiary / scaffolding |
+| `--eco-faint` | `#8a9b8c` | Tertiary / scaffolding (≥4.5:1 on elevated; min 0.85rem) |
 
 ### Signal · accents
 
@@ -50,7 +51,17 @@ Narrative guidelines: `docs/BRAND_SYSTEM.md`.
 | 6 | Herramientas & Tecnología | `#6c63ff` |
 | 7 | Salud & Espiritualidad | `#e76f51` |
 
+**Two readings of the same seven petals (intentional):**
+- `FlowerMark` — radiating ellipses = brand identity (who we are)
+- `FlowerViz` — concentric arcs = skill grades (what you’ve earned)
+
+Same `PETALS` colours/order. Do not invent a third flower.
+
 ## Typography
+
+| Token | Value | Role |
+|-------|-------|------|
+| `--eco-wordmark-size` | nav `1.25rem`; specimen `1.85rem`; hero `clamp(2.4rem, 5vw, 3.5rem)` | Wordmark scale via CSS custom property |
 
 | Role | Family | Notes |
 |------|--------|-------|
@@ -82,10 +93,10 @@ Depth from **tonal steps + 1px hairlines**, not multi-layer shadows. Optional so
 
 | Token | Value |
 |-------|-------|
-| Ease | `cubic-bezier(0.23, 1, 0.32, 1)` |
-| UI | `180ms` |
-| Rise-in | `0.65s` |
-| Stagger | `70ms` |
+| Ease | `--eco-ease` |
+| UI | `--eco-duration-ui` (`180ms`) |
+| Rise-in (specimen load) | `--eco-rise-in` (`0.65s`) |
+| Stagger | `--eco-stagger` (`70ms`) |
 
 Respect `prefers-reduced-motion`: snap to final state, no bounce.
 
