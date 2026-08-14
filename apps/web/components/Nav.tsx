@@ -10,6 +10,7 @@ import {
 } from '@phosphor-icons/react/ssr';
 import { getSession } from '@/lib/auth';
 import { vintageUrl } from '@/lib/urls';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const PILLAR_ICONS: Record<
   string,
@@ -51,6 +52,7 @@ export async function Nav() {
         })}
       </nav>
       <div className="row">
+        <ThemeToggle />
         <a className="btn secondary" href={vintage} title="Vintage PHP UI">
           Vintage
         </a>

@@ -1,22 +1,125 @@
 @import 'tailwindcss';
 
+/* ————————————————————————————————————————————————————————————————
+   Ecologikal — dusk-forest theme, clear glass over living land.
+   Dual theme: light on :root; dark via system fallback + [data-theme].
+   Stored choice ([data-theme]) always wins over the system preference.
+   ———————————————————————————————————————————————————————————————— */
+
 :root {
-  --bg: #121c16;
-  --bg-elev: #1a2820;
-  --ink: #eef2eb;
-  --muted: #9aab9c;
-  --green: #3d7348;
-  --green-bright: #6aad72;
-  --accent: #b8964e;
-  --pink: #c45a72;
-  --blue: #4a6580;
-  --line: rgba(238, 242, 235, 0.12);
-  --radius: 12px;
+  /* Light — daylight in the field */
+  --bg: oklch(0.965 0.008 95);
+  --bg-elev: oklch(0.99 0.005 95);
+  --ink: oklch(0.24 0.03 160);
+  --muted: oklch(0.48 0.03 150);
+  --green: oklch(0.46 0.1 155);
+  --green-bright: oklch(0.5 0.12 150);
+  --gold: oklch(0.58 0.11 80);
+  --accent: var(--gold);
+  --pink: oklch(0.6 0.13 10);
+  --blue: oklch(0.5 0.08 250);
+  --line: color-mix(in oklab, var(--ink) 14%, transparent);
+
+  /* Clear glass */
+  --glass-bg: color-mix(in oklab, var(--bg-elev) 55%, transparent);
+  --glass-bg-strong: color-mix(in oklab, var(--bg-elev) 74%, transparent);
+  --glass-border: color-mix(in oklab, var(--ink) 16%, transparent);
+  --glass-highlight: inset 0 1px 0
+    color-mix(in oklab, white 55%, transparent);
+  --glass-shadow: 0 18px 50px -22px
+    color-mix(in oklab, var(--ink) 38%, transparent);
+
+  /* Cinematic scene (morning gold) */
+  --sky-hi: oklch(0.93 0.045 85);
+  --sky-lo: oklch(0.85 0.075 70);
+  --sun: oklch(0.88 0.115 80);
+  --haze: oklch(0.9 0.03 95);
+  --ridge-far: oklch(0.72 0.05 150);
+  --ridge-mid: oklch(0.58 0.07 152);
+  --ridge-near: oklch(0.44 0.08 155);
+  --field: oklch(0.66 0.09 130);
+  --field-row: oklch(0.58 0.09 135);
+  --water: oklch(0.78 0.05 220);
+
+  --radius: 14px;
   --font: var(--font-geist-sans), 'Segoe UI', 'Avenir Next', system-ui,
     sans-serif;
+  --font-display: var(--font-fraunces), Georgia, 'Times New Roman', serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --duration-ui: 180ms;
+  color-scheme: light;
+}
+
+/* Dark — dusk at the center. System preference… */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: oklch(0.16 0.02 165);
+    --bg-elev: oklch(0.2 0.025 163);
+    --ink: oklch(0.94 0.012 120);
+    --muted: oklch(0.68 0.03 150);
+    --green: oklch(0.52 0.1 155);
+    --green-bright: oklch(0.72 0.13 150);
+    --gold: oklch(0.78 0.1 85);
+    --pink: oklch(0.68 0.12 10);
+    --blue: oklch(0.68 0.07 250);
+    --line: color-mix(in oklab, var(--ink) 13%, transparent);
+
+    --glass-bg: color-mix(in oklab, var(--bg-elev) 52%, transparent);
+    --glass-bg-strong: color-mix(in oklab, var(--bg-elev) 72%, transparent);
+    --glass-border: color-mix(in oklab, var(--ink) 15%, transparent);
+    --glass-highlight: inset 0 1px 0
+      color-mix(in oklab, white 12%, transparent);
+    --glass-shadow: 0 22px 60px -24px
+      color-mix(in oklab, black 70%, transparent);
+
+    --sky-hi: oklch(0.34 0.05 55);
+    --sky-lo: oklch(0.52 0.11 50);
+    --sun: oklch(0.82 0.13 75);
+    --haze: oklch(0.42 0.06 55);
+    --ridge-far: oklch(0.32 0.04 160);
+    --ridge-mid: oklch(0.26 0.035 162);
+    --ridge-near: oklch(0.21 0.03 164);
+    --field: oklch(0.31 0.05 145);
+    --field-row: oklch(0.27 0.045 148);
+    --water: oklch(0.45 0.06 230);
+    color-scheme: dark;
+  }
+}
+
+/* …and the explicit toggle wins in both directions. */
+:root[data-theme='dark'] {
+  --bg: oklch(0.16 0.02 165);
+  --bg-elev: oklch(0.2 0.025 163);
+  --ink: oklch(0.94 0.012 120);
+  --muted: oklch(0.68 0.03 150);
+  --green: oklch(0.52 0.1 155);
+  --green-bright: oklch(0.72 0.13 150);
+  --gold: oklch(0.78 0.1 85);
+  --pink: oklch(0.68 0.12 10);
+  --blue: oklch(0.68 0.07 250);
+  --line: color-mix(in oklab, var(--ink) 13%, transparent);
+
+  --glass-bg: color-mix(in oklab, var(--bg-elev) 52%, transparent);
+  --glass-bg-strong: color-mix(in oklab, var(--bg-elev) 72%, transparent);
+  --glass-border: color-mix(in oklab, var(--ink) 15%, transparent);
+  --glass-highlight: inset 0 1px 0
+    color-mix(in oklab, white 12%, transparent);
+  --glass-shadow: 0 22px 60px -24px
+    color-mix(in oklab, black 70%, transparent);
+
+  --sky-hi: oklch(0.34 0.05 55);
+  --sky-lo: oklch(0.52 0.11 50);
+  --sun: oklch(0.82 0.13 75);
+  --haze: oklch(0.42 0.06 55);
+  --ridge-far: oklch(0.32 0.04 160);
+  --ridge-mid: oklch(0.26 0.035 162);
+  --ridge-near: oklch(0.21 0.03 164);
+  --field: oklch(0.31 0.05 145);
+  --field-row: oklch(0.27 0.045 148);
+  --water: oklch(0.45 0.06 230);
+  color-scheme: dark;
 }
 
 * {
@@ -27,13 +130,38 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background:
-    radial-gradient(1100px 560px at 8% -8%, #1a3324 0%, transparent 55%),
-    radial-gradient(800px 420px at 92% 0%, #243028 0%, transparent 48%),
-    var(--bg);
+  background: var(--bg);
   color: var(--ink);
   font-family: var(--font);
   min-height: 100%;
+}
+
+body {
+  /* .full-bleed uses 50vw math; vw includes the scrollbar — clip the sliver */
+  overflow-x: clip;
+  background:
+    radial-gradient(
+      1200px 620px at 12% -10%,
+      color-mix(in oklab, var(--green) 16%, transparent) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      900px 480px at 95% -4%,
+      color-mix(in oklab, var(--gold) 10%, transparent) 0%,
+      transparent 50%
+    ),
+    var(--bg);
+}
+
+/* Cinematic grain — barely there, fixed, non-interactive */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 a {
@@ -45,27 +173,77 @@ a:hover {
   text-decoration: underline;
 }
 
+::selection {
+  background: color-mix(in oklab, var(--gold) 30%, transparent);
+}
+
 .shell {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 1.25rem 1.5rem 4rem;
+  padding: 0 1.5rem 4rem;
 }
 
+/* Escape the shell for full-bleed cinema */
+.full-bleed {
+  margin-inline: calc(50% - 50vw);
+}
+
+/* ——— Glass ——— */
+.glass-panel {
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: calc(var(--radius) + 4px);
+  box-shadow: var(--glass-highlight), var(--glass-shadow);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-panel {
+    background: color-mix(in oklab, var(--bg-elev) 94%, transparent);
+  }
+}
+
+/* ——— Nav: floating glass bar ——— */
 .nav {
+  position: sticky;
+  top: 0.75rem;
+  z-index: 50;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 0 1.5rem;
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 2rem;
+  padding: 0.6rem 1rem;
+  margin: 0.75rem 0 2rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  box-shadow: var(--glass-highlight), var(--glass-shadow);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .nav {
+    background: color-mix(in oklab, var(--bg-elev) 94%, transparent);
+  }
+}
+
+/* On small screens the wrapped nav is tall — pin it back into the flow. */
+@media (max-width: 719px) {
+  .nav {
+    position: static;
+    border-radius: calc(var(--radius) + 6px);
+    padding: 0.75rem 1rem;
+  }
 }
 
 .brand {
-  font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   color: var(--ink);
 }
 
@@ -76,12 +254,12 @@ a:hover {
 .pillars {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
+  gap: 0.25rem;
 }
 
 .pillars a {
   color: var(--muted);
-  padding: 0.35rem 0.65rem;
+  padding: 0.35rem 0.7rem;
   border-radius: 999px;
   border: 1px solid transparent;
   font-size: 0.9rem;
@@ -95,12 +273,42 @@ a:hover {
 .pillars a.active {
   color: var(--ink);
   border-color: var(--line);
-  background: var(--bg-elev);
+  background: color-mix(in oklab, var(--bg-elev) 70%, transparent);
   text-decoration: none;
 }
 
+/* ——— Theme toggle ——— */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    transform 140ms var(--ease-out),
+    color var(--duration-ui) var(--ease-out),
+    border-color var(--duration-ui) var(--ease-out);
+}
+
+.theme-toggle:active {
+  transform: scale(0.92);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .theme-toggle:hover {
+    color: var(--gold);
+    border-color: color-mix(in oklab, var(--gold) 45%, transparent);
+  }
+}
+
+/* ——— Surfaces ——— */
 .card {
-  background: color-mix(in srgb, var(--bg-elev) 88%, transparent);
+  background: var(--bg-elev);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1.25rem 1.4rem;
@@ -113,14 +321,22 @@ a:hover {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
+/* ——— Type ——— */
+h1,
+h2 {
+  font-family: var(--font-display);
+  font-weight: 550;
+  letter-spacing: 0.005em;
+}
+
 h1 {
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
   margin: 0 0 0.5rem;
-  line-height: 1.15;
+  line-height: 1.12;
 }
 
 h2 {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin: 0 0 0.75rem;
 }
 
@@ -128,6 +344,17 @@ h2 {
   color: var(--muted);
 }
 
+.kicker {
+  font-family: var(--font);
+  font-size: 0.72rem;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  margin: 0 0 0.75rem;
+}
+
+/* ——— Buttons ——— */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -135,16 +362,18 @@ h2 {
   gap: 0.4rem;
   border: 0;
   border-radius: 999px;
-  padding: 0.65rem 1.1rem;
+  padding: 0.65rem 1.15rem;
   background: var(--green);
-  color: white;
+  color: oklch(0.97 0.01 120);
   font-weight: 600;
   font-family: inherit;
+  font-size: 0.95rem;
   cursor: pointer;
   transition:
-    transform var(--duration-ui) var(--ease-out),
+    transform 140ms var(--ease-out),
     opacity var(--duration-ui) var(--ease-out),
-    background var(--duration-ui) var(--ease-out);
+    background var(--duration-ui) var(--ease-out),
+    border-color var(--duration-ui) var(--ease-out);
 }
 
 .btn:active:not(:disabled) {
@@ -157,6 +386,11 @@ h2 {
   color: var(--ink);
 }
 
+.btn.gold {
+  background: var(--gold);
+  color: oklch(0.2 0.03 90);
+}
+
 .btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -164,21 +398,27 @@ h2 {
 
 @media (hover: hover) and (pointer: fine) {
   .btn:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--green) 85%, white);
+    background: color-mix(in oklab, var(--green) 86%, white);
   }
 
   .btn.secondary:hover:not(:disabled) {
-    background: var(--bg-elev);
+    background: color-mix(in oklab, var(--bg-elev) 80%, transparent);
+    border-color: color-mix(in oklab, var(--ink) 26%, transparent);
+  }
+
+  .btn.gold:hover:not(:disabled) {
+    background: color-mix(in oklab, var(--gold) 88%, white);
   }
 }
 
+/* ——— Forms ——— */
 input,
 select,
 textarea {
   width: 100%;
-  background: var(--bg);
+  background: color-mix(in oklab, var(--bg) 70%, var(--bg-elev));
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 10px;
   color: var(--ink);
   padding: 0.55rem 0.7rem;
   margin: 0.35rem 0 0.8rem;
@@ -190,7 +430,7 @@ input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: color-mix(in srgb, var(--green-bright) 55%, var(--line));
+  border-color: color-mix(in oklab, var(--green-bright) 60%, var(--line));
 }
 
 label {
@@ -198,20 +438,262 @@ label {
   color: var(--muted);
 }
 
+/* ——— Badges ——— */
 .badge {
   display: inline-block;
   font-size: 0.75rem;
-  padding: 0.15rem 0.5rem;
+  padding: 0.15rem 0.55rem;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--accent) 25%, transparent);
-  color: var(--accent);
-  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in oklab, var(--gold) 14%, transparent);
+  color: var(--gold);
+  border: 1px solid color-mix(in oklab, var(--gold) 38%, transparent);
 }
 
 .badge.verified {
-  background: color-mix(in srgb, var(--green-bright) 20%, transparent);
+  background: color-mix(in oklab, var(--green-bright) 14%, transparent);
   color: var(--green-bright);
-  border-color: color-mix(in srgb, var(--green-bright) 40%, transparent);
+  border-color: color-mix(in oklab, var(--green-bright) 38%, transparent);
+}
+
+/* ——— Cinematic hero ——— */
+.cine-hero {
+  position: relative;
+  min-height: clamp(480px, 68vh, 640px);
+  display: flex;
+  align-items: flex-end;
+  overflow: clip;
+  border-radius: 0 0 calc(var(--radius) + 10px) calc(var(--radius) + 10px);
+}
+
+.cine-hero .scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cine-hero .scene svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* dusk vignette so glass text always reads */
+.cine-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    color-mix(in oklab, var(--bg) 55%, transparent) 0%,
+    transparent 45%
+  );
+  pointer-events: none;
+}
+
+.cine-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem 2.5rem;
+}
+
+.cine-panel {
+  max-width: 34rem;
+  padding: 1.75rem 2rem;
+}
+
+.cine-panel .brand-mark {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5.5vw, 3.9rem);
+  font-weight: 560;
+  letter-spacing: -0.015em;
+  line-height: 1.04;
+  margin: 0 0 0.85rem;
+  color: var(--ink);
+}
+
+.cine-panel .brand-mark em {
+  font-style: italic;
+  color: var(--green-bright);
+}
+
+.cine-panel .promise {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.45;
+  margin: 0 0 0.5rem;
+  color: var(--ink);
+}
+
+.cine-panel .home-support {
+  margin: 0;
+  max-width: 28rem;
+  font-size: 0.95rem;
+}
+
+/* Entrance: fade + gentle rise, once */
+.cine-panel,
+.rail,
+.flagship {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 600ms var(--ease-out),
+    transform 600ms var(--ease-out);
+
+  @starting-style {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.rail {
+  transition-delay: 90ms;
+}
+
+.flagship-inner,
+.home-dev {
+  transition-delay: 140ms;
+}
+
+/* ——— Pillar rail (streaming-row feel) ——— */
+.rail {
+  display: flex;
+  gap: 0.85rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding: 0.25rem 0.25rem 0.85rem;
+  scrollbar-width: thin;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 1.25rem,
+    black calc(100% - 1.75rem),
+    transparent 100%
+  );
+}
+
+.rail-card {
+  scroll-snap-align: start;
+  flex: 0 0 15.5rem;
+  display: block;
+  position: relative;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(
+      160deg,
+      color-mix(in oklab, var(--tile, var(--green)) 22%, var(--bg-elev)) 0%,
+      var(--bg-elev) 70%
+    );
+  color: var(--ink);
+  padding: 1.1rem 1.2rem 1rem;
+  min-height: 8.25rem;
+  overflow: clip;
+  transition:
+    transform 200ms var(--ease-out),
+    border-color 200ms var(--ease-out);
+}
+
+.rail-card:hover {
+  text-decoration: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .rail-card:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in oklab, var(--tile, var(--green)) 45%, var(--line));
+  }
+}
+
+.rail-card .rail-icon {
+  color: color-mix(in oklab, var(--tile, var(--green)) 70%, var(--ink));
+  margin-bottom: 0.6rem;
+}
+
+.rail-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 560;
+  margin: 0 0 0.25rem;
+}
+
+.rail-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* ——— Flagship (Agroabundanza) ——— */
+.flagship {
+  position: relative;
+  margin-top: 2.5rem;
+  border-radius: calc(var(--radius) + 8px);
+  overflow: clip;
+  min-height: 20rem;
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--line);
+}
+
+.flagship .scene {
+  position: absolute;
+  inset: 0;
+}
+
+.flagship .scene svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.flagship-inner {
+  position: relative;
+  z-index: 2;
+  align-self: flex-end;
+  margin: 1.5rem;
+  max-width: 26rem;
+  padding: 1.5rem 1.75rem;
+}
+
+.flagship-inner h2 {
+  margin-bottom: 0.4rem;
+}
+
+.flagship-inner .principles {
+  display: flex;
+  gap: 0.4rem 0.9rem;
+  flex-wrap: wrap;
+  margin: 0.75rem 0 1rem;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 2.75rem 0 1rem;
+}
+
+.section-head h2 {
+  margin: 0;
+}
+
+/* ——— Petal strip ——— */
+.petal-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
 }
 
 /* Polar skill flower */
@@ -280,11 +762,15 @@ label {
 
 .flower-panel {
   margin-top: 1rem;
-  padding: 1rem;
+  padding: 1rem 1.1rem;
   border-radius: var(--radius);
-  border: 1px solid var(--line);
-  border-left-width: 4px;
-  background: var(--bg);
+  border: 1px solid
+    color-mix(in oklab, var(--petal-color, var(--green)) 35%, var(--line));
+  background: color-mix(
+    in oklab,
+    var(--petal-color, var(--green)) 7%,
+    var(--bg-elev)
+  );
 }
 
 .flower-panel h3 {
@@ -360,7 +846,7 @@ label {
 }
 
 .field-error {
-  color: #e8a0a0;
+  color: var(--pink);
   font-size: 0.8rem;
   margin: -0.5rem 0 0.75rem;
 }
@@ -388,16 +874,17 @@ label {
 }
 
 .login-brand .brand-mark {
+  font-family: var(--font-display);
   font-size: clamp(2.4rem, 5vw, 3.6rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-weight: 560;
+  letter-spacing: -0.015em;
   line-height: 1.05;
   margin: 0 0 1rem;
   color: var(--ink);
 }
 
 .login-brand .brand-mark em {
-  font-style: normal;
+  font-style: italic;
   color: var(--green-bright);
 }
 
@@ -414,6 +901,7 @@ label {
   flex-direction: column;
   gap: 1.5rem;
   max-width: 22rem;
+  padding: 1.75rem;
 }
 
 .login-primary {
@@ -435,6 +923,7 @@ label {
 }
 
 .login-demo h2 {
+  font-family: var(--font);
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--muted);
@@ -514,8 +1003,25 @@ label {
     animation: none !important;
   }
 
-  .btn:active:not(:disabled) {
+  .btn:active:not(:disabled),
+  .theme-toggle:active {
     transform: none;
+  }
+
+  .cine-panel,
+  .rail,
+  .flagship {
+    transition-property: opacity;
+
+    @starting-style {
+      transform: none;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .rail-card:hover {
+      transform: none;
+    }
   }
 }
 
@@ -545,7 +1051,7 @@ label {
   padding: 1rem 0.9rem;
   border-radius: 14px;
   border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--bg-elev) 70%, transparent);
+  background: color-mix(in oklab, var(--bg-elev) 70%, transparent);
   color: var(--ink);
   cursor: pointer;
   font-family: inherit;
@@ -579,12 +1085,12 @@ label {
 .petal-opt.selected {
   border-color: var(--petal-color, var(--green-bright));
   background: color-mix(
-    in srgb,
-    var(--petal-color, var(--green)) 18%,
+    in oklab,
+    var(--petal-color, var(--green)) 16%,
     var(--bg-elev)
   );
   box-shadow: inset 0 0 0 1px
-    color-mix(in srgb, var(--petal-color, var(--green)) 40%, transparent);
+    color-mix(in oklab, var(--petal-color, var(--green)) 40%, transparent);
 }
 
 .petal-opt:disabled {
@@ -593,12 +1099,16 @@ label {
 }
 
 .skill-block {
-  border: 1px solid var(--line);
+  border: 1px solid
+    color-mix(in oklab, var(--petal-color, var(--green)) 32%, var(--line));
   border-radius: var(--radius);
   padding: 1rem 1.1rem;
   margin-bottom: 0.85rem;
-  border-left: 3px solid var(--petal-color, var(--green));
-  background: color-mix(in srgb, var(--bg-elev) 60%, transparent);
+  background: color-mix(
+    in oklab,
+    var(--petal-color, var(--green)) 6%,
+    var(--bg-elev)
+  );
 }
 
 .skill-block h3 {
@@ -659,8 +1169,8 @@ label {
   margin: 0.5rem 0 1.25rem;
   padding: 0.4rem 0.85rem;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
-  color: var(--accent);
+  border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+  color: var(--gold);
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -683,28 +1193,30 @@ label {
   margin: 0.85rem 0 0;
   padding: 0.65rem 0.85rem;
   border-radius: 8px;
-  border: 1px solid color-mix(in srgb, var(--green-bright) 35%, var(--line));
-  background: color-mix(in srgb, var(--green) 14%, var(--bg-elev));
+  border: 1px solid color-mix(in oklab, var(--green-bright) 35%, var(--line));
+  background: color-mix(in oklab, var(--green) 12%, var(--bg-elev));
   color: var(--ink);
   font-size: 0.9rem;
 }
 
+/* Legacy hero classes (other screens reference them) */
 .home-hero {
   padding: 2rem 0 1rem;
   max-width: 36rem;
 }
 
 .home-hero .brand-mark {
+  font-family: var(--font-display);
   font-size: clamp(2.4rem, 5vw, 3.4rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-weight: 560;
+  letter-spacing: -0.015em;
   line-height: 1.05;
   margin: 0 0 1rem;
   color: var(--ink);
 }
 
 .home-hero .brand-mark em {
-  font-style: normal;
+  font-style: italic;
   color: var(--green-bright);
 }
 
