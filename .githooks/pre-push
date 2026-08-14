@@ -1,0 +1,18 @@
+#!/bin/sh
+# ZenKit gate — pre-push. Heavier checks before code leaves the machine.
+#   1. Repo-invariant guard (petals) across the whole tree — always runs, no deps.
+#   2. Tests — run only when deps are installed (CI is the backstop otherwise).
+# Build is intentionally left to CI (too slow for every push).
+set -e
+
+echo "gate » invariants (tree)"
+node scripts/gate-invariants.mjs --all
+
+if [ -d node_modules ]; then
+  echo "gate » tests"
+  pnpm -r --if-present run test
+else
+  echo "gate » tests skipped (node_modules missing — run 'pnpm install'; CI still enforces it)"
+fi
+
+echo "gate » pre-push OK"
