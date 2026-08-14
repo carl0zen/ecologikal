@@ -10,6 +10,7 @@ import {
 } from '@phosphor-icons/react/ssr';
 import { SeedDemoButton } from '@/components/ClientForms';
 import { FlagshipScene, ValleScene } from '@/components/scenes';
+import { ShaderSky } from '@/components/ShaderSky';
 import { vintageUrl } from '@/lib/urls';
 
 const PILLAR_META: Record<
@@ -66,7 +67,8 @@ export default function HomePage() {
     <main>
       {/* ——— Cinematic opening ——— */}
       <section className="cine-hero full-bleed" aria-label="Ecologikal">
-        <ValleScene />
+        <ShaderSky />
+        <ValleScene hideSky />
         <div className="cine-content">
           <div className="cine-panel glass-panel">
             <p className="kicker">La red regenerativa</p>

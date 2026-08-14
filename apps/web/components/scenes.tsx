@@ -4,8 +4,12 @@
  * morning gold in light mode. Decorative: aria-hidden, no external assets.
  */
 
-/** Valle hero — low sun over layered ridges and terraced fields. */
-export function ValleScene() {
+/**
+ * Valle hero — low sun over layered ridges and terraced fields.
+ * With `hideSky`, the sky rect and sun are omitted so a live layer behind
+ * (ShaderSky, or the .cine-hero CSS gradient) paints them instead.
+ */
+export function ValleScene({ hideSky = false }: { hideSky?: boolean }) {
   return (
     <div className="scene" aria-hidden="true">
       <svg
@@ -28,10 +32,14 @@ export function ValleScene() {
           </linearGradient>
         </defs>
 
-        {/* sky + sun */}
-        <rect width="1440" height="640" fill="url(#vs-sky)" />
-        <circle cx="1040" cy="238" r="210" fill="url(#vs-glow)" />
-        <circle cx="1040" cy="238" r="46" fill="var(--sun)" />
+        {/* sky + sun — omitted when a live sky renders behind the svg */}
+        {hideSky ? null : (
+          <>
+            <rect width="1440" height="640" fill="url(#vs-sky)" />
+            <circle cx="1040" cy="238" r="210" fill="url(#vs-glow)" />
+            <circle cx="1040" cy="238" r="46" fill="var(--sun)" />
+          </>
+        )}
 
         {/* far ridge */}
         <path
