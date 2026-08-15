@@ -29,32 +29,32 @@ const TOC = [
 ] as const;
 
 const SURFACES = [
-  { name: 'Page base', token: '--eco-bg' },
-  { name: 'Raised', token: '--eco-raised' },
-  { name: 'Elevated', token: '--eco-elevated' },
+  { name: 'Page base', cssVar: '--eco-bg' },
+  { name: 'Raised', cssVar: '--eco-raised' },
+  { name: 'Elevated', cssVar: '--eco-elevated' },
 ] as const;
 
 const TEXT_SWATCHES = [
-  { name: 'Ink', token: '--eco-ink' },
-  { name: 'Muted', token: '--eco-muted' },
-  { name: 'Faint', token: '--eco-faint' },
+  { name: 'Ink', cssVar: '--eco-ink' },
+  { name: 'Muted', cssVar: '--eco-muted' },
+  { name: 'Faint', cssVar: '--eco-faint' },
 ] as const;
 
 const SIGNAL_SWATCHES = [
-  { name: 'Leaf', token: '--eco-leaf' },
-  { name: 'Canopy', token: '--eco-canopy' },
-  { name: 'Kin', token: '--eco-kin' },
-  { name: 'Alert', token: '--eco-alert' },
+  { name: 'Leaf', cssVar: '--eco-leaf' },
+  { name: 'Canopy', cssVar: '--eco-canopy' },
+  { name: 'Kin · orchid', cssVar: '--eco-kin' },
+  { name: 'Alert', cssVar: '--eco-alert' },
 ] as const;
 
 function Swatch({
   name,
-  token,
+  cssVar,
   fill,
 }: {
   name: string;
-  token: string;
-  /** CSS color — prefer `var(--token)`; petals may use domain hex */
+  cssVar: string;
+  /** CSS color — prefer `var(--eco-*)`; petals may use domain hex */
   fill: string;
 }) {
   return (
@@ -62,7 +62,7 @@ function Swatch({
       <div className="chip" style={{ background: fill }} />
       <div className="meta">
         <p className="name">{name}</p>
-        <p className="token">{token}</p>
+        <p className="token">{cssVar}</p>
       </div>
     </div>
   );
@@ -80,11 +80,11 @@ export default function BrandSystemPage() {
     <main className="bs-page">
       <header className="bs-hero">
         <p className="bs-kicker">Brand system · v1 · 2026</p>
-        <h1>Ecologikal brand — regenerative by construction.</h1>
+        <h1>Ecologikal brand — regenerative, luxury-social.</h1>
         <p className="lede">
-          Identity, voice, colour, typography, surfaces, components, motion and
-          the don&apos;ts. Every specimen below is composed from live design
-          tokens — if the canopy changes, this page changes with it.
+          Plum night, jewel green, orchid kin. Identity, voice, colour,
+          typography, surfaces, components, motion and the don&apos;ts — every
+          specimen below is composed from live design tokens.
         </p>
         <ul className="bs-toc">
           {TOC.map((item) => (
@@ -141,7 +141,7 @@ export default function BrandSystemPage() {
           <p>
             Reserve a margin equal to the mark diameter on all four sides.
             Nothing — text, UI, imagery — encroaches inside that frame. Never
-            recolour <em>logikal</em> in kin gold; leaf green only.
+            recolour <em>logikal</em> in orchid kin; leaf green only.
           </p>
         </div>
       </section>
@@ -204,10 +204,11 @@ export default function BrandSystemPage() {
       <section className="bs-section" id="colour">
         <div className="bs-section-head">
           <p className="bs-index">03 · Colour</p>
-          <h2>Canopy, leaf, kin — plus seven petals.</h2>
+          <h2>Plum night, jewel leaf, orchid kin — plus seven petals.</h2>
           <p className="intro">
-            Committed canopy strategy. Forest carries the product; leaf is the
-            signal; kin marks earned value; petals are taxonomy only.
+            Dual canopy strategy. Plum carries the product; leaf is the signal;
+            orchid kin marks social belonging and earned value; petals are
+            taxonomy only.
           </p>
         </div>
         <p className="bs-eyebrow">
@@ -215,7 +216,7 @@ export default function BrandSystemPage() {
         </p>
         <div className="bs-grid" style={{ marginBottom: '1.5rem' }}>
           {SURFACES.map((s) => (
-            <Swatch key={s.token} name={s.name} token={s.token} fill={`var(${s.token})`} />
+            <Swatch key={s.cssVar} name={s.name} cssVar={s.cssVar} fill={`var(${s.cssVar})`} />
           ))}
         </div>
         <p className="bs-eyebrow">
@@ -223,7 +224,7 @@ export default function BrandSystemPage() {
         </p>
         <div className="bs-grid" style={{ marginBottom: '1.5rem' }}>
           {TEXT_SWATCHES.map((s) => (
-            <Swatch key={s.token} name={s.name} token={s.token} fill={`var(${s.token})`} />
+            <Swatch key={s.cssVar} name={s.name} cssVar={s.cssVar} fill={`var(${s.cssVar})`} />
           ))}
         </div>
         <p className="bs-eyebrow">
@@ -231,7 +232,7 @@ export default function BrandSystemPage() {
         </p>
         <div className="bs-grid" style={{ marginBottom: '1.5rem' }}>
           {SIGNAL_SWATCHES.map((s) => (
-            <Swatch key={s.token} name={s.name} token={s.token} fill={`var(${s.token})`} />
+            <Swatch key={s.cssVar} name={s.name} cssVar={s.cssVar} fill={`var(${s.cssVar})`} />
           ))}
         </div>
         <p className="bs-eyebrow">
@@ -242,7 +243,7 @@ export default function BrandSystemPage() {
             <Swatch
               key={petal.id}
               name={`${petal.id}. ${petal.nameEs}`}
-              token={`PETALS[${petal.id - 1}]`}
+              cssVar={`PETALS[${petal.id - 1}]`}
               fill={petal.color}
             />
           ))}
@@ -300,12 +301,12 @@ export default function BrandSystemPage() {
           <div className="bs-surface-stack">
             {SURFACES.map((s) => (
               <div
-                key={s.token}
+                key={s.cssVar}
                 className="bs-surface"
-                style={{ background: `var(${s.token})` }}
+                style={{ background: `var(${s.cssVar})` }}
               >
                 <strong>{s.name}</strong>
-                <code>{s.token}</code>
+                <code>{s.cssVar}</code>
               </div>
             ))}
           </div>
@@ -482,7 +483,7 @@ export default function BrandSystemPage() {
             <h3>Don&apos;t show</h3>
             <ul>
               <li>Stock handshake + leaf overlay</li>
-              <li>Neon cyber-forest</li>
+              <li>Neon cyber-forest / neon SaaS purple washes</li>
               <li>Influencer vanity crops</li>
               <li>Abstract blob gradients as nature</li>
             </ul>
@@ -500,7 +501,9 @@ export default function BrandSystemPage() {
         </div>
         <div className="bs-dont-grid">
           <div className="bs-dont">No Certexi graphite + signal-lime cosplay</div>
-          <div className="bs-dont">No purple / indigo SaaS gradients</div>
+          <div className="bs-dont">
+            No neon SaaS purple washes (orchid kin is a signal, not a fill)
+          </div>
           <div className="bs-dont">
             No cream + terracotta editorial cliché as default
           </div>

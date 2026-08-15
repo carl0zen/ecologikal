@@ -3,7 +3,7 @@
  * Must match `:root` in `globals.css` — change both or neither.
  */
 export const BRAND_HEX = {
-  inkBg: '#121c16', // --eco-bg
-  leaf: '#6aad72', // --eco-leaf
-  kin: '#b8964e', // --eco-kin
+  inkBg: '#100f16', // --eco-bg
+  leaf: '#5fb87a', // --eco-leaf
+  kin: '#b895d4', // --eco-kin (orchid — social luxury)
 } as const;

@@ -5,39 +5,45 @@ Narrative guidelines: `docs/BRAND_SYSTEM.md`.
 
 ## Aesthetic lane
 
-**Canopy field notebook** — dark chlorophyll surfaces, living petal spectrum, kin-gold markers. Organic geometry without hippie clutter. Spanish-first, GEN-native, regenerative — not industrial (Certexi) and not pastel wellness SaaS.
+**Plum garden salon** — violet-night surfaces, jewel green signal, orchid kin.
+Luxury that still feels like a coop: intimate, social, regenerative — not
+neon SaaS purple, not pastel wellness, not industrial Certexi.
 
 ## Color strategy
 
-**Committed canopy** — forest base carries 50–70% of surface; leaf bright is the primary signal; kin gold marks currency and earned state; seven petal hues are taxonomy only (never decorative fills).
+**Committed dual canopy** — plum night carries 50–70% of surface; jewel leaf is
+the primary action signal; orchid kin marks social currency and earned state;
+seven petal hues stay taxonomy only (never decorative fills).
 
 ### Canopy · surfaces
 
 | Token | Hex | Role |
 |-------|-----|------|
-| `--eco-bg` | `#121c16` | Page base |
-| `--eco-raised` | `#1a2820` | Panels, cards |
-| `--eco-elevated` | `#243028` | Insets, hover strips |
-| `--eco-line` | `rgba(238,242,235,0.12)` | Default hairline |
-| `--eco-line-strong` | `rgba(238,242,235,0.22)` | Emphasised edge |
-| `--eco-canopy-mist` | `#1a3324` | Body vignette only |
+| `--eco-bg` | `#100f16` | Page base (plum night) |
+| `--eco-raised` | `#1a1824` | Panels, cards |
+| `--eco-elevated` | `#262236` | Insets, hover strips |
+| `--eco-line` | `rgba(242,239,232,0.12)` | Default hairline |
+| `--eco-line-strong` | `rgba(242,239,232,0.22)` | Emphasised edge |
+| `--eco-canopy-mist` | `#1c1630` | Purple body vignette |
+| `--eco-leaf-mist` | `#14301f` | Green body vignette |
 
 ### Type
 
 | Token | Hex | Role |
 |-------|-----|------|
-| `--eco-ink` | `#eef2eb` | Primary text |
-| `--eco-muted` | `#9aab9c` | Secondary |
-| `--eco-faint` | `#8a9b8c` | Tertiary / scaffolding (≥4.5:1 on elevated; min 0.85rem) |
+| `--eco-ink` | `#f2efe8` | Primary text (warm parchment) |
+| `--eco-muted` | `#a8a0b5` | Secondary (lilac-muted) |
+| `--eco-faint` | `#928aa3` | Tertiary / scaffolding (≥4.5:1 on elevated; min 0.85rem) |
 
 ### Signal · accents
 
 | Token | Hex | Role |
 |-------|-----|------|
-| `--eco-leaf` | `#6aad72` | Primary CTA, brand emphasis, links |
-| `--eco-canopy` | `#3d7348` | Solid fills, pressed green |
-| `--eco-kin` | `#b8964e` | KINS, earned markers |
-| `--eco-alert` | `#c45a72` | Caution / need urgency |
+| `--eco-leaf` | `#5fb87a` | Primary CTA, brand emphasis, links |
+| `--eco-canopy` | `#356b4a` | Solid fills, pressed green |
+| `--eco-kin` | `#b895d4` | KINS, social/earned markers (orchid) |
+| `--eco-alert` | `#d4788c` | Caution / need urgency |
+
 
 ### Petal spectrum (taxonomy — IDs stable)
 
@@ -110,4 +116,4 @@ Signal CTA (leaf fill) · Ghost (hairline) · Quiet link · Petal chip · Kin ba
 
 ## Don'ts
 
-No purple SaaS gradients · No leaf as paragraph background · No pure `#000`/`#fff` · No Certexi signal-lime · No exclamation-mark marketing · No isometric eco cartoon kits · No collapsing six pillars into Home/Feed.
+No neon SaaS purple/indigo gradients · No leaf as paragraph background · No pure `#000`/`#fff` · No Certexi signal-lime · No exclamation-mark marketing · No isometric eco cartoon kits · No collapsing six pillars into Home/Feed.
