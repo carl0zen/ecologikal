@@ -11,7 +11,7 @@ Inspired in structure by Certexi (`certexi.com/brand-system`) and Grupo Solmex (
 
 ### Thesis mark
 
-A **seven-petal flower** with a kin-gold centre. Geometry is radial and even — reputation as a living organism, not a badge score. The mark stands alone in tight UI; the lockup carries the full regenerative context.
+A **seven-petal flower** with an orchid-kin centre. Geometry is radial and even — reputation as a living organism, not a badge score. The mark stands alone in tight UI; the lockup carries the full regenerative context.
 
 | Form | Use |
 |------|-----|
@@ -22,7 +22,7 @@ A **seven-petal flower** with a kin-gold centre. Geometry is radial and even —
 
 **Clear space:** 1× mark diameter on all sides.
 
-**Wordmark rule:** Never restyle *logikal* in kin gold for the logo — leaf green only. Kin gold is reserved for currency and earned states.
+**Wordmark rule:** Never restyle *logikal* in orchid kin for the logo — leaf green only. Orchid kin is reserved for currency, social belonging, and earned states.
 
 ---
 
@@ -69,13 +69,13 @@ A **seven-petal flower** with a kin-gold centre. Geometry is radial and even —
 
 ## 03 · Colour
 
-**Strategy: committed canopy.** Deep forest carries the product; leaf is the signal; kin is earned value; petals are taxonomy.
+**Strategy: dual canopy (plum + green).** Plum night carries the product; jewel leaf is the signal; orchid kin is social/earned value; petals are taxonomy.
 
 See `DESIGN.md` for the full token table. Rules:
 
 1. Never use pure black or white — tint neutrals toward chlorophyll.
 2. Leaf is for CTAs, key underlines, brand emphasis — not large paragraph backgrounds.
-3. Kin gold is for KINS balance, earn toasts, earned markers — not decorative chrome.
+3. Orchid kin is for KINS balance, earn toasts, earned markers — not decorative chrome.
 4. Petal colours identify taxonomy only; do not invent an eighth “category colour.”
 5. Certexi signal lime (`#CAFB4C`) is off-limits on Eco surfaces.
 
@@ -142,7 +142,7 @@ One organic ease: `cubic-bezier(0.23, 1, 0.32, 1)`. Rise-in on load for brand sp
 ## 10 · Don'ts
 
 1. No Certexi graphite + signal-lime cosplay  
-2. No purple/indigo SaaS gradients  
+2. No neon purple/indigo SaaS gradients (orchid kin is a signal, not a wash)  
 3. No cream + terracotta editorial cliché as default  
 4. No exclamation marks or emoji in body brand copy  
 5. No glassmorphism card stacks  

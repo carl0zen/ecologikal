@@ -1,20 +1,22 @@
 @import 'tailwindcss';
 
-/* Eco brand tokens — specimen at /brand-system · docs/BRAND_SYSTEM.md */
+/* Eco brand tokens — specimen at /brand-system · docs/BRAND_SYSTEM.md
+ * Lane: luxury social canopy — plum night + jewel green + orchid kin */
 :root {
-  --eco-bg: #121c16;
-  --eco-raised: #1a2820;
-  --eco-elevated: #243028;
-  --eco-ink: #eef2eb;
-  --eco-muted: #9aab9c;
-  --eco-faint: #8a9b8c;
-  --eco-canopy: #3d7348;
-  --eco-leaf: #6aad72;
-  --eco-kin: #b8964e;
-  --eco-alert: #c45a72;
-  --eco-line: rgba(238, 242, 235, 0.12);
-  --eco-line-strong: rgba(238, 242, 235, 0.22);
-  --eco-canopy-mist: #1a3324;
+  --eco-bg: #100f16;
+  --eco-raised: #1a1824;
+  --eco-elevated: #262236;
+  --eco-ink: #f2efe8;
+  --eco-muted: #a8a0b5;
+  --eco-faint: #928aa3;
+  --eco-canopy: #356b4a;
+  --eco-leaf: #5fb87a;
+  --eco-kin: #b895d4;
+  --eco-alert: #d4788c;
+  --eco-line: rgba(242, 239, 232, 0.12);
+  --eco-line-strong: rgba(242, 239, 232, 0.22);
+  --eco-canopy-mist: #1c1630;
+  --eco-leaf-mist: #14301f;
   --eco-radius: 12px;
   --eco-ease: cubic-bezier(0.23, 1, 0.32, 1);
   --eco-duration-ui: 180ms;
@@ -55,9 +57,14 @@ body {
       transparent 55%
     ),
     radial-gradient(
-      800px 420px at 92% 0%,
-      var(--eco-elevated) 0%,
-      transparent 48%
+      900px 480px at 96% 4%,
+      var(--eco-leaf-mist) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      700px 400px at 70% -10%,
+      color-mix(in srgb, var(--eco-kin) 18%, transparent) 0%,
+      transparent 55%
     ),
     var(--eco-bg);
   color: var(--ink);
@@ -219,7 +226,7 @@ h2 {
 
 .btn.secondary {
   background: transparent;
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in srgb, var(--eco-kin) 28%, var(--line));
   color: var(--ink);
 }
 
@@ -234,7 +241,8 @@ h2 {
   }
 
   .btn.secondary:hover:not(:disabled) {
-    background: var(--bg-elev);
+    background: color-mix(in srgb, var(--eco-kin) 12%, var(--eco-raised));
+    border-color: color-mix(in srgb, var(--eco-kin) 45%, var(--line));
   }
 }
 
@@ -269,9 +277,10 @@ label {
   font-size: 0.75rem;
   padding: 0.15rem 0.5rem;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--accent) 25%, transparent);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
   color: var(--accent);
-  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  letter-spacing: 0.02em;
 }
 
 .badge.verified {
