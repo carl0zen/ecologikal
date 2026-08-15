@@ -236,7 +236,17 @@ export function ShaderSky() {
     scheme.addEventListener('change', onScheme);
     reduced.addEventListener('change', run);
 
+    /* If the GPU context is lost, hide the canvas so the CSS sky beneath
+       carries the scene instead of a dead black rectangle. */
+    const onLost = (e: Event) => {
+      e.preventDefault();
+      cancelAnimationFrame(raf);
+      canvas.style.display = 'none';
+    };
+    canvas.addEventListener('webglcontextlost', onLost);
+
     return () => {
+      canvas.removeEventListener('webglcontextlost', onLost);
       cancelAnimationFrame(raf);
       ro.disconnect();
       io.disconnect();

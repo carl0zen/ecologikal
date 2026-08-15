@@ -114,14 +114,13 @@ export default function HomePage() {
           Modos de participación, no un feed
         </span>
       </div>
-      <div className="rail" role="list">
+      <div className="rail">
         {PILLARS.map((p) => {
           const meta = PILLAR_META[p.id];
           const Icon = meta.Icon;
           return (
             <Link
               key={p.id}
-              role="listitem"
               href={p.href}
               className="rail-card"
               style={{ ['--tile' as string]: meta.tile }}
