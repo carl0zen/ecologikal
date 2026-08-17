@@ -35,10 +35,11 @@ export async function POST() {
     if (!center) {
       center = {
         id: uid('center'),
-        name: 'Ecoaldea Aurora',
-        slug: 'aurora',
+        name: 'Agroabundanza Institute',
+        slug: 'agroabundanza',
         hostUserId: hostId || 'host1',
-        summary: 'Centro regenerativo de demostración.',
+        summary:
+          'Instituto familiar de 330 ha — regenerar, educar y elevar mediante agro-tech sustentable.',
         type: 'ecovillage',
         status: 'forming',
         createdAt: now,

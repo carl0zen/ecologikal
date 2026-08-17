@@ -24,8 +24,11 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'Ecologikal',
   description:
-    'Red regenerativa — flor de habilidades, KINS, eco-centros. Certexi OS reference vertical.',
+    'Red regenerativa — flor de habilidades, KINS, eco-centros. Plataforma de Agroabundanza Institute · Certexi OS reference vertical.',
 };
+
+/* Applies the stored theme before first paint; system preference otherwise. */
+const themeInit = `try{var t=localStorage.getItem('eco-theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}`;
 
 export default function RootLayout({
   children,
@@ -36,7 +39,11 @@ export default function RootLayout({
     <html
       lang="es"
       className={`${petrona.variable} ${sourceSans.variable} ${jetbrains.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+      </head>
       <body>
         <div className="shell">
           <Nav />

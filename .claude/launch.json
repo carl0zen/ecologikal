@@ -1,0 +1,16 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "web",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@ecologikal/web", "exec", "next", "dev"],
+      "port": 3100,
+      "autoPort": true,
+      "env": {
+        "ECO_ALLOW_DEV_LOGIN": "true",
+        "ECO_ALLOW_PROOF_STUB": "true"
+      }
+    }
+  ]
+}

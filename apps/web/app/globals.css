@@ -1,45 +1,166 @@
 @import 'tailwindcss';
 
-/* Eco brand tokens — specimen at /brand-system · docs/BRAND_SYSTEM.md
- * Lane: luxury social canopy — plum night + jewel green + orchid kin */
+/* ————————————————————————————————————————————————————————————————
+   Ecologikal — dusk-forest theme, clear glass over living land.
+   Dual theme: light on :root; dark via system fallback + [data-theme].
+   Stored choice ([data-theme]) always wins over the system preference.
+   ———————————————————————————————————————————————————————————————— */
+
 :root {
-  --eco-bg: #100f16;
-  --eco-raised: #1a1824;
-  --eco-elevated: #262236;
-  --eco-ink: #f2efe8;
-  --eco-muted: #a8a0b5;
-  --eco-faint: #928aa3;
-  --eco-canopy: #356b4a;
-  --eco-leaf: #5fb87a;
-  --eco-kin: #b895d4;
-  --eco-alert: #d4788c;
-  --eco-line: rgba(242, 239, 232, 0.12);
-  --eco-line-strong: rgba(242, 239, 232, 0.22);
-  --eco-canopy-mist: #1c1630;
-  --eco-leaf-mist: #14301f;
-  --eco-radius: 12px;
-  --eco-ease: cubic-bezier(0.23, 1, 0.32, 1);
-  --eco-duration-ui: 180ms;
+  /* Light — orchid dawn (plum-garden lane, daylight register) */
+  --bg: #f6f2f4;
+  --bg-elev: #fdfbfc;
+  --elev-2: #ffffff;
+  --ink: #262031;
+  --muted: #6c6179;
+  --faint: #877b95;
+  --green: #33684a;
+  --green-bright: #3f7d55;
+  --gold: #7b5b9e; /* orchid kin, darkened for AA on ivory */
+  --accent: var(--gold);
+  --pink: #b05a72;
+  --blue: #5c6394;
+  --line: color-mix(in oklab, var(--ink) 14%, transparent);
+  --line-strong: color-mix(in oklab, var(--ink) 24%, transparent);
+  --canopy-mist: #e7def0;
+  --leaf-mist: #ddeade;
+
+  /* Clear glass */
+  --glass-bg: color-mix(in oklab, var(--bg-elev) 55%, transparent);
+  --glass-bg-strong: color-mix(in oklab, var(--bg-elev) 74%, transparent);
+  --glass-border: color-mix(in oklab, var(--ink) 16%, transparent);
+  --glass-highlight: inset 0 1px 0
+    color-mix(in oklab, white 55%, transparent);
+  --glass-shadow: 0 18px 50px -22px
+    color-mix(in oklab, var(--ink) 38%, transparent);
+
+  /* Cinematic scene (orchid dawn) */
+  --sky-hi: #ecdcee;
+  --sky-lo: #f3decb;
+  --sun: #eec27e;
+  --haze: #f0e7ee;
+  --ridge-far: #a3bcaa;
+  --ridge-mid: #74977d;
+  --ridge-near: #4d7359;
+  --field: #85aa86;
+  --field-row: #6f9873;
+  --water: #a9aed6;
+
+  --radius: 14px;
+  --font: var(--font-source), 'Source Sans 3', 'Segoe UI', system-ui,
+    sans-serif;
+  --font-body: var(--font);
+  --font-display: var(--font-petrona), Petrona, Georgia, serif;
+  --font-mono: var(--font-jetbrains), 'JetBrains Mono', ui-monospace, monospace;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --duration-ui: 180ms;
+  color-scheme: light;
+
+  /* Eco brand tokens — specimen at /brand-system · docs/BRAND_SYSTEM.md
+   * Lane: luxury social canopy — plum night + jewel green + orchid kin.
+   * Aliases resolve per-theme via the vars above. */
+  --eco-bg: var(--bg);
+  --eco-raised: var(--bg-elev);
+  --eco-elevated: var(--elev-2);
+  --eco-ink: var(--ink);
+  --eco-muted: var(--muted);
+  --eco-faint: var(--faint);
+  --eco-canopy: var(--green);
+  --eco-leaf: var(--green-bright);
+  --eco-kin: var(--gold);
+  --eco-alert: var(--pink);
+  --eco-line: var(--line);
+  --eco-line-strong: var(--line-strong);
+  --eco-canopy-mist: var(--canopy-mist);
+  --eco-leaf-mist: var(--leaf-mist);
+  --eco-radius: var(--radius);
+  --eco-ease: var(--ease-out);
+  --eco-duration-ui: var(--duration-ui);
   --eco-stagger: 70ms;
   --eco-rise-in: 0.65s;
+}
 
-  /* Backward-compatible aliases used across v2 UI */
-  --bg: var(--eco-bg);
-  --bg-elev: var(--eco-raised);
-  --ink: var(--eco-ink);
-  --muted: var(--eco-muted);
-  --green: var(--eco-canopy);
-  --green-bright: var(--eco-leaf);
-  --accent: var(--eco-kin);
-  --line: var(--eco-line);
-  --radius: var(--eco-radius);
-  --font-display: var(--font-petrona), Petrona, Georgia, serif;
-  --font-body: var(--font-source), 'Source Sans 3', 'Segoe UI', system-ui,
-    sans-serif;
-  --font: var(--font-body);
-  --font-mono: var(--font-jetbrains), 'JetBrains Mono', ui-monospace, monospace;
-  --ease-out: var(--eco-ease);
-  --duration-ui: var(--eco-duration-ui);
+/* Dark — dusk at the center. System preference… */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #100f16;
+    --bg-elev: #1a1824;
+    --elev-2: #262236;
+    --ink: #f2efe8;
+    --muted: #a8a0b5;
+    --faint: #928aa3;
+    --green: #356b4a;
+    --green-bright: #5fb87a;
+    --gold: #b895d4; /* orchid kin */
+    --pink: #d4788c;
+    --blue: #8a8fc0;
+    --line: color-mix(in oklab, var(--ink) 12%, transparent);
+    --line-strong: color-mix(in oklab, var(--ink) 22%, transparent);
+    --canopy-mist: #1c1630;
+    --leaf-mist: #14301f;
+
+    --glass-bg: color-mix(in oklab, var(--bg-elev) 52%, transparent);
+    --glass-bg-strong: color-mix(in oklab, var(--bg-elev) 72%, transparent);
+    --glass-border: color-mix(in oklab, var(--ink) 15%, transparent);
+    --glass-highlight: inset 0 1px 0
+      color-mix(in oklab, white 12%, transparent);
+    --glass-shadow: 0 22px 60px -24px
+      color-mix(in oklab, black 70%, transparent);
+
+    /* Cinematic scene (plum dusk — warm sun over jewel-green land) */
+    --sky-hi: #221a34;
+    --sky-lo: #55304d;
+    --sun: #e8b47e;
+    --haze: #3a2b46;
+    --ridge-far: #383048;
+    --ridge-mid: #2a2b38;
+    --ridge-near: #1d2226;
+    --field: #223528;
+    --field-row: #1c2d22;
+    --water: #4d5490;
+    color-scheme: dark;
+  }
+}
+
+/* …and the explicit toggle wins in both directions. */
+:root[data-theme='dark'] {
+  --bg: #100f16;
+  --bg-elev: #1a1824;
+  --elev-2: #262236;
+  --ink: #f2efe8;
+  --muted: #a8a0b5;
+  --faint: #928aa3;
+  --green: #356b4a;
+  --green-bright: #5fb87a;
+  --gold: #b895d4; /* orchid kin */
+  --pink: #d4788c;
+  --blue: #8a8fc0;
+  --line: color-mix(in oklab, var(--ink) 12%, transparent);
+  --line-strong: color-mix(in oklab, var(--ink) 22%, transparent);
+  --canopy-mist: #1c1630;
+  --leaf-mist: #14301f;
+
+  --glass-bg: color-mix(in oklab, var(--bg-elev) 52%, transparent);
+  --glass-bg-strong: color-mix(in oklab, var(--bg-elev) 72%, transparent);
+  --glass-border: color-mix(in oklab, var(--ink) 15%, transparent);
+  --glass-highlight: inset 0 1px 0
+    color-mix(in oklab, white 12%, transparent);
+  --glass-shadow: 0 22px 60px -24px
+    color-mix(in oklab, black 70%, transparent);
+
+  /* Cinematic scene (plum dusk — warm sun over jewel-green land) */
+  --sky-hi: #221a34;
+  --sky-lo: #55304d;
+  --sun: #e8b47e;
+  --haze: #3a2b46;
+  --ridge-far: #383048;
+  --ridge-mid: #2a2b38;
+  --ridge-near: #1d2226;
+  --field: #223528;
+  --field-row: #1c2d22;
+  --water: #4d5490;
+  color-scheme: dark;
 }
 
 * {
@@ -50,26 +171,39 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background:
-    radial-gradient(
-      1100px 560px at 8% -8%,
-      var(--eco-canopy-mist) 0%,
-      transparent 55%
-    ),
-    radial-gradient(
-      900px 480px at 96% 4%,
-      var(--eco-leaf-mist) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      700px 400px at 70% -10%,
-      color-mix(in srgb, var(--eco-kin) 18%, transparent) 0%,
-      transparent 55%
-    ),
-    var(--eco-bg);
+  background: var(--bg);
   color: var(--ink);
   font-family: var(--font);
   min-height: 100%;
+}
+
+body {
+  /* .full-bleed uses 50vw math; vw includes the scrollbar — clip the sliver */
+  overflow-x: clip;
+  background:
+    radial-gradient(
+      1100px 560px at 8% -8%,
+      var(--canopy-mist) 0%,
+      transparent 55%
+    ),
+    radial-gradient(900px 480px at 96% 4%, var(--leaf-mist) 0%, transparent 50%),
+    radial-gradient(
+      700px 400px at 70% -10%,
+      color-mix(in oklab, var(--gold) 14%, transparent) 0%,
+      transparent 55%
+    ),
+    var(--bg);
+}
+
+/* Cinematic grain — barely there, fixed, non-interactive */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 a {
@@ -81,55 +215,93 @@ a:hover {
   text-decoration: underline;
 }
 
+::selection {
+  background: color-mix(in oklab, var(--gold) 30%, transparent);
+}
+
 .shell {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 1.25rem 1.5rem 4rem;
+  padding: 0 1.5rem 4rem;
 }
 
+/* Escape the shell for full-bleed cinema */
+.full-bleed {
+  margin-inline: calc(50% - 50vw);
+}
+
+/* ——— Glass ——— */
+.glass-panel {
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: calc(var(--radius) + 4px);
+  box-shadow: var(--glass-highlight), var(--glass-shadow);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-panel {
+    background: color-mix(in oklab, var(--bg-elev) 94%, transparent);
+  }
+}
+
+/* ——— Nav: floating glass bar ——— */
 .nav {
+  position: sticky;
+  top: 0.75rem;
+  z-index: 50;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 0 1.5rem;
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 2rem;
+  padding: 0.6rem 1rem;
+  margin: 0.75rem 0 2rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  box-shadow: var(--glass-highlight), var(--glass-shadow);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
 }
 
-a.eco-lockup {
+@supports not (backdrop-filter: blur(1px)) {
+  .nav {
+    background: color-mix(in oklab, var(--bg-elev) 94%, transparent);
+  }
+}
+
+/* On small screens the wrapped nav is tall — pin it back into the flow. */
+@media (max-width: 719px) {
+  .nav {
+    position: static;
+    border-radius: calc(var(--radius) + 6px);
+    padding: 0.75rem 1rem;
+  }
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   color: var(--ink);
-  text-decoration: none;
 }
 
-a.eco-lockup:hover {
-  text-decoration: none;
-}
-
-.eco-lockup {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-}
-
-.reveal-mark {
-  display: block;
-  margin: 0 auto 0.75rem;
+.brand span {
+  color: var(--green-bright);
 }
 
 .pillars {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
+  gap: 0.25rem;
 }
 
 .pillars a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  color: var(--eco-faint);
-  padding: 0.35rem 0.65rem;
+  color: var(--muted);
+  padding: 0.35rem 0.7rem;
   border-radius: 999px;
   border: 1px solid transparent;
   font-size: 0.9rem;
@@ -143,21 +315,46 @@ a.eco-lockup:hover {
 .pillars a.active {
   color: var(--ink);
   border-color: var(--line);
-  background: var(--bg-elev);
+  background: color-mix(in oklab, var(--bg-elev) 70%, transparent);
   text-decoration: none;
 }
 
+/* ——— Theme toggle ——— */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    transform 140ms var(--ease-out),
+    color var(--duration-ui) var(--ease-out),
+    border-color var(--duration-ui) var(--ease-out);
+}
+
+.theme-toggle:active {
+  transform: scale(0.92);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .theme-toggle:hover {
+    color: var(--gold);
+    border-color: color-mix(in oklab, var(--gold) 45%, transparent);
+  }
+}
+
+/* ——— Surfaces ——— */
 .card {
-  background: color-mix(in srgb, var(--eco-raised) 88%, transparent);
+  background: var(--bg-elev);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1.25rem 1.4rem;
   margin-bottom: 1rem;
-  transition: background var(--duration-ui) var(--ease-out);
-}
-
-.card:hover {
-  background: var(--eco-elevated);
 }
 
 .grid {
@@ -166,58 +363,61 @@ a.eco-lockup:hover {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
-h1 {
+/* ——— Type ——— */
+h1,
+h2 {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
+  font-weight: 550;
+  letter-spacing: 0.005em;
+}
+
+h1 {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
   margin: 0 0 0.5rem;
-  line-height: 1.15;
+  line-height: 1.12;
 }
 
 h2 {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-size: 1.3rem;
   margin: 0 0 0.75rem;
-}
-
-.eco-wordmark {
-  font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  font-size: var(--eco-wordmark-size, 1.25rem);
-  margin: 0;
-}
-
-.eco-wordmark em {
-  font-style: normal;
-  color: var(--eco-leaf);
 }
 
 .muted {
   color: var(--muted);
 }
 
+.kicker {
+  font-family: var(--font);
+  font-size: 0.72rem;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  margin: 0 0 0.75rem;
+}
+
+/* ——— Buttons ——— */
 .btn {
+  position: relative;
+  overflow: clip;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
   border: 0;
   border-radius: 999px;
-  padding: 0.65rem 1.1rem;
+  padding: 0.65rem 1.15rem;
   background: var(--green);
-  color: var(--eco-ink);
+  color: oklch(0.97 0.01 120);
   font-weight: 600;
   font-family: inherit;
+  font-size: 0.95rem;
   cursor: pointer;
   transition:
-    transform var(--duration-ui) var(--ease-out),
+    transform 140ms var(--ease-out),
     opacity var(--duration-ui) var(--ease-out),
-    background var(--duration-ui) var(--ease-out);
+    background var(--duration-ui) var(--ease-out),
+    border-color var(--duration-ui) var(--ease-out);
 }
 
 .btn:active:not(:disabled) {
@@ -226,8 +426,13 @@ h2 {
 
 .btn.secondary {
   background: transparent;
-  border: 1px solid color-mix(in srgb, var(--eco-kin) 28%, var(--line));
+  border: 1px solid var(--line);
   color: var(--ink);
+}
+
+.btn.gold {
+  background: var(--gold);
+  color: oklch(0.2 0.03 90);
 }
 
 .btn:disabled {
@@ -237,22 +442,27 @@ h2 {
 
 @media (hover: hover) and (pointer: fine) {
   .btn:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--green) 85%, white);
+    background: color-mix(in oklab, var(--green) 86%, white);
   }
 
   .btn.secondary:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--eco-kin) 12%, var(--eco-raised));
-    border-color: color-mix(in srgb, var(--eco-kin) 45%, var(--line));
+    background: color-mix(in oklab, var(--bg-elev) 80%, transparent);
+    border-color: color-mix(in oklab, var(--ink) 26%, transparent);
+  }
+
+  .btn.gold:hover:not(:disabled) {
+    background: color-mix(in oklab, var(--gold) 88%, white);
   }
 }
 
+/* ——— Forms ——— */
 input,
 select,
 textarea {
   width: 100%;
-  background: var(--bg);
+  background: color-mix(in oklab, var(--bg) 70%, var(--bg-elev));
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 10px;
   color: var(--ink);
   padding: 0.55rem 0.7rem;
   margin: 0.35rem 0 0.8rem;
@@ -264,7 +474,7 @@ input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: color-mix(in srgb, var(--green-bright) 55%, var(--line));
+  border-color: color-mix(in oklab, var(--green-bright) 60%, var(--line));
 }
 
 label {
@@ -272,21 +482,269 @@ label {
   color: var(--muted);
 }
 
+/* ——— Badges ——— */
 .badge {
   display: inline-block;
   font-size: 0.75rem;
-  padding: 0.15rem 0.5rem;
+  padding: 0.15rem 0.55rem;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--accent) 22%, transparent);
-  color: var(--accent);
-  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
-  letter-spacing: 0.02em;
+  background: color-mix(in oklab, var(--gold) 14%, transparent);
+  color: var(--gold);
+  border: 1px solid color-mix(in oklab, var(--gold) 38%, transparent);
 }
 
 .badge.verified {
-  background: color-mix(in srgb, var(--green-bright) 20%, transparent);
+  background: color-mix(in oklab, var(--green-bright) 14%, transparent);
   color: var(--green-bright);
-  border-color: color-mix(in srgb, var(--green-bright) 40%, transparent);
+  border-color: color-mix(in oklab, var(--green-bright) 38%, transparent);
+}
+
+/* ——— Cinematic hero ——— */
+.cine-hero {
+  position: relative;
+  min-height: clamp(480px, 68vh, 640px);
+  display: flex;
+  align-items: flex-end;
+  overflow: clip;
+  border-radius: 0 0 calc(var(--radius) + 10px) calc(var(--radius) + 10px);
+  /* CSS sky — the base layer; the shader canvas paints over it when WebGL
+     is available, and this carries the scene when it isn't. */
+  background:
+    radial-gradient(
+      42% 58% at 72.2% 37.2%,
+      color-mix(in oklab, var(--sun) 55%, transparent) 0%,
+      transparent 70%
+    ),
+    linear-gradient(to bottom, var(--sky-hi) 0%, var(--sky-lo) 78%);
+}
+
+.shader-sky {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cine-hero .scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cine-hero .scene svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* dusk vignette so glass text always reads */
+.cine-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    color-mix(in oklab, var(--bg) 55%, transparent) 0%,
+    transparent 45%
+  );
+  pointer-events: none;
+}
+
+.cine-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem 2.5rem;
+}
+
+.cine-panel {
+  max-width: 34rem;
+  padding: 1.75rem 2rem;
+}
+
+.cine-panel .brand-mark {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5.5vw, 3.9rem);
+  font-weight: 560;
+  letter-spacing: -0.015em;
+  line-height: 1.04;
+  margin: 0 0 0.85rem;
+  color: var(--ink);
+}
+
+.cine-panel .brand-mark em {
+  font-style: italic;
+  color: var(--green-bright);
+}
+
+.cine-panel .promise {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.45;
+  margin: 0 0 0.5rem;
+  color: var(--ink);
+}
+
+.cine-panel .home-support {
+  margin: 0;
+  max-width: 28rem;
+  font-size: 0.95rem;
+}
+
+/* Entrance: the glass panel arrives once; its content is choreographed
+   word-by-word in the Living Land block at the end of this file. */
+.cine-panel {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 600ms var(--ease-out),
+    transform 600ms var(--ease-out);
+
+  @starting-style {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* ——— Pillar rail (streaming-row feel) ——— */
+.rail {
+  display: flex;
+  gap: 0.85rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding: 0.25rem 0.25rem 0.85rem;
+  scrollbar-width: thin;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 1.25rem,
+    black calc(100% - 1.75rem),
+    transparent 100%
+  );
+}
+
+.rail-card {
+  scroll-snap-align: start;
+  flex: 0 0 15.5rem;
+  display: block;
+  position: relative;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(
+      160deg,
+      color-mix(in oklab, var(--tile, var(--green)) 22%, var(--bg-elev)) 0%,
+      var(--bg-elev) 70%
+    );
+  color: var(--ink);
+  padding: 1.1rem 1.2rem 1rem;
+  min-height: 8.25rem;
+  overflow: clip;
+  transition:
+    transform 200ms var(--ease-out),
+    border-color 200ms var(--ease-out);
+}
+
+.rail-card:hover {
+  text-decoration: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .rail-card:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in oklab, var(--tile, var(--green)) 45%, var(--line));
+  }
+}
+
+.rail-card .rail-icon {
+  color: color-mix(in oklab, var(--tile, var(--green)) 70%, var(--ink));
+  margin-bottom: 0.6rem;
+}
+
+.rail-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 560;
+  margin: 0 0 0.25rem;
+}
+
+.rail-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* ——— Flagship (Agroabundanza) ——— */
+.flagship {
+  position: relative;
+  margin-top: 2.5rem;
+  border-radius: calc(var(--radius) + 8px);
+  overflow: clip;
+  min-height: 20rem;
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--line);
+}
+
+.flagship .scene {
+  position: absolute;
+  inset: 0;
+}
+
+.flagship .scene svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.flagship-inner {
+  position: relative;
+  z-index: 2;
+  align-self: flex-end;
+  margin: 1.5rem;
+  max-width: 26rem;
+  padding: 1.5rem 1.75rem;
+}
+
+.flagship-inner h2 {
+  margin-bottom: 0.4rem;
+}
+
+.flagship-inner .principles {
+  display: flex;
+  gap: 0.4rem 0.9rem;
+  flex-wrap: wrap;
+  margin: 0.75rem 0 1rem;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 2.75rem 0 1rem;
+}
+
+.section-head h2 {
+  margin: 0;
+}
+
+/* ——— Petal strip ——— */
+.petal-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
 }
 
 /* Polar skill flower */
@@ -355,11 +813,15 @@ label {
 
 .flower-panel {
   margin-top: 1rem;
-  padding: 1rem;
+  padding: 1rem 1.1rem;
   border-radius: var(--radius);
-  border: 1px solid var(--line);
-  border-left-width: 4px;
-  background: var(--bg);
+  border: 1px solid
+    color-mix(in oklab, var(--petal-color, var(--green)) 35%, var(--line));
+  background: color-mix(
+    in oklab,
+    var(--petal-color, var(--green)) 7%,
+    var(--bg-elev)
+  );
 }
 
 .flower-panel h3 {
@@ -435,7 +897,7 @@ label {
 }
 
 .field-error {
-  color: var(--eco-alert);
+  color: var(--pink);
   font-size: 0.8rem;
   margin: -0.5rem 0 0.75rem;
 }
@@ -458,18 +920,23 @@ label {
   }
 }
 
-.login-brand,
-.home-hero {
-  --eco-wordmark-size: clamp(2.4rem, 5vw, 3.5rem);
-}
-
-.login-brand .eco-lockup,
-.home-hero .eco-lockup {
-  margin-bottom: 1rem;
-}
-
 .login-brand {
   max-width: 28rem;
+}
+
+.login-brand .brand-mark {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 560;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+  margin: 0 0 1rem;
+  color: var(--ink);
+}
+
+.login-brand .brand-mark em {
+  font-style: italic;
+  color: var(--green-bright);
 }
 
 .login-brand .promise {
@@ -485,6 +952,7 @@ label {
   flex-direction: column;
   gap: 1.5rem;
   max-width: 22rem;
+  padding: 1.75rem;
 }
 
 .login-primary {
@@ -506,6 +974,7 @@ label {
 }
 
 .login-demo h2 {
+  font-family: var(--font);
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--muted);
@@ -555,19 +1024,16 @@ label {
   animation-delay: 0ms;
 }
 .onboard-step[data-stagger] > *:nth-child(2) {
-  animation-delay: calc(var(--eco-stagger) * 1);
+  animation-delay: 45ms;
 }
 .onboard-step[data-stagger] > *:nth-child(3) {
-  animation-delay: calc(var(--eco-stagger) * 2);
+  animation-delay: 90ms;
 }
 .onboard-step[data-stagger] > *:nth-child(4) {
-  animation-delay: calc(var(--eco-stagger) * 3);
+  animation-delay: 135ms;
 }
 .onboard-step[data-stagger] > *:nth-child(5) {
-  animation-delay: calc(var(--eco-stagger) * 4);
-}
-.onboard-step[data-stagger] > *:nth-child(n + 6) {
-  animation-delay: calc(var(--eco-stagger) * 4);
+  animation-delay: 180ms;
 }
 
 @keyframes onboard-in {
@@ -583,12 +1049,28 @@ label {
 
 @media (prefers-reduced-motion: reduce) {
   .onboard-step,
-  .onboard-step[data-stagger] > * {
+  .onboard-step[data-stagger] > *,
+  .reveal-pulse {
     animation: none !important;
   }
 
-  .btn:active:not(:disabled) {
+  .btn:active:not(:disabled),
+  .theme-toggle:active {
     transform: none;
+  }
+
+  .cine-panel {
+    transition-property: opacity;
+
+    @starting-style {
+      transform: none;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .rail-card:hover {
+      transform: none;
+    }
   }
 }
 
@@ -618,7 +1100,7 @@ label {
   padding: 1rem 0.9rem;
   border-radius: 14px;
   border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--bg-elev) 70%, transparent);
+  background: color-mix(in oklab, var(--bg-elev) 70%, transparent);
   color: var(--ink);
   cursor: pointer;
   font-family: inherit;
@@ -652,12 +1134,12 @@ label {
 .petal-opt.selected {
   border-color: var(--petal-color, var(--green-bright));
   background: color-mix(
-    in srgb,
-    var(--petal-color, var(--green)) 18%,
+    in oklab,
+    var(--petal-color, var(--green)) 16%,
     var(--bg-elev)
   );
   box-shadow: inset 0 0 0 1px
-    color-mix(in srgb, var(--petal-color, var(--green)) 40%, transparent);
+    color-mix(in oklab, var(--petal-color, var(--green)) 40%, transparent);
 }
 
 .petal-opt:disabled {
@@ -666,12 +1148,16 @@ label {
 }
 
 .skill-block {
-  border: 1px solid var(--line);
+  border: 1px solid
+    color-mix(in oklab, var(--petal-color, var(--green)) 32%, var(--line));
   border-radius: var(--radius);
   padding: 1rem 1.1rem;
   margin-bottom: 0.85rem;
-  border-left: 3px solid var(--petal-color, var(--green));
-  background: color-mix(in srgb, var(--bg-elev) 60%, transparent);
+  background: color-mix(
+    in oklab,
+    var(--petal-color, var(--green)) 6%,
+    var(--bg-elev)
+  );
 }
 
 .skill-block h3 {
@@ -713,10 +1199,8 @@ label {
   margin: 1.5rem 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .reveal-pulse .flower-svg {
-    animation: reveal-arc 2.4s var(--ease-out) 1;
-  }
+.reveal-pulse .flower-svg {
+  animation: reveal-arc 2.4s var(--ease-out) infinite;
 }
 
 @keyframes reveal-arc {
@@ -734,8 +1218,8 @@ label {
   margin: 0.5rem 0 1.25rem;
   padding: 0.4rem 0.85rem;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
-  color: var(--accent);
+  border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+  color: var(--gold);
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -758,15 +1242,31 @@ label {
   margin: 0.85rem 0 0;
   padding: 0.65rem 0.85rem;
   border-radius: 8px;
-  border: 1px solid color-mix(in srgb, var(--green-bright) 35%, var(--line));
-  background: color-mix(in srgb, var(--green) 14%, var(--bg-elev));
+  border: 1px solid color-mix(in oklab, var(--green-bright) 35%, var(--line));
+  background: color-mix(in oklab, var(--green) 12%, var(--bg-elev));
   color: var(--ink);
   font-size: 0.9rem;
 }
 
+/* Legacy hero classes (other screens reference them) */
 .home-hero {
   padding: 2rem 0 1rem;
   max-width: 36rem;
+}
+
+.home-hero .brand-mark {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 560;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+  margin: 0 0 1rem;
+  color: var(--ink);
+}
+
+.home-hero .brand-mark em {
+  font-style: italic;
+  color: var(--green-bright);
 }
 
 .home-hero .promise {
@@ -785,4 +1285,350 @@ label {
 .home-dev {
   margin-top: 2rem;
   opacity: 0.85;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Living Land — the landing breathes.
+   All motion is opt-in via prefers-reduced-motion: no-preference.
+   Scroll-driven choreography is @supports-guarded; without support the
+   page is simply still and fully visible. Transform/opacity only,
+   except the one-shot crop-row draw (small area, scroll-scrubbed).
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Word layout is unconditional — motion preference must never change copy. */
+.hero-word {
+  display: inline-block;
+  margin-right: 0.28em;
+}
+
+.hero-word:last-child {
+  margin-right: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* — Hero orchestration: kicker → words → promise → actions — */
+  .hero-rise,
+  .hero-word {
+    opacity: 0;
+    animation: hero-rise 700ms var(--ease-out) both;
+    animation-delay: calc(180ms + var(--i, 0) * 85ms);
+  }
+
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+      filter: blur(7px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  /* — Birds: slow thermal drift, each on its own clock — */
+  .birds path {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: bird-drift 11s ease-in-out infinite alternate;
+  }
+
+  .birds path:nth-child(2) {
+    animation-duration: 14s;
+    animation-delay: -4s;
+  }
+
+  .birds path:nth-child(3) {
+    animation-duration: 9s;
+    animation-delay: -7s;
+  }
+
+  @keyframes bird-drift {
+    from {
+      transform: translate(0, 0);
+    }
+    to {
+      transform: translate(30px, -12px);
+    }
+  }
+
+  /* — Campus lamps breathe (staggered inline delays) — */
+  .lamp {
+    animation: lamp-breathe 4.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes lamp-breathe {
+    from {
+      opacity: 0.65;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* — Runway approach lights: a slow chase down the strip — */
+  .strip-lights rect {
+    animation: strip-chase 2.45s linear infinite;
+  }
+
+  .strip-lights rect:nth-child(1) { animation-delay: 0s; }
+  .strip-lights rect:nth-child(2) { animation-delay: 0.35s; }
+  .strip-lights rect:nth-child(3) { animation-delay: 0.7s; }
+  .strip-lights rect:nth-child(4) { animation-delay: 1.05s; }
+  .strip-lights rect:nth-child(5) { animation-delay: 1.4s; }
+  .strip-lights rect:nth-child(6) { animation-delay: 1.75s; }
+  .strip-lights rect:nth-child(7) { animation-delay: 2.1s; }
+
+  @keyframes strip-chase {
+    0%,
+    58% {
+      opacity: 0.35;
+    }
+    66% {
+      opacity: 1;
+    }
+    76%,
+    100% {
+      opacity: 0.35;
+    }
+  }
+
+  /* — Laguna shimmer — */
+  .laguna {
+    animation: laguna-shimmer 7s ease-in-out infinite alternate;
+  }
+
+  @keyframes laguna-shimmer {
+    from {
+      opacity: 0.86;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* — Rail icons lean into the hover — */
+  .rail-card .rail-icon {
+    transition: transform 200ms var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .rail-card:hover .rail-icon {
+      transform: translateY(-2px) scale(1.06);
+    }
+
+    /* — One indulgence: light sweeps across the gold CTA — */
+    .btn.gold::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -45%;
+      width: 38%;
+      background: linear-gradient(
+        105deg,
+        transparent,
+        color-mix(in oklab, white 55%, transparent),
+        transparent
+      );
+      transform: skewX(-18deg);
+      pointer-events: none;
+    }
+
+    .btn.gold:hover::after {
+      animation: gold-shine 900ms var(--ease-out);
+    }
+
+    @keyframes gold-shine {
+      to {
+        transform: skewX(-18deg) translateX(420%);
+      }
+    }
+  }
+
+  /* — Scroll choreography (progressive enhancement) — */
+  @supports (animation-timeline: scroll()) {
+    /* hero parallax: near layers exit faster, content recedes like a
+       camera pulling up and away */
+    .cine-hero .ridge-far,
+    .cine-hero .ridge-mid,
+    .cine-hero .ridge-near,
+    .cine-hero .terrace {
+      animation: linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 90vh;
+    }
+
+    .cine-hero .ridge-far {
+      animation-name: par-far;
+    }
+    .cine-hero .ridge-mid {
+      animation-name: par-mid;
+    }
+    .cine-hero .ridge-near {
+      animation-name: par-near;
+    }
+    .cine-hero .terrace {
+      animation-name: par-terrace;
+    }
+
+    @keyframes par-far {
+      to {
+        transform: translateY(-10px);
+      }
+    }
+    @keyframes par-mid {
+      to {
+        transform: translateY(-26px);
+      }
+    }
+    @keyframes par-near {
+      to {
+        transform: translateY(-46px);
+      }
+    }
+    @keyframes par-terrace {
+      to {
+        transform: translateY(-64px);
+      }
+    }
+
+    .cine-hero .cine-content {
+      animation: hero-recede linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 80vh;
+    }
+
+    @keyframes hero-recede {
+      to {
+        opacity: 0.3;
+        transform: translateY(34px);
+      }
+    }
+
+    /* sections rise as they enter the viewport */
+    .section-head {
+      animation: rise-in var(--ease-out) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+
+    .rail {
+      view-timeline: --rail block;
+    }
+
+    .rail-card {
+      animation: rise-in var(--ease-out) both;
+      animation-timeline: --rail;
+      animation-range: entry 0% entry 70%;
+    }
+
+    .rail-card:nth-child(2) { animation-range: entry 8% entry 78%; }
+    .rail-card:nth-child(3) { animation-range: entry 16% entry 86%; }
+    .rail-card:nth-child(4) { animation-range: entry 24% entry 94%; }
+    .rail-card:nth-child(5) { animation-range: entry 30% entry 100%; }
+    .rail-card:nth-child(6) { animation-range: entry 36% entry 100%; }
+
+    .flagship {
+      view-timeline: --flagship block;
+    }
+
+    .flagship-inner {
+      animation: rise-in var(--ease-out) both;
+      animation-timeline: --flagship;
+      animation-range: entry 20% entry 90%;
+    }
+
+    /* the fields plant themselves */
+    .crop-row {
+      stroke-dasharray: 1;
+      animation: crop-draw linear both;
+      animation-timeline: --flagship;
+      animation-range: entry 5% entry 60%;
+    }
+
+    .crop-row:nth-child(2) { animation-range: entry 13% entry 68%; }
+    .crop-row:nth-child(3) { animation-range: entry 21% entry 76%; }
+    .crop-row:nth-child(4) { animation-range: entry 29% entry 84%; }
+    .crop-row:nth-child(5) { animation-range: entry 37% entry 92%; }
+
+    @keyframes crop-draw {
+      from {
+        stroke-dashoffset: 1;
+      }
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .petal-strip {
+      view-timeline: --petals block;
+    }
+
+    .petal-strip .badge {
+      animation: rise-in var(--ease-out) both;
+      animation-timeline: --petals;
+      animation-range: entry 0% entry 100%;
+    }
+
+    .petal-strip .badge:nth-child(2) { animation-range: entry 6% entry 100%; }
+    .petal-strip .badge:nth-child(3) { animation-range: entry 12% entry 100%; }
+    .petal-strip .badge:nth-child(4) { animation-range: entry 18% entry 100%; }
+    .petal-strip .badge:nth-child(5) { animation-range: entry 24% entry 100%; }
+    .petal-strip .badge:nth-child(6) { animation-range: entry 30% entry 100%; }
+    .petal-strip .badge:nth-child(7) { animation-range: entry 36% entry 100%; }
+
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translateY(26px);
+      }
+    }
+  }
+}
+
+/* ——— Brand lockup (FlowerMark + wordmark, from the plum-garden system) ——— */
+a.eco-lockup {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+a.eco-lockup:hover {
+  text-decoration: none;
+}
+
+.eco-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.login-brand .eco-lockup,
+.home-hero .eco-lockup {
+  margin-bottom: 1rem;
+}
+
+.eco-wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  font-size: var(--eco-wordmark-size, 1.25rem);
+  margin: 0;
+}
+
+.eco-wordmark em {
+  font-style: normal;
+  color: var(--eco-leaf);
+}
+
+.home-hero,
+.login-brand {
+  --eco-wordmark-size: clamp(2.4rem, 5vw, 3.5rem);
+}
+
+.reveal-mark {
+  display: block;
+  margin: 0 auto 0.75rem;
 }

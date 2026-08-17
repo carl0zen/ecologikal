@@ -4,6 +4,7 @@ import { EcoWordmark, FlowerMark } from '@/components/brand/FlowerMark';
 import { PILLAR_ICONS } from '@/components/brand/pillarIcons';
 import { getSession } from '@/lib/auth';
 import { vintageUrl } from '@/lib/urls';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 export async function Nav() {
   const session = await getSession();
@@ -30,6 +31,7 @@ export async function Nav() {
         })}
       </nav>
       <div className="row">
+        <ThemeToggle />
         <a className="btn secondary" href={vintage} title="Vintage PHP UI">
           Vintage
         </a>

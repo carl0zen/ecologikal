@@ -117,3 +117,27 @@ Signal CTA (leaf fill) · Ghost (hairline) · Quiet link · Petal chip · Kin ba
 ## Don'ts
 
 No neon SaaS purple/indigo gradients · No leaf as paragraph background · No pure `#000`/`#fff` · No Certexi signal-lime · No exclamation-mark marketing · No isometric eco cartoon kits · No collapsing six pillars into Home/Feed.
+
+## Dual theme & cinema layer (blend addendum)
+
+The plum-garden tokens above are the **dark** ("plum night") theme. The system
+is dual-theme: `data-theme="dark" | "light"` on `<html>`, set pre-paint from
+`localStorage('eco-theme')`, system preference as fallback; toggle in nav.
+`--eco-*` tokens are now aliases of per-theme vars in `globals.css`, so brand
+components render correctly in both themes.
+
+**Light — "orchid dawn":** plum-tinted ivory `#f6f2f4`, plum ink `#262031`,
+canopy `#33684a`, leaf `#3f7d55`, kin darkened to `#7b5b9e` for AA.
+
+**Cinema layer** (landing):
+- WebGL shader sky (`ShaderSky`) reads scene tokens at runtime — plum dusk with
+  warm amber sun in dark, orchid dawn in light; CSS-gradient sky as fallback.
+- Theme-aware SVG scenes: Valle hero (ridges/terraces/birds), Agroabundanza
+  aerial (crop rows, laguna, airstrip, lit campus).
+- Clear-glass surfaces (nav pill, panels over imagery only): backdrop blur +
+  hairline + inner highlight.
+- **Living Land** choreography: word-by-word hero reveal, ambient loops (birds,
+  lamps, runway chase, laguna), scroll-driven parallax and entrances
+  (`animation-timeline`, entry-based ranges), all behind
+  `prefers-reduced-motion: no-preference`.
+- Serif display is **Petrona**; body **Source Sans 3**; mono **JetBrains Mono**.

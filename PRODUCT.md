@@ -52,3 +52,15 @@ Voice is **field-useful, peer-attested, compost-warm** — never startup hype, n
 | Infinite scroll | Six intent feeds |
 | Points vanity | KINS as spendable ecosocial currency |
 | Meetup listing | Eco-center ops + skill-matched cooperate |
+
+## Flagship & registers (blend addendum)
+
+- **Agroabundanza Institute** is the flagship eco-center: a 330-hectare family
+  institute (Regenerar · Educar · Elevar) whose retreats put people to work on
+  real social/ecological problems. The landing features it; the demo seed
+  provisions it.
+- **Registers:** home and login are brand surfaces (cinematic, Netflix-like
+  storytelling in service of impact); the six pillar screens are product
+  surfaces. Scene sentence: *a guest under a palapa at golden hour (light); an
+  econauta in a candle-lit common room at night (dark).* Both themes are
+  first-class; the stored choice wins.
