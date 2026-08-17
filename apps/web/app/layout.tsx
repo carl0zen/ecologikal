@@ -1,29 +1,30 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono, Fraunces } from 'next/font/google';
+import { JetBrains_Mono, Petrona, Source_Sans_3 } from 'next/font/google';
 import './globals.css';
 import { Nav } from '@/components/Nav';
 
-const geistSans = Geist({
-  subsets: ['latin'],
-  variable: '--font-geist-sans',
+const petrona = Petrona({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-petrona',
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  subsets: ['latin'],
-  variable: '--font-geist-mono',
+const sourceSans = Source_Sans_3({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-source',
+  display: 'swap',
 });
 
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  variable: '--font-fraunces',
-  axes: ['opsz'],
-  style: ['normal', 'italic'],
+const jetbrains = JetBrains_Mono({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-jetbrains',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
   title: 'Ecologikal',
   description:
-    'La red regenerativa: flor de habilidades, KINS y eco-centros. Plataforma de Agroabundanza Institute.',
+    'Red regenerativa — flor de habilidades, KINS, eco-centros. Plataforma de Agroabundanza Institute · Certexi OS reference vertical.',
 };
 
 /* Applies the stored theme before first paint; system preference otherwise. */
@@ -37,7 +38,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable}`}
+      className={`${petrona.variable} ${sourceSans.variable} ${jetbrains.variable}`}
       suppressHydrationWarning
     >
       <head>

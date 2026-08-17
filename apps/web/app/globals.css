@@ -7,18 +7,23 @@
    ———————————————————————————————————————————————————————————————— */
 
 :root {
-  /* Light — daylight in the field */
-  --bg: oklch(0.965 0.008 95);
-  --bg-elev: oklch(0.99 0.005 95);
-  --ink: oklch(0.24 0.03 160);
-  --muted: oklch(0.48 0.03 150);
-  --green: oklch(0.46 0.1 155);
-  --green-bright: oklch(0.5 0.12 150);
-  --gold: oklch(0.58 0.11 80);
+  /* Light — orchid dawn (plum-garden lane, daylight register) */
+  --bg: #f6f2f4;
+  --bg-elev: #fdfbfc;
+  --elev-2: #ffffff;
+  --ink: #262031;
+  --muted: #6c6179;
+  --faint: #877b95;
+  --green: #33684a;
+  --green-bright: #3f7d55;
+  --gold: #7b5b9e; /* orchid kin, darkened for AA on ivory */
   --accent: var(--gold);
-  --pink: oklch(0.6 0.13 10);
-  --blue: oklch(0.5 0.08 250);
+  --pink: #b05a72;
+  --blue: #5c6394;
   --line: color-mix(in oklab, var(--ink) 14%, transparent);
+  --line-strong: color-mix(in oklab, var(--ink) 24%, transparent);
+  --canopy-mist: #e7def0;
+  --leaf-mist: #ddeade;
 
   /* Clear glass */
   --glass-bg: color-mix(in oklab, var(--bg-elev) 55%, transparent);
@@ -29,42 +34,71 @@
   --glass-shadow: 0 18px 50px -22px
     color-mix(in oklab, var(--ink) 38%, transparent);
 
-  /* Cinematic scene (morning gold) */
-  --sky-hi: oklch(0.93 0.045 85);
-  --sky-lo: oklch(0.85 0.075 70);
-  --sun: oklch(0.88 0.115 80);
-  --haze: oklch(0.9 0.03 95);
-  --ridge-far: oklch(0.72 0.05 150);
-  --ridge-mid: oklch(0.58 0.07 152);
-  --ridge-near: oklch(0.44 0.08 155);
-  --field: oklch(0.66 0.09 130);
-  --field-row: oklch(0.58 0.09 135);
-  --water: oklch(0.78 0.05 220);
+  /* Cinematic scene (orchid dawn) */
+  --sky-hi: #ecdcee;
+  --sky-lo: #f3decb;
+  --sun: #eec27e;
+  --haze: #f0e7ee;
+  --ridge-far: #a3bcaa;
+  --ridge-mid: #74977d;
+  --ridge-near: #4d7359;
+  --field: #85aa86;
+  --field-row: #6f9873;
+  --water: #a9aed6;
 
   --radius: 14px;
-  --font: var(--font-geist-sans), 'Segoe UI', 'Avenir Next', system-ui,
+  --font: var(--font-source), 'Source Sans 3', 'Segoe UI', system-ui,
     sans-serif;
-  --font-display: var(--font-fraunces), Georgia, 'Times New Roman', serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-body: var(--font);
+  --font-display: var(--font-petrona), Petrona, Georgia, serif;
+  --font-mono: var(--font-jetbrains), 'JetBrains Mono', ui-monospace, monospace;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --duration-ui: 180ms;
   color-scheme: light;
+
+  /* Eco brand tokens — specimen at /brand-system · docs/BRAND_SYSTEM.md
+   * Lane: luxury social canopy — plum night + jewel green + orchid kin.
+   * Aliases resolve per-theme via the vars above. */
+  --eco-bg: var(--bg);
+  --eco-raised: var(--bg-elev);
+  --eco-elevated: var(--elev-2);
+  --eco-ink: var(--ink);
+  --eco-muted: var(--muted);
+  --eco-faint: var(--faint);
+  --eco-canopy: var(--green);
+  --eco-leaf: var(--green-bright);
+  --eco-kin: var(--gold);
+  --eco-alert: var(--pink);
+  --eco-line: var(--line);
+  --eco-line-strong: var(--line-strong);
+  --eco-canopy-mist: var(--canopy-mist);
+  --eco-leaf-mist: var(--leaf-mist);
+  --eco-radius: var(--radius);
+  --eco-ease: var(--ease-out);
+  --eco-duration-ui: var(--duration-ui);
+  --eco-stagger: 70ms;
+  --eco-rise-in: 0.65s;
 }
 
 /* Dark — dusk at the center. System preference… */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --bg: oklch(0.16 0.02 165);
-    --bg-elev: oklch(0.2 0.025 163);
-    --ink: oklch(0.94 0.012 120);
-    --muted: oklch(0.68 0.03 150);
-    --green: oklch(0.52 0.1 155);
-    --green-bright: oklch(0.72 0.13 150);
-    --gold: oklch(0.78 0.1 85);
-    --pink: oklch(0.68 0.12 10);
-    --blue: oklch(0.68 0.07 250);
-    --line: color-mix(in oklab, var(--ink) 13%, transparent);
+    --bg: #100f16;
+    --bg-elev: #1a1824;
+    --elev-2: #262236;
+    --ink: #f2efe8;
+    --muted: #a8a0b5;
+    --faint: #928aa3;
+    --green: #356b4a;
+    --green-bright: #5fb87a;
+    --gold: #b895d4; /* orchid kin */
+    --pink: #d4788c;
+    --blue: #8a8fc0;
+    --line: color-mix(in oklab, var(--ink) 12%, transparent);
+    --line-strong: color-mix(in oklab, var(--ink) 22%, transparent);
+    --canopy-mist: #1c1630;
+    --leaf-mist: #14301f;
 
     --glass-bg: color-mix(in oklab, var(--bg-elev) 52%, transparent);
     --glass-bg-strong: color-mix(in oklab, var(--bg-elev) 72%, transparent);
@@ -74,32 +108,38 @@
     --glass-shadow: 0 22px 60px -24px
       color-mix(in oklab, black 70%, transparent);
 
-    --sky-hi: oklch(0.34 0.05 55);
-    --sky-lo: oklch(0.52 0.11 50);
-    --sun: oklch(0.82 0.13 75);
-    --haze: oklch(0.42 0.06 55);
-    --ridge-far: oklch(0.32 0.04 160);
-    --ridge-mid: oklch(0.26 0.035 162);
-    --ridge-near: oklch(0.21 0.03 164);
-    --field: oklch(0.31 0.05 145);
-    --field-row: oklch(0.27 0.045 148);
-    --water: oklch(0.45 0.06 230);
+    /* Cinematic scene (plum dusk — warm sun over jewel-green land) */
+    --sky-hi: #221a34;
+    --sky-lo: #55304d;
+    --sun: #e8b47e;
+    --haze: #3a2b46;
+    --ridge-far: #383048;
+    --ridge-mid: #2a2b38;
+    --ridge-near: #1d2226;
+    --field: #223528;
+    --field-row: #1c2d22;
+    --water: #4d5490;
     color-scheme: dark;
   }
 }
 
 /* …and the explicit toggle wins in both directions. */
 :root[data-theme='dark'] {
-  --bg: oklch(0.16 0.02 165);
-  --bg-elev: oklch(0.2 0.025 163);
-  --ink: oklch(0.94 0.012 120);
-  --muted: oklch(0.68 0.03 150);
-  --green: oklch(0.52 0.1 155);
-  --green-bright: oklch(0.72 0.13 150);
-  --gold: oklch(0.78 0.1 85);
-  --pink: oklch(0.68 0.12 10);
-  --blue: oklch(0.68 0.07 250);
-  --line: color-mix(in oklab, var(--ink) 13%, transparent);
+  --bg: #100f16;
+  --bg-elev: #1a1824;
+  --elev-2: #262236;
+  --ink: #f2efe8;
+  --muted: #a8a0b5;
+  --faint: #928aa3;
+  --green: #356b4a;
+  --green-bright: #5fb87a;
+  --gold: #b895d4; /* orchid kin */
+  --pink: #d4788c;
+  --blue: #8a8fc0;
+  --line: color-mix(in oklab, var(--ink) 12%, transparent);
+  --line-strong: color-mix(in oklab, var(--ink) 22%, transparent);
+  --canopy-mist: #1c1630;
+  --leaf-mist: #14301f;
 
   --glass-bg: color-mix(in oklab, var(--bg-elev) 52%, transparent);
   --glass-bg-strong: color-mix(in oklab, var(--bg-elev) 72%, transparent);
@@ -109,16 +149,17 @@
   --glass-shadow: 0 22px 60px -24px
     color-mix(in oklab, black 70%, transparent);
 
-  --sky-hi: oklch(0.34 0.05 55);
-  --sky-lo: oklch(0.52 0.11 50);
-  --sun: oklch(0.82 0.13 75);
-  --haze: oklch(0.42 0.06 55);
-  --ridge-far: oklch(0.32 0.04 160);
-  --ridge-mid: oklch(0.26 0.035 162);
-  --ridge-near: oklch(0.21 0.03 164);
-  --field: oklch(0.31 0.05 145);
-  --field-row: oklch(0.27 0.045 148);
-  --water: oklch(0.45 0.06 230);
+  /* Cinematic scene (plum dusk — warm sun over jewel-green land) */
+  --sky-hi: #221a34;
+  --sky-lo: #55304d;
+  --sun: #e8b47e;
+  --haze: #3a2b46;
+  --ridge-far: #383048;
+  --ridge-mid: #2a2b38;
+  --ridge-near: #1d2226;
+  --field: #223528;
+  --field-row: #1c2d22;
+  --water: #4d5490;
   color-scheme: dark;
 }
 
@@ -141,14 +182,15 @@ body {
   overflow-x: clip;
   background:
     radial-gradient(
-      1200px 620px at 12% -10%,
-      color-mix(in oklab, var(--green) 16%, transparent) 0%,
-      transparent 58%
+      1100px 560px at 8% -8%,
+      var(--canopy-mist) 0%,
+      transparent 55%
     ),
+    radial-gradient(900px 480px at 96% 4%, var(--leaf-mist) 0%, transparent 50%),
     radial-gradient(
-      900px 480px at 95% -4%,
-      color-mix(in oklab, var(--gold) 10%, transparent) 0%,
-      transparent 50%
+      700px 400px at 70% -10%,
+      color-mix(in oklab, var(--gold) 14%, transparent) 0%,
+      transparent 55%
     ),
     var(--bg);
 }
@@ -1544,4 +1586,49 @@ label {
       }
     }
   }
+}
+
+/* ——— Brand lockup (FlowerMark + wordmark, from the plum-garden system) ——— */
+a.eco-lockup {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+a.eco-lockup:hover {
+  text-decoration: none;
+}
+
+.eco-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.login-brand .eco-lockup,
+.home-hero .eco-lockup {
+  margin-bottom: 1rem;
+}
+
+.eco-wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  font-size: var(--eco-wordmark-size, 1.25rem);
+  margin: 0;
+}
+
+.eco-wordmark em {
+  font-style: normal;
+  color: var(--eco-leaf);
+}
+
+.home-hero,
+.login-brand {
+  --eco-wordmark-size: clamp(2.4rem, 5vw, 3.5rem);
+}
+
+.reveal-mark {
+  display: block;
+  margin: 0 auto 0.75rem;
 }

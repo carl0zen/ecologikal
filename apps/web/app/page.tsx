@@ -11,6 +11,7 @@ import {
 import { SeedDemoButton } from '@/components/ClientForms';
 import { FlagshipScene, ValleScene } from '@/components/scenes';
 import { ShaderSky } from '@/components/ShaderSky';
+import { flag } from '@/lib/env';
 import { vintageUrl } from '@/lib/urls';
 
 const PILLAR_META: Record<
@@ -60,8 +61,7 @@ const PILLAR_META: Record<
 export default function HomePage() {
   const vintage = vintageUrl('/');
   const allowDev =
-    process.env.ECO_ALLOW_DEV_LOGIN === 'true' ||
-    process.env.ECO_ALLOW_PROOF_STUB === 'true';
+    flag('ECO_ALLOW_DEV_LOGIN') || flag('ECO_ALLOW_PROOF_STUB');
 
   return (
     <main>
@@ -183,11 +183,16 @@ export default function HomePage() {
       {allowDev ? (
         <section className="card home-dev">
           <h2>Desarrollo</h2>
-          <p className="muted">Dual-stack y semillas — solo con flags de demo.</p>
+          <p className="muted">
+            Dual-stack, semillas y specimen de marca — solo con flags de demo.
+          </p>
           <div className="row" style={{ marginTop: '0.75rem' }}>
             <a className="btn secondary" href={vintage}>
               Vintage PHP
             </a>
+            <Link className="btn secondary" href="/brand-system">
+              Brand system
+            </Link>
             <SeedDemoButton />
           </div>
         </section>

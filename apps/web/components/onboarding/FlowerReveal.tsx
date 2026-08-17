@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import type { FlowerSnapshot, PetalId, Skill } from '@ecologikal/domain';
+import { FlowerMark } from '@/components/brand/FlowerMark';
 import { FlowerViz } from '@/components/FlowerViz';
 import { CopyLinkButton } from '@/components/CopyLinkButton';
 
@@ -31,6 +32,7 @@ export function FlowerReveal({
 
   return (
     <div className="reveal-stage reveal-pulse onboard-step" data-stagger>
+      <FlowerMark size={48} className="reveal-mark" decorative />
       <h1>Tu flor, {displayName}</h1>
       <p className="muted" style={{ margin: '0 auto', maxWidth: '26rem' }}>
         Así te ven en Conoce — y quien abra tu enlace.

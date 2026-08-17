@@ -150,12 +150,13 @@ const SECRET_PATTERNS = [
   [/\bgh[pousr]_[A-Za-z0-9]{30,}\b/, 'GitHub token'],
   [/\bxox[baprs]-[A-Za-z0-9-]{10,}\b/, 'Slack token'],
   [
-    /(password|passwd|secret|api[_-]?key|token)\s*[:=]\s*['"][^'"]{6,}['"]/i,
+    // Skip CSS custom properties (`--eco-kin`) and other design-token names.
+    /(password|passwd|secret|api[_-]?key|token)\s*[:=]\s*['"](?!--)[^'"]{6,}['"]/i,
     'hardcoded credential',
   ],
 ];
 // Obvious placeholders we don't want to flag.
-const PLACEHOLDER = /(changeme|example|placeholder|your[_-]?|xxx+|<[^>]+>|\$\{)/i;
+const PLACEHOLDER = /(changeme|example|placeholder|your[_-]?|xxx+|<[^>]+>|\$\{|--eco-)/i;
 
 function checkSecrets(lines) {
   for (const line of lines) {

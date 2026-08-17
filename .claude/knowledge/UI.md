@@ -104,6 +104,23 @@ Eco-center admin: workshops, vacancies, rooms/bookings, people roles, gallery.
 
 ---
 
+## Brand system (v2)
+
+Live specimen: `apps/web` → `/brand-system`. Canonical docs: `docs/BRAND_SYSTEM.md`, `DESIGN.md`, `PRODUCT.md`.
+
+| Layer | Choice |
+|-------|--------|
+| Thesis | La flor es tu reputación |
+| Display | Petrona |
+| UI | Source Sans 3 |
+| Mono | JetBrains Mono |
+| Colour | Committed canopy (`--eco-*` tokens in `globals.css`) |
+| Mark | Seven-petal flower (`components/brand/FlowerMark.tsx`) |
+
+**Rule:** Eco visuals stay separate from Certexi graphite + signal-lime. Primitives beat decorative trends.
+
+---
+
 ## Landing storytelling
 
 `index.php` sells each pillar with large ecoicon + short mission copy + ally (GEN) + multimedia.
